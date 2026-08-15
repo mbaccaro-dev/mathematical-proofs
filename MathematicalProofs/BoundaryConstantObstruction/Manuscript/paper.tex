@@ -1,0 +1,361 @@
+\documentclass[11pt,a4paper]{amsart}
+
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage[protrusion=true,expansion=false]{microtype}
+\usepackage[margin=30mm]{geometry}
+\usepackage{amsmath,amssymb,amsthm,mathtools}
+\usepackage[dvipsnames]{xcolor}
+\usepackage[colorlinks=true,linkcolor=MidnightBlue,citecolor=MidnightBlue,urlcolor=MidnightBlue]{hyperref}
+\hypersetup{
+ pdftitle={A Boundary-Constant Obstruction to Real-Rooted Riemann Incomplete-Gamma Approximants},
+ pdfauthor={Mayk Loide Baccaro},
+ pdfsubject={Nonreal zeros of finite symmetrized incomplete-gamma approximants to the Riemann Xi function}
+}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{lemma}[theorem]{Lemma}
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+
+\newcommand{\C}{\mathbb C}
+\newcommand{\R}{\mathbb R}
+\newcommand{\XiN}{\Xi_N}
+\newcommand{\FNt}{F_{N,t}}
+\setlength{\emergencystretch}{2em}
+
+\title[Boundary-constant obstruction]
+{A Boundary-Constant Obstruction to Real-Rooted\\
+Riemann Incomplete-Gamma Approximants}
+\author[Mayk Loide Baccaro]{Mayk Loide Baccaro\\
+Independent researcher\\
+\href{mailto:m.baccaro7663@student.nu.edu}{\texttt{m.baccaro7663@student.nu.edu}}}
+\date{14 August 2026}
+\subjclass[2020]{Primary 11M26; Secondary 30D15, 33B20}
+\keywords{Riemann Xi function, incomplete gamma function, entire function, real-rootedness, Hadamard factorization}
+
+\begin{document}
+\raggedbottom
+
+\begin{abstract}
+Let $H_N$ denote the $N$th Fourier partial sum obtained from Riemann's
+incomplete-gamma expansion, and let
+\[
+ c_N=\sum_{n>N}(4\pi n^2-1)e^{-\pi n^2}>0.
+\]
+For every finite $N\geq1$ and every $0<t\leq1$, we prove that the even entire
+function $F_{N,t}=H_N+t c_N$ has a nonreal zero.  The direct arithmetic-index
+truncation is the endpoint $F_{N,1}$.  Indeed, $F_{N,t}(x)\to t c_N$ at both
+ends of the real axis, while $F_{N,t}(i/2)-t c_N=1/2-c_N\ne0$; moreover,
+$F_{N,t}$ has order at most one.  If all zeros were real, the positive
+boundary limit would leave only finitely many zeros, and Hadamard
+factorization together with evenness would force $F_{N,t}$ to be constant.
+P\'olya's theorem already treats the unshifted endpoint $t=0$.  The result
+identifies the obstruction created by the positive constant shift and separates it
+from Haglund's next-summand zero-motion conjectures.  It has no implication
+for the Riemann hypothesis itself.
+\end{abstract}
+
+\maketitle
+
+\section{Introduction}
+
+To support a limiting real-rootedness argument, a finite approximating family
+needs a corresponding finite-level zero theorem.  Local uniform convergence
+alone does not place the approximants' zeros on the real axis.  P\'olya's
+Fourier-transform program and Hejhal's refinement show that finite-level zero
+behavior depends sensitively on the choice of approximating kernel
+\cite{Polya1926,Hejhal1990}.  Haglund later studied incomplete-gamma partial
+sums and the geometry of their complex zeros \cite{Haglund2011}.
+
+This note studies direct finite truncations of the symmetrized
+incomplete-gamma expansion for the completed zeta function.  These truncations
+preserve both functional-equation halves term by term and converge locally
+uniformly to Xi.  Conversion to a cosine transform separates an additional
+boundary constant.  The exact decomposition derived below is
+$\Xi_N=H_N+c_N$.  We place it in the one-parameter family
+$F_{N,t}=H_N+t c_N$ and study every positive shift $0<t\leq1$.
+
+The boundary constant forces a nonreal zero at every finite level.
+
+\begin{theorem}\label{thm:main}
+For every finite integer $N\geq1$ and every $0<t\leq1$, the function
+$\FNt$ defined in~\eqref{eq:shift-family} has at least one nonreal zero.  In
+particular, the symmetrized incomplete-gamma approximant
+$\XiN=F_{N,1}$ has a nonreal zero for every finite $N$.
+\end{theorem}
+
+The argument does not locate a zero numerically.  It combines four global
+facts: a positive real-axis boundary limit, nonconstancy, order at most one,
+and evenness.  Section~\ref{sec:representation} derives the exact cosine
+representation and its endpoint constant.  Section~\ref{sec:boundary}
+evaluates the constant by Jacobi's theta transformation.  The growth estimate
+and factorization argument appear in Sections~\ref{sec:growth}
+and~\ref{sec:zeros}.  Section~\ref{sec:comparison} identifies the unshifted
+endpoint covered by P\'olya, distinguishes Haglund's deformation, and states
+what the theorem does and does not imply.
+
+\section{The finite incomplete-gamma family}\label{sec:representation}
+
+Write
+\[
+ \xi(s)=\frac12s(s-1)\pi^{-s/2}\Gamma\!\left(\frac{s}{2}\right)\zeta(s),
+ \qquad
+ \Xi(z)=\xi\!\left(\frac12+iz\right).
+\]
+The standard theta-function argument gives a symmetrized incomplete-gamma
+expansion for $\xi$; see, for example, \cite[Ch.~1]{Edwards2001} and
+\cite{Haglund2011}.  Its direct truncation after the $N$th arithmetic term is
+\begin{align}
+ \xi_N(s)=\frac12+\frac{s(s-1)}2\sum_{n=1}^N
+ \bigg[& (\pi n^2)^{-s/2}
+       \Gamma\!\left(\frac{s}{2},\pi n^2\right) \notag\\
+ &+(\pi n^2)^{-(1-s)/2}
+       \Gamma\!\left(\frac{1-s}{2},\pi n^2\right)\bigg],
+ \label{eq:def-xin-s}
+\end{align}
+where $\Gamma(a,x)=\int_x^\infty t^{a-1}e^{-t}\,dt$.  Define
+\begin{equation}\label{eq:def-xin}
+ \XiN(z)=\xi_N\!\left(\frac12+iz\right).
+\end{equation}
+Each $\XiN$ is a real even entire function.  The omitted tail decays
+exponentially in $n^2$, uniformly for $z$ in compact sets, so $\XiN\to\Xi$
+locally uniformly as $N\to\infty$.
+
+Set
+\begin{equation}\label{eq:S-def}
+ S_N(u)=\sum_{n=1}^N\exp\!\left(\frac u2-\pi n^2e^{2u}\right),
+ \qquad u\geq0,
+\end{equation}
+and
+\[
+ I_N(z)=\int_0^\infty S_N(u)\cos(zu)\,du.
+\]
+Substituting $t=\pi n^2e^{2u}$ in the two incomplete-gamma integrals and
+using $s=1/2+iz$ gives
+\begin{equation}\label{eq:first-integral}
+ \XiN(z)=\frac12-2\left(z^2+\frac14\right)I_N(z).
+\end{equation}
+
+Let
+\begin{equation}\label{eq:phi-def}
+ \Phi_N(u)=S_N''(u)-\frac14S_N(u).
+\end{equation}
+All derivatives of $S_N$ decay superexponentially at infinity.  Two
+integrations by parts therefore yield
+\[
+ \int_0^\infty \Phi_N(u)\cos(zu)\,du
+ =-S_N'(0)-\left(z^2+\frac14\right)I_N(z).
+\]
+Combining this identity with~\eqref{eq:first-integral} proves the exact
+representation
+\begin{equation}\label{eq:cosine-representation}
+ \XiN(z)=c_N+2\int_0^\infty \Phi_N(u)\cos(zu)\,du,
+\end{equation}
+where
+\begin{equation}\label{eq:c-partial}
+ c_N=\frac12+2S_N'(0)
+ =\frac12+\sum_{n=1}^N(1-4\pi n^2)e^{-\pi n^2}.
+\end{equation}
+Put
+\begin{equation}\label{eq:shift-family}
+ H_N(z)=2\int_0^\infty\Phi_N(u)\cos(zu)\,du,
+ \qquad
+ F_{N,t}(z)=H_N(z)+t c_N \quad (0\leq t\leq1).
+\end{equation}
+Then~\eqref{eq:cosine-representation} says exactly that
+$\Xi_N=F_{N,1}$.
+
+\section{The positive boundary constant}\label{sec:boundary}
+
+The sign of $c_N$ follows from the theta transformation, not from numerical
+cancellation in~\eqref{eq:c-partial}.
+
+\begin{proposition}\label{prop:constant}
+For every finite $N\geq1$,
+\begin{equation}\label{eq:c-tail}
+ c_N=\sum_{n>N}(4\pi n^2-1)e^{-\pi n^2},
+ \qquad 0<c_N<\frac12.
+\end{equation}
+Moreover,
+\begin{equation}\label{eq:real-limit}
+ \lim_{x\to\pm\infty}\XiN(x)=c_N,
+ \qquad x\in\R.
+\end{equation}
+For $0\leq t\leq1$ one has, more generally,
+\begin{equation}\label{eq:shift-limit}
+ \lim_{x\to\pm\infty}F_{N,t}(x)=t c_N.
+\end{equation}
+\end{proposition}
+
+\begin{proof}
+Let
+\[
+ S(u)=\sum_{n=1}^\infty\exp\!\left(\frac u2-\pi n^2e^{2u}\right).
+\]
+For $\vartheta(x)=\sum_{k\in\mathbb Z}e^{-\pi k^2x}$, Jacobi's identity
+$\vartheta(x)=x^{-1/2}\vartheta(1/x)$ gives
+\[
+ S(u)-S(-u)=-\sinh\!\left(\frac u2\right).
+\]
+Differentiating at $u=0$ gives $S'(0)=-1/4$, hence
+\[
+ \frac12+\sum_{n=1}^\infty(1-4\pi n^2)e^{-\pi n^2}=0.
+\]
+Subtracting~\eqref{eq:c-partial} proves the tail formula
+in~\eqref{eq:c-tail}.  Every tail summand is positive.  The strict upper
+bound follows directly from~\eqref{eq:c-partial}, since every term in its
+finite sum is negative.
+
+Finally, $\Phi_N\in L^1(0,\infty)$.  The Riemann--Lebesgue lemma applied
+to~\eqref{eq:cosine-representation} proves~\eqref{eq:real-limit}.
+\end{proof}
+
+The shifted functions are not constant.  Indeed, at $z=i/2$ one has $s=0$,
+and the factor $s(s-1)$ in~\eqref{eq:def-xin-s} vanishes.  Since
+$\Xi_N=H_N+c_N$,
+\begin{equation}\label{eq:nonconstant}
+ F_{N,t}(i/2)=\frac12-(1-t)c_N,
+ \qquad
+ F_{N,t}(i/2)-t c_N=\frac12-c_N>0.
+\end{equation}
+
+\section{Growth}\label{sec:growth}
+
+\begin{lemma}\label{lem:order}
+For each fixed finite $N$ and $t\in[0,1]$, the entire function $F_{N,t}$ has
+order at most one.  More precisely, if
+$M_{N,t}(r)=\max_{|z|\leq r}|F_{N,t}(z)|$, then
+\[
+ \log M_{N,t}(r)=O_N\!\bigl(r\log(2+r)\bigr).
+\]
+\end{lemma}
+
+\begin{proof}
+For $|z|\leq r$ and $u\geq0$,
+$|\cos(zu)|\leq e^{ru}$.  Since
+\[
+ 0<S_N(u)\leq N\exp\!\left(\frac u2-\pi e^{2u}\right),
+\]
+the change of variables $t=e^{2u}$ gives
+\begin{align*}
+ |I_N(z)|
+ &\leq \frac N2\int_1^\infty
+ t^{r/2-3/4}e^{-\pi t}\,dt\\
+ &\leq \frac N2\,\pi^{-(r/2+1/4)}
+ \Gamma\!\left(\frac r2+\frac14\right)
+\end{align*}
+for all sufficiently large $r$.  Stirling's estimate, together with the
+quadratic factor in~\eqref{eq:first-integral}, yields the asserted bound.
+The identity $F_{N,t}=\Xi_N-(1-t)c_N$ shows that adding the bounded constant
+does not change the estimate.  Its order consequence is immediate from the
+definition of the order of an entire function.
+\end{proof}
+
+\section{Nonreal zeros at every finite level}\label{sec:zeros}
+
+\begin{proof}[Proof of Theorem~\ref{thm:main}]
+Fix a finite $N\geq1$ and $0<t\leq1$, and suppose that every zero of
+$F_{N,t}$ is real.  Proposition~\ref{prop:constant} and
+\eqref{eq:shift-limit} show that $F_{N,t}(x)>0$ for all sufficiently large
+$|x|$.  Equation~\eqref{eq:nonconstant} shows that $F_{N,t}$ is not the zero
+function, so its zeros are isolated.  Under the supposition, all zeros
+therefore lie in a compact real interval and are finite in number.
+
+By Lemma~\ref{lem:order} and Hadamard factorization
+\cite[Ch.~2]{Boas1954},
+\begin{equation}\label{eq:hadamard}
+ F_{N,t}(z)=e^{az+b}P(z)
+\end{equation}
+for constants $a,b\in\C$ and a polynomial $P$.  Evenness gives
+the reflection product
+\[
+ Q(z)=F_{N,t}(z)F_{N,t}(-z)=e^{2b}P(z)P(-z)
+\]
+is a polynomial.  If $L=t c_N$, then~\eqref{eq:shift-limit} gives
+$Q(x)\to L^2$ as $x\to+\infty$.  A polynomial with a finite limit on the
+positive real axis is constant, so $Q\equiv L^2$.  Evenness now gives
+$F_{N,t}^2\equiv L^2$.  Since $L>0$, the function $F_{N,t}$ never vanishes;
+differentiating shows that $F_{N,t}'\equiv0$.  Hence $F_{N,t}$ is constant,
+contrary to~\eqref{eq:nonconstant}.  Thus $F_{N,t}$ has a nonreal zero.
+Because $F_{N,t}$ is real and even, its nonreal zeros occur in the
+corresponding conjugation and sign symmetry orbit.
+\end{proof}
+
+At $t=1$, $F_{N,1}=\Xi_N$ is the direct incomplete-gamma truncation.  Hence
+every finite truncation, including $N=1$, has a nonreal zero.  The same
+conclusion holds for every positive shift $0<t\leq1$.
+
+\begin{remark}[Local zero motion]\label{rem:motion}
+Fix $N$.  If $z_0$ is a simple zero of $F_{N,t_0}$ for some
+$0<t_0\leq1$, the holomorphic implicit-function theorem gives a unique local
+zero branch $z(t)$ through $(t_0,z_0)$, with
+\[
+ z'(t_0)=-\frac{c_N}{H_N'(z_0)}.
+\]
+This identity is local: it gives no global ordering, collision exclusion, or
+continuation through a multiple zero.
+\end{remark}
+
+\section{Relation to earlier approximants and scope}\label{sec:comparison}
+
+For a single summand
+$S_n(u)=\exp(u/2-\pi n^2e^{2u})$, direct differentiation gives
+\begin{equation}\label{eq:haglund-normalization}
+ 2\left(S_n''(u)-\frac14S_n(u)\right)
+ =e^{-\pi n^2e^{2u}}
+ \left(8\pi^2n^4e^{9u/2}-12\pi n^2e^{5u/2}\right).
+\end{equation}
+Consequently,~\eqref{eq:shift-family} is exactly the normalization of the
+finite Fourier sums in Haglund's equations~(3), (13), and~(14)
+\cite{Haglund2011}.  The direct incomplete-gamma truncation differs from
+that sum by the positive constant:
+\begin{equation}\label{eq:haglund-shift}
+ \XiN(z)=H_N(z)+c_N.
+\end{equation}
+
+At the unshifted endpoint, P\'olya proved that every finite partial sum of
+Riemann's kernel series has infinitely many zeros but only finitely many real
+zeros \cite[\S4]{Polya1926}.  Thus $H_N=F_{N,0}$ already has nonreal zeros.
+Theorem~\ref{thm:main} covers every positive shift $0<t\leq1$; its boundary
+argument requires $t c_N>0$ and therefore does not apply at $t=0$.
+
+Haglund investigated monotonic patterns among complex zeros and reported
+numerical zeros without rigorous error bounds \cite{Haglund2011}.  His
+numbered conjectures concern the unshifted sums and a next-summand homotopy,
+not the additive constant path $H_N+t c_N$.  Hejhal's work concerns other
+P\'olya-type kernel modifications \cite{Hejhal1990}.  Neither result addresses
+the additive path $H_N+t c_N$, and no monotonicity statement follows from the
+local formula in Remark~\ref{rem:motion}.
+
+The conclusion is limited to the functions in~\eqref{eq:shift-family} with
+$0<t\leq1$.  It rules out the proof plan that demands real-rootedness for
+these finite approximants and then passes to $\Xi$ by local uniform
+convergence.  Changing the truncation, adding a nonconstant correction, or
+proving a different source-specific zero theorem produces a different
+problem.  The existence of nonreal zeros of the approximants has no
+implication for whether the zeros of the limiting Riemann Xi function are
+real.
+
+\section*{Data and code availability}
+
+The proof is analytic and uses no external data or numerical zero location.
+An accompanying Lean~4 formalization checks the finite definitions, theta
+identity, boundary limits, nonconstancy witness, growth bound, factorization
+contradiction, symmetry orbit, and local-uniform convergence to the classical
+completed Xi function, together with the simple-zero local motion stated in
+Remark~\ref{rem:motion}.
+
+\section*{Assistance disclosure}
+
+AI systems were used extensively in mathematical derivation, Lean proof
+development, literature discovery, organization, and typesetting.  The author
+remains responsible for every mathematical statement, proof, citation, and
+submission decision.
+
+\bibliographystyle{amsplain}
+\bibliography{references}
+
+\end{document}

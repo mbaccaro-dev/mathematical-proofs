@@ -1,0 +1,15 @@
+# Mathematical proofs
+
+Each subdirectory is a complete paper artifact containing:
+
+- the human-readable manuscript and bibliography;
+- the typeset PDF;
+- a pinned Lean 4 project; and
+- citation information for the paper.
+
+## Contents
+
+- [`BoundaryConstantObstruction`](BoundaryConstantObstruction/) —
+  *A Boundary-Constant Obstruction to Real-Rooted Riemann
+  Incomplete-Gamma Approximants*.
+  [doi:10.5281/zenodo.21941655](https://doi.org/10.5281/zenodo.21941655)

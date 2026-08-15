@@ -1,0 +1,27 @@
+cff-version: 1.2.0
+message: "If you use this formalization, please cite the accompanying paper."
+title: "Lean 4 formalization for A Boundary-Constant Obstruction to Real-Rooted Riemann Incomplete-Gamma Approximants"
+type: software
+authors:
+  - family-names: "Baccaro"
+    given-names: "Mayk Loide"
+version: 1.0.0
+date-released: 2026-08-14
+abstract: >-
+  Lean 4 formalization accompanying the paper on nonreal zeros of finite
+  symmetrized incomplete-gamma approximants to the Riemann Xi function.
+keywords:
+  - Lean 4
+  - Riemann Xi function
+  - incomplete gamma function
+  - entire functions
+  - real-rootedness
+preferred-citation:
+  type: article
+  authors:
+    - family-names: "Baccaro"
+      given-names: "Mayk Loide"
+  title: "A Boundary-Constant Obstruction to Real-Rooted Riemann Incomplete-Gamma Approximants"
+  year: 2026
+  doi: "10.5281/zenodo.21941655"
+  url: "https://doi.org/10.5281/zenodo.21941655"
