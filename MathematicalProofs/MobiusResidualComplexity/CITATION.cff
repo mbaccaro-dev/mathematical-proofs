@@ -1,0 +1,28 @@
+cff-version: 1.2.0
+message: "If you use this formalization, please cite the accompanying paper."
+title: "Lean 4 formal assurance for Logarithmic Residual-Complexity Barriers for Local Mobius Cancellation"
+type: software
+authors:
+  - family-names: "Baccaro"
+    given-names: "Mayk Loide"
+version: 1.0.0
+date-released: 2026-08-18
+doi: "10.5281/zenodo.22006119"
+abstract: >-
+  Lean 4 formal assurance for the finite matching, balance, exponent-sandwich,
+  square-root constant, and endpoint-doubling kernels used in the accompanying
+  paper on local Mobius cancellation certificates.
+keywords:
+  - Lean 4
+  - Mobius function
+  - local cancellation
+  - matching
+  - residual complexity
+preferred-citation:
+  type: article
+  authors:
+    - family-names: "Baccaro"
+      given-names: "Mayk Loide"
+  title: "Logarithmic Residual-Complexity Barriers for Local Mobius Cancellation"
+  year: 2026
+  doi: "10.5281/zenodo.22006119"

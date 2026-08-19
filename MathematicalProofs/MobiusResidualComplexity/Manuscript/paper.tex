@@ -1,0 +1,463 @@
+\documentclass[11pt,a4paper]{amsart}
+
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage[protrusion=true,expansion=false]{microtype}
+\usepackage[margin=30mm]{geometry}
+\usepackage{amsmath,amssymb,amsthm,mathtools}
+\usepackage{enumitem}
+\usepackage[dvipsnames]{xcolor}
+\usepackage[colorlinks=true,linkcolor=MidnightBlue,citecolor=MidnightBlue,urlcolor=MidnightBlue]{hyperref}
+\hypersetup{
+  pdftitle={Logarithmic Residual-Complexity Barriers for Local Mobius Cancellation},
+  pdfauthor={Mayk Loide Baccaro},
+  pdfsubject={Necessary complexity and pair-compression theorems for local Mobius cancellation schemes}
+}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{lemma}[theorem]{Lemma}
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+
+\newcommand{\N}{\mathbb N}
+\newcommand{\R}{\mathbb R}
+\newcommand{\mob}{\mu}
+\newcommand{\om}{\omega}
+\newcommand{\M}{M}
+\setlength{\emergencystretch}{2em}
+
+\title[Residual complexity for local M\"obius cancellation]
+{Logarithmic Residual-Complexity Barriers\\
+for Local M\"obius Cancellation}
+
+\author[Mayk Loide Baccaro]{Mayk Loide Baccaro\\
+Independent researcher\\
+\href{mailto:m.baccaro7663@student.nu.edu}{\texttt{m.baccaro7663@student.nu.edu}}}
+
+\date{18 August 2026}
+\subjclass[2020]{Primary 11N37; Secondary 05C70, 11A25}
+\keywords{M\"obius function, squarefree integers, matching, residual complexity, Mertens function, hypergraph compression}
+
+\begin{document}
+\raggedbottom
+
+\begin{abstract}
+Consider cancellation certificates for the M\"obius function that pair
+squarefree integers after removing their greatest common divisor.  If the
+residual cofactors have at most $R(T)$ prime factors at scale
+$T=\max(a,b)$, every edge has length $O(T^\alpha)$, and only
+$O(X^\beta)$ vertices through $X$ remain unmatched, then
+\[
+ \limsup_{X\to\infty}\frac{R(X)\log\log X}{\log X}
+ \geq (1-\alpha)(1-\beta).
+\]
+The square-root scale therefore forces a limsup of at least $1/4$.
+Finite vertex-disjoint, unit-weight, zero-sum M\"obius cells with a common
+core compress exactly to opposite-sign pairs.  When the residual budget
+depends on scale, the compression loses only endpoints near jumps of $R$.
+Thus short local certificates require logarithmically growing residual
+complexity, and common-core cells obey the same pairwise limitation.  The
+results construct no matching and give no estimate for the actual Mertens
+function.
+\end{abstract}
+
+\maketitle
+\enlargethispage{12pt}
+
+\section{Introduction}
+
+Let $\mob$ be the M\"obius function and
+\[
+ \M(X)=\sum_{n\leq X}\mob(n).
+\]
+The Riemann hypothesis is equivalent to
+$\M(X)=O_\varepsilon(X^{1/2+\varepsilon})$ for every $\varepsilon>0$;
+see Titchmarsh~\cite[Chapter XIV]{Titchmarsh1986} or
+Montgomery--Vaughan~\cite[Chapter 15]{MontgomeryVaughan2007}.  Since
+$\mob(n)\in\{-1,0,1\}$, a combinatorial route would pair most squarefree
+integers of opposite M\"obius sign with short edges and charge the summatory
+error to unmatched vertices and edges crossing the cutoff.
+
+We study the necessary nonlocality of a broad gcd-residual matching and a
+natural enlargement from pairs to finite cells.  Related work treats sign
+patterns of $\mob$ and the Liouville function by analytic methods
+\cite{MatomakiRadziwillTao2016}, together with harmonic and matrix structures
+on the squarefree integers~\cite{Hilberdink2014}.  McNew and Pomerance study
+coprime matchings between the divisor set of an integer and an initial
+interval, proving in particular that every squarefree integer is matchable
+\cite{McNewPomerance2026}.  Their edge condition concerns coprimality.  The
+edges here must have opposite M\"obius signs, short displacement, and a bounded
+residual after the common divisor is removed.  The controlling question is
+the obstruction forced by the retained greatest common divisor in such an
+edge.
+
+Aymone and Liu study analytic bounds for summatory functions of
+multiplicative functions resembling M\"obius, including a separate
+one-quarter lower-bound exponent in Liu's class~\cite{Aymone2020,Liu2023}.
+Their objects are altered multiplicative functions; the objects here are
+local matching certificates for the M\"obius function itself.
+
+Products of many primes in a short dyadic band form a large same-sign family.
+A small residual budget forces any repair
+edge incident to that family to retain a greatest common divisor larger than
+the permitted displacement.  This gives the product threshold
+$(1-\alpha)(1-\beta)$ in Theorem~\ref{thm:threshold}.
+
+The second part tests a larger zero-sum cell.  Distinct squarefree vertices
+with unit M\"obius weights and one common greatest common divisor can be
+rank-paired by sign.  The pairing preserves the exact signed boundary mass at
+every cutoff.  If the budget changes with the endpoint, failed derived pairs
+are confined to neighborhoods of its jump set; Theorem~\ref{thm:sparse-jump}
+quantifies the loss.
+
+The scope is the stated certificate class.  Weighted flows, overlapping
+cells, non-common-core structures, cross terms, signed residual estimates,
+and dense-jump budgets require separate arguments.  The conclusions give no
+lower bound for $|\M(X)|$ and do not cover every combinatorial approach to
+M\"obius cancellation.
+
+\section{The maximal residual pair class}
+
+Write $\om(n)$ for the number of distinct prime divisors of $n$.  Let
+$R:[1,\infty)\to\N\cup\{0\}$ be nondecreasing.
+
+\begin{definition}[Residual-admissible pair]\label{def:pair}
+Distinct squarefree integers $a,b$ form an $R$-admissible pair if, with
+\[
+ g=(a,b),\qquad T=\max(a,b),
+\]
+one has
+\begin{equation}\label{eq:budget}
+ \om(a/g)\leq R(T),\qquad \om(b/g)\leq R(T),
+\end{equation}
+and $\om(a/g)$ and $\om(b/g)$ have opposite parity.
+\end{definition}
+
+The parity condition gives $\mob(a)=-\mob(b)$, since $g,a/g,b/g$ are
+squarefree.  Every such pair also obeys
+\begin{equation}\label{eq:gcd-floor}
+ |a-b|=g\,|a/g-b/g|\geq g.
+\end{equation}
+Definition~\ref{def:pair} permits every edge satisfying the stated budget,
+so any extra scheduling or graph restriction can only remove edges.
+
+\begin{lemma}[Matching identity]\label{lem:matching}
+Let $\mathcal P$ be a finite family of disjoint opposite-sign pairs and let
+$U(X)$ be the number of squarefree integers at most $X$ not covered by
+$\mathcal P$.  If $C(X)$ is the number of pairs with exactly one endpoint at
+most $X$, then
+\[
+ |\M(X)|\leq U(X)+C(X).
+\]
+\end{lemma}
+
+\begin{proof}
+Pairs lying completely below or completely above $X$ contribute zero.  Each
+crossing pair and each uncovered squarefree vertex contributes a number of
+absolute value one.  Integers with $\mob(n)=0$ contribute nothing.
+\end{proof}
+
+\section{The logarithmic complexity threshold}
+
+\begin{theorem}[Residual-complexity barrier]\label{thm:threshold}
+Fix $0\leq\alpha<1$, $0\leq\beta<1$, and $C>0$.  Suppose a matching of
+squarefree integers uses only $R$-admissible pairs and satisfies
+\begin{equation}\label{eq:short}
+ |a-b|\leq C\max(a,b)^\alpha
+\end{equation}
+on every used edge.  If the number of unmatched squarefree vertices through
+$X$ is $O(X^\beta)$, then
+\begin{equation}\label{eq:threshold}
+ \limsup_{X\to\infty}
+ \frac{R(X)\log\log X}{\log X}
+ \geq (1-\alpha)(1-\beta).
+\end{equation}
+\end{theorem}
+
+\begin{proof}
+Assume that the limsup in~\eqref{eq:threshold} is
+\[
+ r<(1-\alpha)(1-\beta).
+\]
+Choose
+\begin{equation}\label{eq:delta}
+ \frac{r}{1-\alpha}<\delta<1-\beta.
+\end{equation}
+For large $y$, put $k=\lfloor y^\delta\rfloor$, let
+$m_y=\pi(2y)-\pi(y)$, let $S_y$ contain the products of $k$ distinct primes
+in $(y,2y]$, and put $X_y=(2y)^k$.
+
+The prime number theorem in a fixed dyadic interval
+\cite{MontgomeryVaughan2007} gives
+$m_y\gg y/\log y$.  Since $k=y^{\delta+o(1)}=o(m_y)$, the standard upper and
+lower binomial estimates give
+\begin{equation}\label{eq:family}
+ |S_y|=\binom{m_y}{k}=X_y^{1-\delta+o(1)}.
+\end{equation}
+Every element of $S_y$ has M\"obius sign $(-1)^k$.  The choice of $\delta$
+in~\eqref{eq:delta} makes this family larger than $X_y^\beta$ by a fixed
+power for all sufficiently large $y$.
+
+Fix $n\in S_y$ and suppose that it has a partner $b$.  If $b\geq2n$, then
+\eqref{eq:short} gives $b^{1-\alpha}\leq2C$, which fails for large $y$.
+Thus $b<2n\leq2X_y$, and
+\begin{equation}\label{eq:logscale}
+ \frac{\log(2X_y)}{\log\log(2X_y)}
+ =\left(\frac1\delta+o(1)\right)k.
+\end{equation}
+The assumed limsup bound, monotonicity of $R$, and~\eqref{eq:delta} yield
+some $\eta>0$ such that
+\begin{equation}\label{eq:R-bound}
+ R(\max(n,b))\leq R(2X_y)<(1-\alpha-\eta)k
+\end{equation}
+for all sufficiently large $y$.
+
+Let $g=(n,b)$.  The residual $n/g$ contains at most $R(2X_y)$ of the $k$
+prime factors of $n$.  Combining the retained prime factors with
+\eqref{eq:gcd-floor} and the short-edge bound gives
+\begin{equation}\label{eq:key-sandwich}
+ y^{(\alpha+\eta)k}
+ < y^{k-R(2X_y)}
+ \leq g
+ \leq |n-b|
+ \leq C(2X_y)^\alpha
+ =y^{(\alpha+o(1))k},
+\end{equation}
+which is impossible for large $y$.  Hence every member of $S_y$ is
+unmatched.  Equation~\eqref{eq:family} contradicts the asserted
+$O(X_y^\beta)$ unmatched count.
+\end{proof}
+
+\begin{corollary}[Square-root matching scale]\label{cor:quarter}
+Fix $R$.  Suppose that for every $\varepsilon>0$ there is a
+residual-admissible matching, allowed to depend on $\varepsilon$, whose edge
+lengths and unmatched counts are
+\[
+ O_\varepsilon(X^{1/2+\varepsilon}).
+\]
+Then necessarily
+\[
+ \limsup_{X\to\infty}
+ \frac{R(X)\log\log X}{\log X}\geq\frac14.
+\]
+\end{corollary}
+
+\begin{proof}
+Apply Theorem~\ref{thm:threshold} with
+$\alpha=\beta=1/2+\varepsilon$ and let $\varepsilon\downarrow0$.
+\end{proof}
+
+A matching construction additionally requires Hall-type expansion or another
+mechanism for controlling collisions.
+
+\section{Common-core cells collapse to pairs}
+
+\begin{definition}[Common-core M\"obius cell]
+A cell is a finite set $H$ of distinct squarefree positive integers with
+\[
+ \sum_{n\in H}\mob(n)=0.
+\]
+Write $g_H=\gcd\{n:n\in H\}$, $T_H=\max H$, and
+\[
+ S_H(X)=\sum_{\substack{n\in H\\ n\leq X}}\mob(n).
+\]
+\end{definition}
+
+\begin{theorem}[Exact fixed-budget pair compression]\label{thm:compression}
+Suppose a common-core M\"obius cell $H$ satisfies
+\[
+ \om(n/g_H)\leq R_H\qquad(n\in H).
+\]
+List its positive vertices increasingly as $p_1,\ldots,p_m$ and its negative
+vertices increasingly as $q_1,\ldots,q_m$.  Pair $p_i$ with $q_i$.  Then
+every derived pair $\{a,b\}$ satisfies
+\[
+ \mob(a)=-\mob(b),\quad
+ \om(a/(a,b)),\om(b/(a,b))\leq R_H,\quad
+ |a-b|\leq\operatorname{diam}(H).
+\]
+For every real $X$, exactly $|S_H(X)|$ of these pairs cross $X$.
+\end{theorem}
+
+\begin{proof}
+The zero-sum hypothesis gives the same number of positive and negative
+vertices.  For a paired $a,b$, the common core $g_H$ divides $h=(a,b)$.
+Since the integers are squarefree,
+\[
+ \om(a/h)\leq\om(a/g_H)\leq R_H,
+ \qquad
+ \om(b/h)\leq\om(b/g_H)\leq R_H.
+\]
+Opposite M\"obius signs give opposite residual parities.  The diameter bound
+is immediate.
+
+At a cutoff $X$, let $P(X)$ and $Q(X)$ count the positive and negative
+endpoints through $X$.  Increasing rank pairing matches the common initial
+portion.  The crossing-pair count is therefore
+$|P(X)-Q(X)|=|S_H(X)|$.
+\end{proof}
+
+The final identity preserves the exact signed prefix mass simultaneously at
+every cutoff.
+
+\section{Endpoint budgets and sparse jumps}
+
+If a cell is admitted at budget $R(T_H)$, a derived pair with maximum
+endpoint $m<T_H$ may exceed the smaller budget $R(m)$.  The following example
+shows the endpoint issue exactly.
+
+\begin{proposition}[Sharp finite endpoint gap]\label{prop:gap}
+Let
+\[
+ H=\{2,5,21,33\},\qquad
+ R(t)=\begin{cases}1,&t<30,\\2,&t\geq30.\end{cases}
+\]
+Then $H$ is a zero-sum common-core cell admitted at scale $33$, but neither
+opposite-sign pair partition makes every pair admissible at its own maximum
+endpoint.
+\end{proposition}
+
+\begin{proof}
+The signs are $(-1,-1,+1,+1)$ and every vertex has at most two prime
+factors.  There are two opposite-sign pair partitions.  In each partition,
+the pair not containing $33$ has maximum below $30$ and contains an endpoint
+with two residual prime factors, so it violates budget one.
+\end{proof}
+
+Let $J(Y)$ be the number of integer jump locations $j\leq Y$ with
+$R(j)>R(j-1)$.
+
+\begin{theorem}[Sparse-jump repair]\label{thm:sparse-jump}
+Let $R:\N\to\N\cup\{0\}$ and $D:\N\to[0,\infty)$ be nondecreasing.  At a
+cutoff $X$, let $\mathcal F_X$ be a finite vertex-disjoint family of
+common-core M\"obius cells satisfying
+\[
+ \om(n/g_H)\leq R(T_H),\qquad
+ \operatorname{diam}(H)\leq D(T_H).
+\]
+Rank-pair every cell as in Theorem~\ref{thm:compression}, and delete a derived
+pair when it violates the residual budget at its own maximum endpoint.  If
+$D(t)\leq t/2$ for all sufficiently large $t$, then, up to a fixed initial
+constant $B_0$, the number $B(X)$ of deleted endpoints at most $X$ obeys
+\begin{equation}\label{eq:jump-bound}
+ B(X)\leq B_0+\bigl(2\lfloor D(2X)\rfloor+1\bigr)J(2X).
+\end{equation}
+If also $D(t)\leq Ct^\alpha$ with $\alpha<1$, every retained pair satisfies
+\begin{equation}\label{eq:inherited-gap}
+ |a-b|\leq C2^\alpha\max(a,b)^\alpha
+\end{equation}
+for all sufficiently large endpoints.
+\end{theorem}
+
+\begin{proof}
+Let a deleted pair have maximum endpoint $m$.  Common-core inheritance still
+bounds both residuals by $R(T_H)$; deletion therefore implies
+$R(m)<R(T_H)$.  Hence there is a jump $j\in(m,T_H]$.  Every endpoint of the
+pair lies within $D(T_H)$ of $j$.
+
+If a deleted endpoint $n\leq X$ lies in $H$, then
+\[
+ T_H-n\leq D(T_H)\leq T_H/2,
+\]
+so $T_H\leq2X$ and $D(T_H)\leq D(2X)$.  Each endpoint is therefore an
+integer in a radius-$D(2X)$ neighborhood of a jump through $2X$.
+Vertex-disjointness ensures that no integer endpoint is counted twice, which
+proves~\eqref{eq:jump-bound}.
+
+For the retained-pair gap, put $m=\max(a,b)$.  Eventually
+$m\geq T_H-D(T_H)\geq T_H/2$, and therefore
+\[
+ |a-b|\leq D(T_H)\leq CT_H^\alpha\leq C2^\alpha m^\alpha.
+\]
+\end{proof}
+
+\begin{corollary}[Compression at square-root scale]\label{cor:compression}
+Suppose $R(Y)=O(\log Y/\log\log Y)$ and, for every $\delta>0$ and
+sufficiently large $X$, there is a family $\mathcal F_{\delta,X}$ as in
+Theorem~\ref{thm:sparse-jump} with
+\[
+ D(t)=O_\delta(t^{1/2+\delta})
+\]
+and total uncovered plus signed cell-boundary mass
+\[
+ O_\delta(X^{1/2+\delta}).
+\]
+Here the boundary mass is the sum of $|S_H(X)|$ over the cells.  Then for
+every $\varepsilon>0$, that cutoff-specific cell certificate compresses to an
+opposite-sign pair certificate with unmatched plus crossing contribution
+$O_\varepsilon(X^{1/2+\varepsilon})$.
+\end{corollary}
+
+\begin{proof}
+An integer-valued nondecreasing $R$ has $J(Y)\leq R(Y)+O(1)$.  Choose
+$0<\delta<\min(\varepsilon,1/2)$.  Equation~\eqref{eq:jump-bound} then
+contributes
+\[
+ O_\delta\!\left(X^{1/2+\delta}
+ \frac{\log X}{\log\log X}\right)
+ =O_\varepsilon(X^{1/2+\varepsilon}).
+\]
+Theorem~\ref{thm:compression} preserves the signed boundary mass, and
+\eqref{eq:inherited-gap} preserves the power exponent.
+\end{proof}
+
+The family may depend on the queried cutoff when the desired conclusion is
+pointwise and all constants are uniform.  A global or online matching claim
+requires one coherent family.
+
+\section{Scope and remaining mechanisms}
+
+Theorem~\ref{thm:threshold} rules out square-root performance for short
+gcd-residual pairs with a fixed or subthreshold edit budget.
+Theorems~\ref{thm:compression} and~\ref{thm:sparse-jump} transfer the same
+limitation to common-core unit cells under a sparse-jump endpoint budget.
+
+The following mechanisms remain outside the results:
+\begin{enumerate}[label=(\roman*)]
+\item weighted or signed flows in place of raw unit M\"obius mass;
+\item overlapping cells with a proved ownership or conservation law;
+\item cells without a common gcd or with aggregate residual control;
+\item cross-cofactor moves and cancellation among unmatched signs;
+\item dense-jump budgets with an independent complexity theorem; and
+\item analytic estimates not mediated by a short local matching.
+\end{enumerate}
+
+Unmatched cardinality can exceed $|\M(X)|$ because the unmatched signs may
+cancel.  The conclusions apply to the stated cancellation certificates.
+
+\appendix
+\section{Verification remarks}
+
+The proofs are symbolic.  The threshold theorem combines the displacement
+factorization~\eqref{eq:gcd-floor}, the band-product estimate
+\eqref{eq:family}, the scale conversion~\eqref{eq:logscale}, and the strict
+exponent separation in~\eqref{eq:key-sandwich}.  Exact pair compression
+preserves $|S_H(X)|$ at every prefix.  The sparse-jump argument charges a
+deleted pair only after establishing $R(m)<R(T_H)$.  Finite exact-arithmetic
+checks recover the displayed cell and its two pairings.  The printed
+deductions establish the asymptotic theorem.
+
+\section*{Data and code availability}
+
+The asymptotic arguments are self-contained and use no external dataset.  An
+accompanying Lean~4 development checks finite opposite-sign cancellation, the
+matching bound, zero-sum cell balance, the strict exponent contradiction, the
+square-root constant, and the endpoint-doubling connector.  The prime-number
+asymptotics, logarithmic scale conversion, residual gcd model, exact rank
+compression, and global sparse-jump argument remain manuscript-level proofs.
+
+\section*{Assistance disclosure}
+
+AI systems were used extensively in mathematical derivation, Lean proof
+development, literature discovery, organization, and typesetting.  The author
+remains responsible for every mathematical statement, proof, citation, and
+submission decision.
+
+\bibliographystyle{amsplain}
+\bibliography{references}
+
+\end{document}

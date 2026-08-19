@@ -1,0 +1,20 @@
+import RiemannHypothesisProofFactory.MobiusResidualComplexity.CombinatorialKernel
+
+/-!
+# Möbius residual-complexity paper certificate
+
+The imported module checks the paper's finite cancellation bound, zero-sum
+cell balance, final exponent contradiction, square-root constant identity,
+and endpoint-doubling connector. The analytic, residual-matching, compression,
+and global sparse-jump obligations listed in `CombinatorialKernel.lean` remain
+manuscript-level proofs.
+-/
+
+#print axioms RiemannHypothesisProofFactory.MobiusResidualComplexity.opposite_sign_pair_cancel
+#print axioms RiemannHypothesisProofFactory.MobiusResidualComplexity.abs_sum_le_card
+#print axioms RiemannHypothesisProofFactory.MobiusResidualComplexity.finite_matching_bound
+#print axioms RiemannHypothesisProofFactory.MobiusResidualComplexity.zero_sum_unit_cell_balanced
+#print axioms RiemannHypothesisProofFactory.MobiusResidualComplexity.strict_exponent_sandwich_impossible
+#print axioms RiemannHypothesisProofFactory.MobiusResidualComplexity.square_root_threshold_identity
+#print axioms RiemannHypothesisProofFactory.MobiusResidualComplexity.cell_max_le_twice_endpoint
+#print axioms RiemannHypothesisProofFactory.MobiusResidualComplexity.cell_max_le_doubled_cutoff
