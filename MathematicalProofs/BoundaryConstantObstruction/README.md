@@ -4,11 +4,7 @@ Mayk Loide Baccaro, 2026.
 
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.21941655.svg)](https://doi.org/10.5281/zenodo.21941655)
 
-For every finite integer `N >= 1` and every real `0 < t <= 1`, the paper
-proves that the even entire function `F_(N,t) = H_N + t c_N` has at least one
-nonreal zero. At `t = 1`, this is the direct symmetrized incomplete-gamma
-approximant. The result concerns the finite approximants and does not prove or
-disprove the Riemann hypothesis.
+This paper studies finite approximations to Riemann’s Xi function built from its incomplete-gamma expansion. It proves that every finite approximation in a natural family with a positive boundary shift has at least one nonreal zero. The proof combines the behavior at the ends of the real axis with symmetry, growth bounds, and Hadamard factorization. The result covers the direct symmetrized incomplete-gamma approximations at every finite level and clarifies how this obstruction relates to earlier work by Pólya and Haglund. It concerns the finite approximations and does not prove or disprove the Riemann hypothesis.
 
 ## Contents
 
