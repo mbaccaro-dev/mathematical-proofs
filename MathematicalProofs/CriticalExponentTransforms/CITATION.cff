@@ -1,0 +1,27 @@
+cff-version: 1.2.0
+message: "If you use this formalization, please cite the accompanying paper."
+title: "Lean 4 formal assurance for Scale-Covariant Transforms Preserve Critical-Exponent Gaps"
+type: software
+authors:
+  - family-names: "Baccaro"
+    given-names: "Mayk Loide"
+version: 1.0.0
+date-released: 2026-08-18
+abstract: >-
+  Lean 4 formal assurance for the algebraic exponent-gap, saturation, and
+  inverse-symbol kernel in a paper on scale-covariant transforms.
+keywords:
+  - Lean 4
+  - scale covariance
+  - Mellin transform
+  - critical exponent
+  - observability
+preferred-citation:
+  type: article
+  authors:
+    - family-names: "Baccaro"
+      given-names: "Mayk Loide"
+  title: "Scale-Covariant Transforms Preserve Critical-Exponent Gaps"
+  year: 2026
+  doi: "10.5281/zenodo.22005931"
+  url: "https://doi.org/10.5281/zenodo.22005931"

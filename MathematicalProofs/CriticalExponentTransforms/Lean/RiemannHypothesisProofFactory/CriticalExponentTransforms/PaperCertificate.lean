@@ -1,0 +1,21 @@
+import RiemannHypothesisProofFactory.CriticalExponentTransforms.AlgebraicKernel
+
+/-!
+# Critical-exponent transforms paper certificate
+
+The imported kernel checks the paper's shared exponent arithmetic, a
+scalar-valued pure-power specialization, exact saturation inversion, and the
+Mellin inverse-symbol modulus step. The analytic and vector-valued obligations
+listed in `AlgebraicKernel.lean` remain manuscript-level proofs.
+-/
+
+#print axioms RiemannHypothesisProofFactory.CriticalExponentTransforms.multilinear_gap_identity
+#print axioms RiemannHypothesisProofFactory.CriticalExponentTransforms.multilinear_successive_exponent_lt
+#print axioms RiemannHypothesisProofFactory.CriticalExponentTransforms.multilinear_adjacent_gap_identity
+#print axioms RiemannHypothesisProofFactory.CriticalExponentTransforms.homogeneous_gap_identity
+#print axioms RiemannHypothesisProofFactory.CriticalExponentTransforms.scalar_pure_power_normal_form
+#print axioms RiemannHypothesisProofFactory.CriticalExponentTransforms.saturation_gap_identity
+#print axioms RiemannHypothesisProofFactory.CriticalExponentTransforms.germ_gap_identity
+#print axioms RiemannHypothesisProofFactory.CriticalExponentTransforms.abs_saturation_lt_one
+#print axioms RiemannHypothesisProofFactory.CriticalExponentTransforms.saturation_inverse
+#print axioms RiemannHypothesisProofFactory.CriticalExponentTransforms.inverse_symbol_lower_bound

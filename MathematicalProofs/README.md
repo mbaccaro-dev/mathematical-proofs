@@ -21,3 +21,6 @@ Each subdirectory is a complete paper artifact containing:
   *Selberg Feedback and Approximate Divisor Data Do Not Stably Determine Square-Root
   Prime Error*.
   [doi:10.5281/zenodo.22005767](https://doi.org/10.5281/zenodo.22005767)
+- [`CriticalExponentTransforms`](CriticalExponentTransforms/) —
+  *Scale-Covariant Transforms Preserve Critical-Exponent Gaps*.
+  [doi:10.5281/zenodo.22005931](https://doi.org/10.5281/zenodo.22005931)

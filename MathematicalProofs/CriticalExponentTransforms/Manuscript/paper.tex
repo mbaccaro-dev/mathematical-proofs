@@ -1,0 +1,686 @@
+\documentclass[11pt,a4paper]{amsart}
+
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{amsmath,amssymb,mathtools}
+\usepackage[protrusion=true,expansion=false]{microtype}
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{enumitem}
+\usepackage[a4paper,margin=30mm]{geometry}
+\usepackage[dvipsnames]{xcolor}
+\usepackage[colorlinks=true,linkcolor=MidnightBlue,citecolor=MidnightBlue,urlcolor=MidnightBlue]{hyperref}
+\hypersetup{
+  pdftitle={Scale-Covariant Transforms Preserve Critical-Exponent Gaps},
+  pdfauthor={Mayk Loide Baccaro}
+}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{lemma}[theorem]{Lemma}
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{example}[theorem]{Example}
+\newtheorem{remark}[theorem]{Remark}
+
+\newcommand{\R}{\mathbb R}
+\newcommand{\C}{\mathbb C}
+\newcommand{\norm}[1]{\lVert #1\rVert}
+\newcommand{\Sa}{S_a}
+\newcommand{\cE}{\mathcal E}
+\newcommand{\cA}{\mathcal A}
+\DeclareMathOperator{\Lip}{Lip}
+\newcolumntype{L}[1]{>{\raggedright\arraybackslash}p{#1}}
+\setlength{\emergencystretch}{2em}
+
+\title[Critical-exponent preservation]{Scale-Covariant Transforms Preserve Critical-Exponent Gaps}
+\author[Mayk Loide Baccaro]{Mayk Loide Baccaro\\
+Independent researcher\\
+\href{mailto:m.baccaro7663@student.nu.edu}{\texttt{m.baccaro7663@student.nu.edu}}}
+\date{18 August 2026}
+\subjclass[2020]{Primary 26A12; Secondary 44A15, 11M26}
+\keywords{scale covariance, homogeneous operator, multilinear map, Mellin transform, regular variation, critical exponent, observability}
+
+\begin{document}
+
+\begin{abstract}
+Scaling alone does not improve a critical exponent.  We make this exact for
+five scale-transform classes whose
+definitions do not use the arithmetic source of the input.  The main result
+treats a fixed finite multilinear observable applied to a mixture
+$x^\sigma+c x^\rho$: every visible perturbation order $r$ has exponent gap
+exactly $r(\rho-1/2)$ from its orderwise critical image, while complete
+cancellation makes the perturbation unidentifiable.  We then derive a normal
+form for nonlinear homogeneous maps with isometric phase coupling, prove the
+corresponding pure-power law without assuming additivity or continuity, and
+give a sharp Mellin-symbol dichotomy for bounded multiplicative dilations.
+Stable pointwise normalizations preserve the same gap; for a canonical
+saturation the inverse stability is quantitative away from the boundary.
+A compact Abel operator transfers real and oscillatory powers with the same
+radial exponent.  Scale covariance can rescale, amplify, or annihilate an
+off-critical mode.  Every visible mode retains its distance from the natural
+critical scale.
+\end{abstract}
+
+\maketitle
+
+\section{Introduction}
+
+Power laws diagonalize scaling.  This elementary fact becomes decisive when a proposed transform is expected to improve a critical exponent.  A linear multiplicative convolution acts on $x^s$ through its Mellin symbol.  A positively homogeneous, dilation-covariant nonlinear map sends $x^\rho$ to another exact power.  A finite multilinear observable expands a mixture into finitely many exact powers.  In each case the transform either preserves a computable relative gap or loses the mode.
+
+The setting is classical.  Karamata established the language of regular variation \cite{Karamata1930}.  Wiener tied Tauberian recovery to nonvanishing transform data \cite{Wiener1932}, and Drasin--Shea treated convolution of regularly varying functions \cite{DrasinShea1976}.  Mapping theorems extend regular variation to cones and metric spaces \cite{HultLindskog2006}.  Inverse multiplicative convolution uses Mellin nonvanishing as a cancellation and observability condition \cite{JacobsenEtAl2009,DamekEtAl2014}.  Homogeneous mapping results and general homogeneous-operator frameworks cover related covariance structures \cite{DyszewskiMikosch2020,AvetisyanKarapetyants2021}.  Jacobs and Frank recently developed a Mellin spectral theory for scale-invariant symmetric kernels and separated geometric scaling from the spectral decay of finite truncations~\cite{JacobsFrank2026}.  The fixed observable theorems below track visible perturbations against a specified critical benchmark, including exact cancellation and conditioning constants.
+
+Here we organize the deterministic, pointwise consequences around a fixed critical input exponent $1/2$.  The individual covariance and Mellin eigenmode identities are algebraic consequences of their hypotheses; the contribution is their exact synthesis, including mixture-order resolution, phase observability, loss cases, and explicit conditioning constants.  The paper treats:
+\begin{enumerate}[label=\textup{(\Roman*)},leftmargin=2.6em]
+  \item a finite multilinear mixture theorem that resolves every perturbation order;
+  \item an oscillatory phase-orbit normal form with nonlinear phase response;
+  \item a general pure-power theorem for positive homogeneous covariance;
+  \item a bounded Mellin-dilation theorem with a sharp observability dichotomy;
+  \item stable pointwise normalization laws and an explicit compact connector.
+\end{enumerate}
+The compact Abel operator
+\begin{equation}\label{eq:K-intro}
+  Kf(X)=-4X^2\int_X^{2X}f(t)t^{-3}\,dt
+\end{equation}
+supplies a common local control.  It maps $X^s$ to a nonzero multiple of $X^s$ throughout the strip $1/2<\Re s<1$.  This is the square-root threshold relevant to the classical prime-number-error formulation of the Riemann hypothesis \cite{vonKoch1901}.
+
+\medskip
+\noindent\textbf{Scope.}
+The theorems concern the fixed operator classes and natural critical
+benchmarks printed below; their definitions use no arithmetic information
+about the source.  They establish exact exponent preservation and exact loss
+of observability.  The actual prime-counting error and the Riemann hypothesis
+remain outside their scope.  The contribution is the assembled theorem
+package with explicit boundaries; the underlying scaling identities are
+classical.
+
+\section{Critical scales and a compact Abel control}\label{sec:critical}
+
+For a measurable $V$-valued function $g$ on $(0,\infty)$, define its dyadic logarithmic energy by
+\begin{equation}\label{eq:energy}
+  \cE_X(g)=\int_X^{2X}\norm{g(x)}^2\,\frac{dx}{x}.
+\end{equation}
+For $\alpha\in\R$, put
+\begin{equation}\label{eq:A-alpha}
+ \cA(\alpha)=\int_1^2u^{2\alpha}\,\frac{du}{u}
+ =\begin{cases}
+ \dfrac{2^{2\alpha}-1}{2\alpha},&\alpha\ne0,\\[6pt]
+ \log2,&\alpha=0.
+ \end{cases}
+\end{equation}
+Thus $\cA(\alpha)$ is finite and strictly positive for every real $\alpha$.
+
+The following block identity isolates the periodic mechanism used for both
+oscillatory Abel images and nonlinear phase orbits.
+
+\begin{lemma}[Periodic block-energy reduction]\label{lem:periodic-block}
+Let $V$ be a finite-dimensional normed real vector space, let
+$A:\R\to V$ be $2\pi$-periodic with measurable squared norm, and fix
+$\gamma\ne0$ and $\alpha\in\R$.  Put $L=\log2$ and
+\begin{equation}\label{eq:periodic-block-profile}
+ H_A(\delta)=\int_0^L e^{2\alpha u}
+  \norm{A(\delta+\gamma u)}^2\,du.
+\end{equation}
+If a measurable function $g_\theta$ satisfies
+\[
+ \norm{g_\theta(e^t)}
+ =e^{\alpha t}\norm{A(\theta+\gamma t)},
+\]
+then
+\begin{equation}\label{eq:periodic-block-energy}
+ \cE_{e^y}(g_\theta)
+ =e^{2\alpha y}H_A(\theta+\gamma y),
+ \qquad H_A(\delta+2\pi)=H_A(\delta).
+\end{equation}
+If $0<\int_0^{2\pi}\norm{A(\phi)}^2\,d\phi<\infty$, then
+$0<H_A(\delta_0)<\infty$ for some $\delta_0$.  If
+$\norm{A}^2\notin L^1_{\mathrm{loc}}(\R)$, then
+$H_A(\delta_0)=\infty$ for some $\delta_0$.
+\end{lemma}
+
+\begin{proof}
+Substitute $x=e^{y+u}$ in \eqref{eq:energy}; this gives
+\eqref{eq:periodic-block-energy}.  The periodicity of $H_A$ follows from that
+of $A$.  A period is covered by finitely many intervals of length
+$|\gamma|L$.  Therefore positive finite period mass makes at least one such
+block positive and finite, while failure of local integrability of the
+squared-norm profile makes
+at least one such block infinite.  Reversing orientation when $\gamma<0$
+does not change either conclusion.
+\end{proof}
+
+We use the dilation convention
+\begin{equation}\label{eq:dilation}
+  (S_af)(x)=f(ax),\qquad a,x>0.
+\end{equation}
+The sign of every covariance weight below follows from this convention.
+
+\begin{proposition}[Compact Abel multiplier]\label{prop:Abel}
+For $z\in\C$ with $z\ne2$, the operator in \eqref{eq:K-intro} satisfies
+\begin{equation}\label{eq:Abel-multiplier}
+  K(x^z)(X)=m(z)X^z,
+  \qquad
+  m(z)=-4\,\frac{1-2^{z-2}}{2-z}.
+\end{equation}
+The multiplier does not vanish in $1/2<\Re z<1$.  If
+\[
+ f_\theta(x)=x^\beta\cos(\gamma\log x+\theta),
+ \qquad \gamma\ne0,
+\]
+then, for $1/2<\beta<1$,
+\begin{equation}\label{eq:Abel-phase-energy}
+  \cE_X(Kf_\theta)\asymp_{\beta,\gamma}X^{2\beta}
+  \qquad(X>0),
+\end{equation}
+uniformly in $\theta$.
+\end{proposition}
+
+\begin{proof}
+Direct integration gives
+\[
+ -4X^2\int_X^{2X}t^{z-3}\,dt
+ =-4\frac{1-2^{z-2}}{2-z}X^z.
+\]
+The numerator can vanish only when
+$z=2+2\pi i k/\log2$ for some $k\in\mathbb Z$, so it is nonzero in the stated strip.  Taking the real part of $e^{i\theta}m(\beta+i\gamma)X^{\beta+i\gamma}$ proves the phase formula.  Apply Lemma~\ref{lem:periodic-block} to the resulting nonzero sinusoidal profile.  Its block profile is continuous and strictly positive at every phase, because a nonzero sinusoid cannot vanish on an interval of positive length.  Compactness of one period gives positive uniform lower and finite upper bounds, proving \eqref{eq:Abel-phase-energy} uniformly in $\theta$.
+\end{proof}
+
+\section{Finite multilinear mixtures}\label{sec:multilinear}
+
+The first theorem addresses the main obstruction left open by a pure-mode calculation: a nonlinear observable can mix a dominant baseline with an off-critical perturbation.  Finite multilinearity resolves that interaction exactly.
+
+\begin{theorem}[Multilinear mixture gap law]\label{thm:multilinear}
+Fix
+\[
+  \sigma>\rho>\frac12,
+  \qquad d\in\mathbb N,
+\]
+and a finite-dimensional normed real vector space $V$.  Let $\mathcal C$ be a real vector space of pointwise functions containing $x^\sigma$, $x^\rho$, their required linear combinations, and their positive dilates.  Let
+\[
+ B:\mathcal C^d\longrightarrow
+ \{\text{pointwise measurable $V$-valued functions on }(0,\infty)\}
+\]
+be a fixed real $d$-linear map.  Assume that a single $\kappa\in\R$ satisfies
+\begin{equation}\label{eq:B-covariance}
+ B(S_af_1,\ldots,S_af_d)
+ =a^\kappa S_aB(f_1,\ldots,f_d)
+\end{equation}
+for every admissible tuple and every $a>0$.  Set $T(f)=B(f,\ldots,f)$ and, for fixed $c\ne0$, define
+\begin{equation}\label{eq:Delta-T}
+ \Delta_cT(x)=T(x^\sigma+cx^\rho)(x)-T(x^\sigma)(x).
+\end{equation}
+
+For $1\le r\le d$, let
+\begin{equation}\label{eq:v-r}
+ v_r=\sum_{\substack{I\subseteq\{1,\ldots,d\}\\|I|=r}}
+ B(h_{I,1},\ldots,h_{I,d})(1),
+ \qquad
+ h_{I,j}=\begin{cases}x^\rho,&j\in I,\\x^\sigma,&j\notin I.
+ \end{cases}
+\end{equation}
+Then
+\begin{equation}\label{eq:complete-expansion}
+ \Delta_cT(x)=\sum_{r=1}^dc^r x^{\alpha_r}v_r,
+ \qquad
+ \alpha_r=(d-r)\sigma+r\rho-\kappa.
+\end{equation}
+Exactly one of the following alternatives holds.
+
+\begin{enumerate}[label=\textup{(\alph*)},leftmargin=2.3em]
+\item If every $v_r=0$, then $\Delta_cT\equiv0$ for every $c$; the difference channel does not identify the perturbation.
+\item If $r_0$ is the least index with $v_{r_0}\ne0$, then
+\begin{align}
+ \norm{\Delta_cT(x)}
+ &=|c|^{r_0}x^{\alpha_{r_0}}
+   \bigl(\norm{v_{r_0}}+o(1)\bigr),\label{eq:leading-norm}\\
+ \cE_X(\Delta_cT)
+ &=|c|^{2r_0}\norm{v_{r_0}}^2
+   \cA(\alpha_{r_0})X^{2\alpha_{r_0}}
+   \bigl(1+o(1)\bigr).\label{eq:leading-energy}
+\end{align}
+\end{enumerate}
+
+For the order-$r$ critical image define
+\begin{equation}\label{eq:order-critical}
+ \alpha_{r,\mathrm{crit}}
+ =(d-r)\sigma+\frac r2-\kappa.
+\end{equation}
+Every visible order obeys the exact gap law
+\begin{equation}\label{eq:order-gap}
+  \alpha_r-\alpha_{r,\mathrm{crit}}
+  =r\left(\rho-\frac12\right)>0.
+\end{equation}
+Consequently the order-$r$ component fails every estimate
+\[
+ \cE_X(\text{order-$r$ component})
+ =O_\varepsilon\bigl(X^{2\alpha_{r,\mathrm{crit}}+\varepsilon}\bigr)
+\]
+with $0<\varepsilon<2r(\rho-1/2)$.
+\end{theorem}
+
+\begin{proof}
+For a tuple of powers $f_j(x)=x^{\tau_j}$, write
+$g=B(f_1,\ldots,f_d)$.  Multilinearity and \eqref{eq:B-covariance} give
+\[
+ a^{\tau_1+\cdots+\tau_d}g(x)
+ =a^\kappa g(ax).
+\]
+Set $x=1$ and then $a=x$ to obtain
+\begin{equation}\label{eq:B-power}
+ B(x^{\tau_1},\ldots,x^{\tau_d})(x)
+ =x^{\tau_1+\cdots+\tau_d-\kappa}
+  B(x^{\tau_1},\ldots,x^{\tau_d})(1).
+\end{equation}
+Expanding all $2^d$ ordered slot choices in
+$B(x^\sigma+cx^\rho,\ldots,x^\sigma+cx^\rho)$ proves
+\eqref{eq:complete-expansion}.
+
+Since $\sigma>\rho$, the exponents $\alpha_r$ strictly decrease with $r$.
+If every coefficient vector vanishes, the first alternative follows.  Otherwise divide \eqref{eq:complete-expansion} by $c^{r_0}x^{\alpha_{r_0}}$.  The remaining finite sum converges uniformly on every dyadic ratio $x/X\in[1,2]$ to $v_{r_0}$.  This proves \eqref{eq:leading-norm}; squaring and substituting $x=Xu$ proves \eqref{eq:leading-energy}.  Subtracting \eqref{eq:order-critical} from $\alpha_r$ gives \eqref{eq:order-gap} and the final assertion.
+\end{proof}
+
+\begin{corollary}[Compact non-identifiability]\label{cor:compact-nonid}
+Assume in addition that $\rho<1$.  If every $v_r$ in Theorem~\ref{thm:multilinear} vanishes, then the same perturbation erased by $\Delta_cT$ has
+\begin{equation}\label{eq:compact-difference}
+ K(x^\sigma+cx^\rho)-K(x^\sigma)
+ =c\,m(\rho)X^\rho\ne0.
+\end{equation}
+Thus the difference channel cannot recover the compact Abel response.
+\end{corollary}
+
+\begin{proof}
+Apply Proposition~\ref{prop:Abel} to $x^\rho$ and use linearity of $K$.
+\end{proof}
+
+\begin{remark}\label{rem:full-output}
+Corollary~\ref{cor:compact-nonid} concerns the baseline-subtracted statistic $\Delta_cT$.  A claim about the full output $T(x^\sigma+cx^\rho)$ must also verify its full critical benchmark; a large baseline can make that premise fail before identifiability becomes relevant.
+\end{remark}
+
+\begin{example}[Pointwise product]\label{ex:product}
+Let $B(f,g)=fg$.  Then $d=2$ and $\kappa=0$, and
+\[
+ (x^\sigma+cx^\rho)^2-x^{2\sigma}
+ =2c x^{\sigma+\rho}+c^2x^{2\rho}.
+\]
+The first visible order has gap $\rho-1/2$; the quadratic perturbation has gap $2(\rho-1/2)$ from its own critical image.
+\end{example}
+
+\begin{example}[A differential product]\label{ex:differential}
+On a dilation-stable differentiable class, let $B(f,g)=f'g$.  Then
+$B(S_af,S_ag)=aS_aB(f,g)$, so $d=2$ and $\kappa=1$.  Directly,
+\[
+ (x^\sigma+cx^\rho)'(x^\sigma+cx^\rho)
+ -(x^\sigma)'x^\sigma
+ =c(\sigma+\rho)x^{\sigma+\rho-1}
+  +c^2\rho x^{2\rho-1}.
+\]
+The covariance weight changes both output exponents by $-1$ and leaves both relative gaps unchanged.
+\end{example}
+
+\section{Oscillatory phase orbits}\label{sec:phase}
+
+Complex powers generate real two-dimensional phase orbits.  The next theorem allows an arbitrary nonlinear periodic phase response and a finite-dimensional isometric coupling.
+
+\begin{theorem}[Phase-orbit normal form]\label{thm:phase}
+Fix $\beta\in\R$, $\gamma\in\R\setminus\{0\}$, and
+\[
+ f_\theta(x)=x^\beta\cos(\gamma\log x+\theta).
+\]
+Let $T$ map a dilation-stable cone containing this orbit to pointwise measurable functions with values in a finite-dimensional normed space $V$.  Assume
+\begin{equation}\label{eq:q-hom-phase}
+ T(cf)=c^qT(f)\qquad(c>0)
+\end{equation}
+for a fixed $q>0$.  Let $(U_s)_{s\in\R}$ be an isometric representation on $V$, and assume
+\begin{equation}\label{eq:phase-covariance}
+ T(S_{e^s}f)=e^{\kappa s}U_sS_{e^s}(Tf)
+ \qquad(s\in\R)
+\end{equation}
+for a fixed $\kappa\in\R$.  Put
+\[
+ g_\theta=T(f_\theta),
+ \qquad A(\phi)=g_\phi(1),
+ \qquad \alpha=q\beta-\kappa.
+\]
+Then $A$ is $2\pi$-periodic and
+\begin{equation}\label{eq:phase-normal-form}
+ g_\theta(e^t)
+ =e^{\alpha t}U_t^{-1}A(\theta+\gamma t),
+ \qquad
+ \norm{g_\theta(x)}=x^\alpha
+ \norm{A(\theta+\gamma\log x)}.
+\end{equation}
+
+If $\norm{A}=0$ almost everywhere, the orbit is annihilated in logarithmic
+energy.  If
+$0<\int_0^{2\pi}\norm{A(\phi)}^2\,d\phi<\infty$, then for each $\theta$ there
+are $X_0>0$ and
+\begin{equation}\label{eq:phase-subsequence}
+ X_n=X_0\exp\left(\frac{2\pi n}{|\gamma|}\right)
+\end{equation}
+such that
+\begin{equation}\label{eq:phase-energy}
+ \cE_{X_n}(g_\theta)=C_\theta X_n^{2\alpha}
+ \qquad(n\ge0)
+\end{equation}
+with $C_\theta>0$.  If $\norm{A}^2\notin L^1_{\mathrm{loc}}(\R)$, at least
+one repeating sequence of blocks has infinite energy.
+
+Relative to the natural critical output exponent
+\begin{equation}\label{eq:phase-critical}
+  \alpha_{\mathrm{crit}}=\frac q2-\kappa,
+\end{equation}
+every visible orbit with $\beta>1/2$ has exact radial gap
+\begin{equation}\label{eq:phase-gap}
+  \alpha-\alpha_{\mathrm{crit}}
+  =q\left(\beta-\frac12\right)>0.
+\end{equation}
+\end{theorem}
+
+\begin{proof}
+The identity
+\[
+ S_{e^t}f_\theta=e^{\beta t}f_{\theta+\gamma t}
+\]
+combined with \eqref{eq:q-hom-phase} and \eqref{eq:phase-covariance} gives
+\[
+ e^{q\beta t}g_{\theta+\gamma t}(1)
+ =e^{\kappa t}U_tg_\theta(e^t),
+\]
+which is \eqref{eq:phase-normal-form}.  Periodicity follows from
+$f_{\theta+2\pi}=f_\theta$.
+
+The norm identity and measurability of $g_\theta$ imply measurability of the
+squared-norm profile of $A$.  Lemma~\ref{lem:periodic-block} then gives the exact block formula
+\[
+ \cE_{e^y}(g_\theta)
+ =e^{2\alpha y}H_A(\theta+\gamma y).
+\]
+Zero period mass makes every block vanish.  For positive finite mass, choose
+$\delta_0$ with $0<H_A(\delta_0)<\infty$, put
+$y_0=(\delta_0-\theta)/\gamma$, and set $X_0=e^{y_0}$.  Since
+$\gamma(2\pi/|\gamma|)=\pm2\pi$, the profile repeats on the sequence
+\eqref{eq:phase-subsequence}; \eqref{eq:phase-energy} follows with
+$C_\theta=H_A(\delta_0)>0$.  If
+$\norm{A}^2\notin L^1_{\mathrm{loc}}(\R)$, choose
+instead a block on which $H_A$ is infinite and repeat the same argument.
+Equation \eqref{eq:phase-gap} is direct subtraction.
+\end{proof}
+
+\begin{corollary}[Compact Abel observability of off-critical phases]\label{cor:phase-Abel}
+If $1/2<\beta<1$, Proposition~\ref{prop:Abel} gives
+$\cE_X(Kf_\theta)\asymp X^{2\beta}$.  Hence an annihilated phase output cannot determine the compact response, while every visible phase response retains the positive gap in \eqref{eq:phase-gap} along the geometric subsequence supplied by Theorem~\ref{thm:phase}.
+\end{corollary}
+
+\section{Positive homogeneous scale covariance}\label{sec:homogeneous}
+
+The pure-power theorem requires neither additivity nor continuity.  It is the broadest operator statement in the paper and the simplest consequence of exact covariance; general homogeneous-operator frameworks provide the surrounding context \cite{AvetisyanKarapetyants2021}.
+
+\begin{theorem}[Pure-power gap law]\label{thm:pure}
+Let $\mathcal F$ be a cone of real-valued functions on $(0,\infty)$ closed under positive scalar multiplication and every dilation $S_a$.  Let $T$ map $\mathcal F$ to pointwise measurable functions valued in a finite-dimensional normed space $V$.  Suppose fixed numbers $q>0$ and $\kappa\in\R$ satisfy
+\begin{align}
+ T(cf)&=c^qT(f)&& (c>0),\label{eq:pure-hom}\\
+ T(S_af)&=a^\kappa S_a(Tf)&& (a>0).\label{eq:pure-cov}
+\end{align}
+If $f_\rho(x)=x^\rho$ belongs to $\mathcal F$ and
+$v_\rho=T(f_\rho)(1)$, then
+\begin{equation}\label{eq:pure-normal-form}
+ T(f_\rho)(x)=x^{q\rho-\kappa}v_\rho.
+\end{equation}
+Thus $v_\rho=0$ annihilates the power, while $v_\rho\ne0$ gives
+\begin{equation}\label{eq:pure-energy}
+ \cE_X(Tf_\rho)
+ =\norm{v_\rho}^2\cA(q\rho-\kappa)
+ X^{2(q\rho-\kappa)}.
+\end{equation}
+Relative to the image $q/2-\kappa$ of the critical input exponent, the output gap equals
+\begin{equation}\label{eq:pure-gap}
+ q\rho-\kappa-\left(\frac q2-\kappa\right)
+ =q\left(\rho-\frac12\right).
+\end{equation}
+\end{theorem}
+
+\begin{proof}
+Since $S_af_\rho=a^\rho f_\rho$, equations
+\eqref{eq:pure-hom}--\eqref{eq:pure-cov} yield
+\[
+ a^{q\rho}T(f_\rho)=a^\kappa S_a(Tf_\rho).
+\]
+Evaluate at $1$ and put $a=x$ to obtain \eqref{eq:pure-normal-form}.  Equations \eqref{eq:pure-energy} and \eqref{eq:pure-gap} follow from \eqref{eq:energy}--\eqref{eq:A-alpha}.
+\end{proof}
+
+\begin{remark}
+The stated hypotheses alone leave $T(E+cx^\rho)$ undetermined; Theorem~\ref{thm:multilinear} handles one precise and important mixture class.
+\end{remark}
+
+\section{Bounded multiplicative dilations}\label{sec:Mellin}
+
+Linear multiplicative dilations admit the classical Mellin symbol calculus.  The theorem records the exact boundedness gate and lower bound needed here to distinguish stable coordinates from annihilating filters \cite{Wiener1932,JacobsenEtAl2009,DamekEtAl2014}.
+
+\begin{theorem}[Mellin observability dichotomy]\label{thm:Mellin}
+Fix $\vartheta>0$.  Let $\nu$ be a complex Borel measure on $[1,\infty)$ such that
+\begin{equation}\label{eq:A-theta}
+ A_\vartheta(\nu)=\int_{[1,\infty)}t^{-\vartheta}\,d|\nu|(t)<\infty.
+\end{equation}
+Whenever the integral exists, define
+\begin{align}
+ (T_\nu F)(x)&=\int_{[1,\infty)}F(x/t)\,d\nu(t),\label{eq:T-nu}\\
+ M_\nu(s)&=\int_{[1,\infty)}t^{-s}\,d\nu(t).
+ \label{eq:M-nu}
+\end{align}
+For every $s\in\C$ with $\Re s\ge\vartheta$,
+\begin{equation}\label{eq:M-eigen}
+ T_\nu(x^s)=M_\nu(s)x^s,
+ \qquad |M_\nu(s)|\le A_\vartheta(\nu).
+\end{equation}
+If a second measure $\eta$ satisfies $A_\vartheta(\eta)<\infty$ and
+$T_\eta T_\nu(x^s)=x^s$ on these modes, then
+\begin{equation}\label{eq:M-inverse}
+ M_\eta(s)M_\nu(s)=1,
+ \qquad
+ \frac1{A_\vartheta(\eta)}
+ \le |M_\nu(s)|\le A_\vartheta(\nu).
+\end{equation}
+At any proposed exponent $s_0$ within this bounded measure class, precisely two cases remain:
+\begin{enumerate}[label=\textup{(\roman*)},leftmargin=2.3em]
+ \item a finite nonzero symbol preserves $\Re s_0$ and changes only amplitude and phase;
+ \item a zero symbol annihilates the mode and loses observability.
+\end{enumerate}
+If the weighted variation diverges, or if only a singular formal symbol is
+available, the proposed operator lies outside the theorem's bounded class.
+For the first case,
+\begin{equation}\label{eq:M-energy}
+ \int_X^{2X}|M_\nu(s)x^s|^2\,\frac{dx}{x}
+ =|M_\nu(s)|^2\cA(\Re s)X^{2\Re s}.
+\end{equation}
+\end{theorem}
+
+\begin{proof}
+For $t\ge1$ and $\Re s\ge\vartheta$,
+$|t^{-s}|=t^{-\Re s}\le t^{-\vartheta}$.  Absolute convergence permits direct substitution:
+\[
+ (T_\nu x^s)(x)
+ =\int(x/t)^s\,d\nu(t)
+ =x^sM_\nu(s).
+\]
+The total-variation inequality gives the upper bound.  Applying the eigenvalue identity twice gives
+$M_\eta(s)M_\nu(s)=1$, and the upper bound for $M_\eta$ gives the lower bound in \eqref{eq:M-inverse}.  The dichotomy and \eqref{eq:M-energy} follow immediately.
+\end{proof}
+
+\begin{example}[Finite dilation frames]\label{ex:finite-frame}
+For fixed $t_j\ge1$ and $a_j\in\C$,
+\[
+ TF(x)=\sum_{j=1}^Ja_jF(x/t_j)
+\]
+has symbol $M(s)=\sum_ja_jt_j^{-s}$.  Adding fixed scales changes this multiplier and leaves the exponent of every surviving mode unchanged.
+\end{example}
+
+\begin{example}[Square smoothing]\label{ex:square}
+Let
+\[
+ \nu_Q=\sum_{m\ge1}\delta_{m^2},
+ \qquad
+ \nu_R=\sum_{m\ge1}\mu(m)\delta_{m^2}.
+\]
+For $\vartheta>1/2$, both weighted variations are finite and
+\[
+ M_Q(s)=\zeta(2s),
+ \qquad
+ M_R(s)=\frac1{\zeta(2s)},
+ \qquad \Re s>\frac12.
+\]
+Their composition is the identity on every admitted power mode.  They form stable coordinates in this half-plane and preserve every exponent.
+\end{example}
+
+\begin{remark}
+The ordinary divisor measure $\sum_{m\ge1}\delta_m$ satisfies
+$A_\vartheta<\infty$ only for $\vartheta>1$.  Its formal symbol $\zeta(s)$ therefore does not define a bounded operator of Theorem~\ref{thm:Mellin} in the critical strip; meromorphic continuation does not supply the missing weighted-variation bound.
+\end{remark}
+
+\section{Stable pointwise normalizations}\label{sec:normalization}
+
+The relevant benchmark is the normalized image of the critical exponent.
+
+\begin{proposition}[Saturation preserves the gap]\label{prop:saturation}
+For a real-valued function $E$ on $(0,\infty)$, define
+\begin{equation}\label{eq:saturation}
+ S_E(x)=\frac{E(x)}{x+|E(x)|}.
+\end{equation}
+Then $|S_E(x)|<1$ and
+\begin{equation}\label{eq:saturation-inverse}
+ E(x)=\frac{xS_E(x)}{1-|S_E(x)|}.
+\end{equation}
+If $E(x)=cx^\rho$ with $c\ne0$ and $1/2<\rho<1$, then
+\begin{equation}\label{eq:saturation-power}
+ S_E(x)=\frac{cx^{\rho-1}}{1+|c|x^{\rho-1}},
+ \qquad
+ \cE_X(S_E)\asymp_{c,\rho}X^{2\rho-2}
+\end{equation}
+for all sufficiently large $X$.  The normalized critical exponent is $-1/2$, so the amplitude gap remains $\rho-1/2$.
+
+Let $A>0$.  Suppose that, on $[A,4A]$, $E$ is measurable and
+$|S_E|\le r$ for some $0\le r<1$.  Then the compact Abel operator satisfies the stable connector
+\begin{equation}\label{eq:connector}
+ \int_A^{2A}|KE(X)|^2\,\frac{dX}{X}
+ \le \frac{9A^2}{(1-r)^2}
+ \int_A^{4A}|S_E(t)|^2\,\frac{dt}{t}.
+\end{equation}
+\end{proposition}
+
+\begin{proof}
+For $x>0$, put $d=x+|E(x)|$.  Then $d>0$,
+$|S_E(x)|=|E(x)|/d<1$, and $1-|S_E(x)|=x/d$; cancellation gives
+\eqref{eq:saturation-inverse} without a sign split.  Substitution gives
+\eqref{eq:saturation-power}; since $x^{\rho-1}\to0$, the two-sided energy
+comparison follows after $x=Xu$.
+
+On the declared recovery domain,
+$|E(t)|\le t|S_E(t)|/(1-r)$.  Hence
+\[
+ |KE(X)|
+ \le\frac{4X^2}{1-r}
+ \int_X^{2X}|S_E(t)|t^{-2}\,dt.
+\]
+Cauchy--Schwarz with measure $dt/t$ and
+$\int_X^{2X}t^{-3}\,dt=3/(8X^2)$ gives
+\begin{equation}\label{eq:pointwise-connector}
+ |KE(X)|^2
+ \le\frac{6X^2}{(1-r)^2}
+ \int_X^{2X}|S_E(t)|^2\,\frac{dt}{t}.
+\end{equation}
+Integrate over $X\in[A,2A]$ and reverse the order.  For each
+$t\in[A,4A]$, the inner integral of $X\,dX$ ranges over a subinterval of
+$[A,2A]$ and is at most $3A^2/2$.  Multiplication by $6$ proves \eqref{eq:connector}.
+\end{proof}
+
+\begin{proposition}[Two-sided power germs]\label{prop:germ}
+Let $\Phi:\R\to\R$ be Borel measurable and satisfy, for some $q>0$, $u_0>0$, and $0<m\le M<\infty$,
+\begin{equation}\label{eq:two-sided-germ}
+  m|u|^q\le|\Phi(u)|\le M|u|^q
+  \qquad(|u|\le u_0).
+\end{equation}
+Define $N_E(x)=\Phi(E(x)/x)$.  If $E(x)=cx^\rho$ with $c\ne0$ and $\rho<1$, then
+\begin{equation}\label{eq:germ-energy}
+ \cE_X(N_E)\asymp X^{2q(\rho-1)}.
+\end{equation}
+The image of the critical input has exponent $-q/2$, and the relative amplitude gap is exactly $q(\rho-1/2)$.
+\end{proposition}
+
+\begin{proof}
+For large $x$, $|cx^{\rho-1}|\le u_0$.  Apply
+\eqref{eq:two-sided-germ}, square, and integrate on $[X,2X]$.  The exponent comparison is direct.
+\end{proof}
+
+\section{Comparison of the transform classes}\label{sec:comparison}
+
+Table~\ref{tab:classes} records the common mechanism and the extra information carried by each theorem.
+
+\begin{table}[htbp]
+\centering
+\caption{Exact outcomes for the admitted scale classes.}
+\label{tab:classes}
+\small
+\begin{tabular}{@{}L{0.25\textwidth}L{0.25\textwidth}L{0.20\textwidth}L{0.20\textwidth}@{}}
+\toprule
+Class & Admitted input & Visible-mode law & Zero/flat outcome\\
+\midrule
+Finite multilinear & $x^\sigma+cx^\rho$ & order $r$ gap $r(\rho-1/2)$ & difference channel loses perturbation\\
+Phase-coupled homogeneous & $x^\beta\cos(\gamma\log x+\theta)$ & radial gap $q(\beta-1/2)$ & zero squared-norm mass annihilated\\
+Positive homogeneous & $x^\rho$ & gap $q(\rho-1/2)$ & power annihilated\\
+Bounded Mellin dilation & $x^s$ & same $\Re s$ & symbol zero loses mode\\
+Stable pointwise germ & $cx^\rho$ with $\rho<1$ & gap $q(\rho-1/2)$ & missing lower modulus loses size control\\
+\bottomrule
+\end{tabular}
+\end{table}
+
+The covariance weight $\kappa$ changes the absolute output dimension and cancels from every relative gap.  Positive homogeneity multiplies the gap by $q$.  Finite interaction order multiplies it again by $r$.  None of these operations changes its sign.
+
+\section{Conclusion}
+
+Exact scale covariance imposes an exact exponent calculus.  Finite multilinear mixtures expose every perturbation order; phase coupling changes angular response and leaves radial growth unchanged; positive homogeneous maps carry the critical gap affinely; bounded Mellin dilations act through a scalar symbol; and stable normalizations preserve the gap relative to their own critical image.  The compact Abel multiplier confirms that the same real and oscillatory powers remain visible at the original radial exponent.  The resulting statements give explicit energy laws and conditioning constants for each admitted class.
+
+\appendix
+\section{Verification remarks}\label{app:audit}
+
+Every result is deductive; no numerical data, stochastic simulation, or fitted
+parameter enters a theorem.  We use the convention $S_af(x)=f(ax)$.  In
+Theorem~\ref{thm:multilinear}, the $2^d$ ordered slot choices are grouped by
+the exact number $r$ of perturbation slots, with $c\ne0$ fixed before
+$X\to\infty$; the relation
+$\alpha_r-\alpha_{r+1}=\sigma-\rho>0$ then identifies the leading visible
+order on every dyadic block.  The annihilated case concerns the difference
+output, as explained in Remark~\ref{rem:full-output}.
+
+For Theorem~\ref{thm:phase}, the identity
+$S_{e^t}f_\theta=e^{\beta t}f_{\theta+\gamma t}$ and the inverse $U_t^{-1}$
+in \eqref{eq:phase-normal-form} are essential.  The periodicity gives a
+geometric subsequence.  Arbitrary measurable phase responses lack a general
+every-block lower bound.  The Mellin statement requires \eqref{eq:A-theta}, and a bounded
+inverse requires the nonzero lower bound in \eqref{eq:M-inverse}.  Finally,
+the constant $9$ in \eqref{eq:connector} combines the $6X^2$ Cauchy--Schwarz
+factor with the interval-reversal bound $3A^2/2$.  The compact Abel multiplier
+has zeros only on $\Re z=2$, outside the strip used in
+Proposition~\ref{prop:Abel}.
+
+\section*{Data and code availability}
+
+The results and their proofs are complete in the manuscript and require no
+external data.  An accompanying Lean~4 development checks the shared exponent
+arithmetic, a scalar pure-power specialization, exact saturation inversion,
+and the Mellin inverse-symbol modulus step.  The analytic and vector-valued
+arguments remain manuscript-level proofs.
+
+\section*{Assistance disclosure}
+
+AI systems were used extensively in mathematical derivation, Lean proof
+development, literature discovery, organization, and typesetting.  The author
+remains responsible for every mathematical statement, proof, citation, and
+submission decision.
+
+\begingroup
+\raggedright
+\bibliographystyle{amsplain}
+\bibliography{references}
+\endgroup
+
+\end{document}
