@@ -1,0 +1,714 @@
+\documentclass[11pt,a4paper]{amsart}
+
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{amsmath,amssymb,mathtools}
+\usepackage{microtype}
+\usepackage{booktabs}
+\usepackage{enumitem}
+\usepackage[a4paper,margin=30mm]{geometry}
+\usepackage[dvipsnames]{xcolor}
+\usepackage[colorlinks=true,linkcolor=MidnightBlue,citecolor=MidnightBlue,urlcolor=MidnightBlue]{hyperref}
+\hypersetup{
+  pdftitle={Selberg Feedback and Approximate Divisor Data Do Not Stably Determine Square-Root Prime Error},
+  pdfauthor={Mayk Loide Baccaro}
+}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{lemma}[theorem]{Lemma}
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{remark}[theorem]{Remark}
+
+\DeclareMathOperator{\suppop}{supp}
+\newcommand{\N}{\mathbb N}
+\newcommand{\1}{\mathbf 1}
+\newcommand{\Lambdaone}{\Lambda}
+
+\title[Selberg feedback and prime error]{Selberg Feedback and Approximate Divisor Data\\Do Not Stably Determine Square-Root Prime Error}
+\author[Mayk Loide Baccaro]{Mayk Loide Baccaro\\
+Independent researcher\\
+\href{mailto:m.baccaro7663@student.nu.edu}{\texttt{m.baccaro7663@student.nu.edu}}}
+\date{18 August 2026}
+\subjclass[2020]{Primary 11N05; Secondary 11M26, 11N37, 11A25}
+\keywords{Selberg symmetry formula, von Mangoldt function, Dirichlet convolution, stability, inverse problem, Riemann hypothesis}
+\begin{document}
+
+\begin{abstract}
+Selberg's symmetry formula is strong enough to prove the prime number theorem.
+Approximate versions of its feedback can lose square-root-scale information
+about prime error.  We construct positive weights on the actual
+prime powers that are constant along every prime-power chain and satisfy the
+Selberg symmetry formula with its classical $O(x)$ remainder, yet whose
+summatory functions separate by $x^\rho$ for any prescribed
+$\rho\in(1/2,1)$.  After scale normalization, each complete divisor-residual
+vector through $2X$ has norm at most a fixed tolerance $\tau$ (and the two
+vectors are therefore at distance at most $2\tau$), while the summatory errors
+at $X$ differ by $\gg_\rho X^\rho/\log X$.  Thus every exact recovery map on
+this class has condition number at least $\gg_\rho X^\rho/\log X$ in the
+supremum norm.  The same construction has centered divisor residual, bounded
+mean square, a compactly supported dyadic transform obstruction, and
+controlled generalized von Mangoldt recursions at every order.  These results
+isolate a precise information barrier for the stated approximate summaries.
+Exact symbolic use of $\Lambda*\1=\log$ lies outside this approximation
+problem, and the results leave the Riemann hypothesis unchanged.
+\end{abstract}
+
+\maketitle
+
+\section{Introduction}
+
+Write
+\[
+  \psi(x)=\sum_{n\le x}\Lambda(n),
+  \qquad (f*g)(n)=\sum_{d\mid n}f(d)g(n/d),
+\]
+where $\Lambda(p^k)=\log p$ and $\Lambda(n)=0$ off the prime powers.  The identity
+\begin{equation}\label{eq:exact-inversion}
+  \Lambda*\1=\log
+\end{equation}
+determines $\Lambda$ exactly by M\"obius inversion.  Stable recovery from
+approximate divisor data is a separate question.  This paper quantifies its
+conditioning inside a narrow arithmetic class that preserves the most
+conspicuous structure of $\Lambda$: nonnegativity, support on the actual prime
+powers, and constancy on each chain $p,p^2,p^3,\ldots$.
+
+The Riemann hypothesis is equivalent to a square-root-scale estimate for $\psi(x)-x$, with the usual logarithmic allowance; this formulation goes back to von Koch \cite{vonKoch1901}.  Selberg's elementary proof of the prime number theorem derives the symmetry formula
+\begin{equation}\label{eq:selberg-classical}
+ \sum_{n\le x}\Lambda(n)\log n
+ +\sum_{mn\le x}\Lambda(m)\Lambda(n)
+ =2x\log x+O(x)
+\end{equation}
+and closes a qualitative feedback argument \cite{Selberg1949}.  We test
+whether positivity, the $O(x)$ Selberg remainder, and small error in
+\eqref{eq:exact-inversion} force a much sharper summatory estimate.  The
+constructed family gives a quantitative failure.
+
+For a weight $a$ define
+\begin{align}
+ A_a(x)&=\sum_{n\le x}a(n),
+ &E_a(x)&=A_a(x)-x,\label{eq:A-E}\\
+ R_a(n)&=(a*\1)(n)-\log n,\label{eq:residual}\\
+ S_a(x)&=\sum_{n\le x}a(n)\log n
+       +\sum_{mn\le x}a(m)a(n),\label{eq:Selberg-stat}
+\end{align}
+where the second sum in \eqref{eq:Selberg-stat} is over ordered pairs.  Our main theorem constructs, at every large scale $X$, two admissible weights whose residual vectors $(R_a(n))_{n\le2X}$ are uniformly close but whose outputs $E_a(X)$ are far apart.
+
+Section~\ref{sec:main} states the conditioning theorem and its square-root impossibility corollary.  Sections~\ref{sec:construction}--\ref{sec:selberg} build the fixed two-sign family and prove its arithmetic and Selberg properties.  Section~\ref{sec:compact} gives a compact dyadic transform consequence, and Section~\ref{sec:hierarchy} treats the generalized von Mangoldt recursion.  Appendix~\ref{app:dense} records a simpler dense model that exposes the underlying cancellation without the prime-power constraints.
+
+Related results fall into three groups.  Beurling's generalized primes show how prime-number theorems respond to changes in the underlying prime system \cite{Beurling1937}; here the ordinary primes remain fixed and only the weight changes.  Quantitative remainder theorems for generalized primes require explicit analytic hypotheses \cite{DebruyneVindas2017}.  Ivi\'c introduced functions generalizing von Mangoldt's function, and Calder\'on Garc\'ia--Z\'arate developed a Selberg-type asymptotic variant for such functions \cite{Ivic1975,CalderonGarciaZarate1990}.  Generalized von Mangoldt sums also encode criteria equivalent to the Riemann hypothesis \cite{Balazard2008,BanksSinha2025}, while prime-sensitive Lindel\"of formulations give another exact equivalence \cite{GonekGrahamLee2020}.  None of these results supplies the uniform inverse estimate tested here.  Our theorem addresses conditioning of recovery from approximate arithmetic summaries on a fixed positive prime-power cone.
+
+\section{The conditioning obstruction}\label{sec:main}
+
+\begin{definition}\label{def:cone}
+Let $\mathcal C$ be the set of weights $a:\N\to[0,\infty)$ such that
+\[
+  \suppop(a)\subseteq\{p^k:p\text{ prime},\ k\ge1\}
+  \quad\text{and}\quad
+  a(p^k)=a(p)\quad(k\ge1).
+\]
+For $X\ge2$, write
+\[
+  \mathcal R_X(a)=(R_a(n))_{1\le n\le\lfloor2X\rfloor}
+\]
+and equip residual vectors with the supremum norm.
+\end{definition}
+
+\begin{theorem}[Near-linear conditioning lower bound]\label{thm:conditioning}
+Fix $\rho\in(1/2,1)$.  There are a function $\delta_\rho:\N\to\mathbb R$, a constant $C_\rho>0$, and $X_\rho\ge2$ with the following property.  For every $X\ge X_\rho$ and $0<\tau\le1$, the weights
+\begin{equation}\label{eq:scaled-pair}
+  a_{X,\pm}=\Lambda\pm\eta_X\delta_\rho,
+  \qquad
+  \eta_X=\frac{\tau}{C_\rho\log(2X)},
+\end{equation}
+belong to $\mathcal C$ and satisfy
+\begin{align}
+ \|\mathcal R_X(a_{X,\pm})\|_\infty&\le\tau,\label{eq:input-bound}\\
+ |E_{a_{X,+}}(X)-E_{a_{X,-}}(X)|
+ &\ge \frac{\tau}{\rho C_\rho}\frac{X^\rho}{\log(2X)}.\label{eq:output-separation}
+\end{align}
+Each $a_{X,\pm}$ also obeys
+\begin{equation}\label{eq:scaled-selberg}
+  S_{a_{X,\pm}}(x)=2x\log x+O_\rho(x)
+  \qquad(x\ge2),
+\end{equation}
+with a constant independent of $X$ and $\tau$.
+
+Consequently, if a map
+\[
+ \Phi_X:\mathcal R_X(\mathcal C)\longrightarrow\mathbb R
+\]
+recovers $E_a(X)$ exactly for every $a\in\mathcal C$, then its Lipschitz constant in the supremum norm satisfies
+\begin{equation}\label{eq:lipschitz-lower}
+  \operatorname{Lip}(\Phi_X)
+  \ge \frac{1}{2\rho C_\rho}\frac{X^\rho}{\log(2X)}
+  \qquad(X\ge X_\rho).
+\end{equation}
+In particular, for every $\delta\in(0,1/2)$ one can take $\rho=1-\delta$ and obtain
+\[
+  \operatorname{Lip}(\Phi_X)\gg_\delta
+  \frac{X^{1-\delta}}{\log X}.
+\]
+\end{theorem}
+
+The scale dependence in \eqref{eq:scaled-pair} is essential and explicit: the theorem measures the condition number of a family of finite-scale inverse problems.  The fixed perturbations from which the family is obtained appear in Theorem~\ref{thm:fixed-pair}.
+
+\begin{corollary}[No uniform square-root correction]\label{cor:sqrt}
+Fix $\varepsilon\in[0,1/2)$.  There is no constant $C_\varepsilon$ such that every $a\in\mathcal C$ and every $X\ge2$ satisfy
+\begin{equation}\label{eq:forbidden-bound}
+ |A_a(X)-\psi(X)|
+ \le C_\varepsilon X^{1/2+\varepsilon}
+ \max_{n\le2X}|R_a(n)|.
+\end{equation}
+The conclusion remains true after restricting to weights that satisfy \eqref{eq:scaled-selberg} with a uniform $O_\rho(x)$ constant.
+\end{corollary}
+
+\begin{proof}
+Choose $\rho\in(1/2+\varepsilon,1)$ and use one of the weights in \eqref{eq:scaled-pair}.  Since
+\[
+ A_{a_{X,\pm}}(X)-\psi(X)
+ =\pm\eta_X\sum_{n\le X}\delta_\rho(n),
+\]
+the asymptotic established in Proposition~\ref{prop:fixed-sums} gives, for both signs and all sufficiently large $X$,
+\[
+ |A_{a_{X,\pm}}(X)-\psi(X)|
+ \ge \frac{\tau}{2\rho C_\rho}
+       \frac{X^\rho}{\log(2X)}.
+\]
+The right side of \eqref{eq:forbidden-bound} is at most
+$C_\varepsilon\tau X^{1/2+\varepsilon}$.  Their ratio tends to infinity.
+\end{proof}
+
+\begin{table}[t]
+\centering
+\caption{Properties of the fixed and scale-normalized pairs.  All constants may depend on $\rho$.}
+\label{tab:comparison}
+\small
+\begin{tabular}{@{}p{0.39\textwidth}cc@{}}
+\toprule
+Property & Fixed pair & Normalized pair at $X$\\
+\midrule
+Actual prime-power support & yes & yes\\
+Strictly positive at every prime power & yes & yes\\
+Constant on every $p^k$ chain & yes & yes\\
+Centered divisor mean & $O(x^\rho)$ & $O(x^\rho/\log X)$\\
+Divisor residual mean square & $O(x)$ & $O(x/\log^2 X)$\\
+Complete residual through $2X$ & $O(\log X)$ & at most $\tau$\\
+Selberg statistic & $2x\log x+O(x)$ & uniform $2x\log x+O(x)$\\
+Two-sign output separation at $X$ & $\asymp X^\rho$ & $\gg \tau X^\rho/\log X$\\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\section{A centered perturbation on the actual prime powers}\label{sec:construction}
+
+Fix $\rho\in(1/2,1)$ for the remainder of Sections~\ref{sec:construction}--\ref{sec:compact}, and define
+\begin{equation}\label{eq:c-p}
+  c_2=-\sum_{\substack{p\text{ prime}\\p\text{ odd}}}
+       \frac{p^{\rho-1}\log p}{p-1},
+  \qquad
+  c_p=p^{\rho-1}\log p\quad(p\text{ odd}).
+\end{equation}
+The series defining $c_2$ converges because its summand has order
+$\log p/p^{2-\rho}$ and $2-\rho>1$.  Extend the coefficients to an arithmetic function by
+\begin{equation}\label{eq:delta}
+  \delta_\rho(p^k)=c_p\quad(k\ge1),
+  \qquad
+  \delta_\rho(n)=0\quad(n\text{ not a prime power}).
+\end{equation}
+The correction on the $2$-power chain enforces the exact centering identity
+\begin{equation}\label{eq:centering}
+  \sum_p\frac{c_p}{p-1}=0.
+\end{equation}
+
+Set
+\begin{equation}\label{eq:constants}
+ C_\rho=\max\left\{3^{\rho-1},\frac{|c_2|}{\log2}\right\},
+ \qquad
+ D_\rho=\sum_{n\ge1}\frac{|\delta_\rho(n)|}{n}
+ =\sum_p\frac{|c_p|}{p-1}.
+\end{equation}
+For odd primes, $|c_p|/\log p=p^{\rho-1}\le3^{\rho-1}$, so
+$|c_p|\le C_\rho\log p$ for every prime $p$.  Both constants are finite,
+and $C_\rho>0$.
+
+\begin{proposition}[Size of the perturbation]\label{prop:fixed-sums}
+As $x\to\infty$,
+\begin{align}
+ \sum_{n\le x}|\delta_\rho(n)|&=O_\rho(x^\rho),\label{eq:U}\\
+ H_\rho(x):=\sum_{n\le x}\delta_\rho(n)
+ &=\frac{x^\rho}{\rho}+o_\rho(x^\rho).\label{eq:H}
+\end{align}
+\end{proposition}
+
+\begin{proof}
+Chebyshev's estimate $\vartheta(y)=\sum_{p\le y}\log p=O(y)$ and partial summation give
+\[
+ \sum_{p\le y}p^{\rho-1}\log p=O_\rho(y^\rho).
+\]
+The levels $p^k$ with $k\ge2$ contribute $O_\rho(x^{\rho/2}\log x)$, and the correction along the powers of $2$ contributes $O_\rho(\log x)$.  This proves \eqref{eq:U}.
+
+For the signed sum, the prime level contributes
+\[
+ \sum_{p\le x}p^{\rho-1}\log p
+ =\frac{x^\rho}{\rho}+o_\rho(x^\rho)
+\]
+by the prime number theorem and partial summation.  The higher prime-power levels and the $2$-chain correction are $o_\rho(x^\rho)$ by the bounds just given.  Hence \eqref{eq:H} follows.
+\end{proof}
+
+\begin{theorem}[Fixed two-sign family]\label{thm:fixed-pair}
+For every
+\begin{equation}\label{eq:eta-small}
+ 0<\eta\le \min\{1,(2C_\rho)^{-1}\},
+\end{equation}
+the weights
+\[
+ a_\pm=\Lambda\pm\eta\delta_\rho
+\]
+belong to $\mathcal C$, are strictly positive on every prime power, and satisfy
+\begin{equation}\label{eq:fixed-separation}
+ A_{a_+}(x)-A_{a_-}(x)
+ =\frac{2\eta}{\rho}x^\rho+o_\rho(x^\rho).
+\end{equation}
+\end{theorem}
+
+\begin{proof}
+Support and chain constancy follow from \eqref{eq:delta}.  At $p^k$,
+\[
+ a_\pm(p^k)=\log p\pm\eta c_p
+ \ge(1-\eta C_\rho)\log p\ge\tfrac12\log p>0.
+\]
+Equation \eqref{eq:fixed-separation} is twice $\eta$ times \eqref{eq:H}.
+\end{proof}
+
+\section{The divisor residual}\label{sec:divisor}
+
+Let
+\begin{equation}\label{eq:r-def}
+ r_\rho=\delta_\rho*\1.
+\end{equation}
+Unique factorization turns the convolution into the explicit additive function
+\begin{equation}\label{eq:r-explicit}
+ r_\rho(n)=\sum_p c_pv_p(n),
+\end{equation}
+where $v_p(n)$ is the exponent of $p$ in $n$.  Thus
+\begin{equation}\label{eq:r-pointwise}
+ |r_\rho(n)|
+ \le C_\rho\sum_pv_p(n)\log p
+ =C_\rho\log n.
+\end{equation}
+
+\begin{proposition}[Centered mean and bounded mean square]\label{prop:residual-moments}
+For $x\ge2$,
+\begin{align}
+ \sum_{n\le x}r_\rho(n)&=O_\rho(x^\rho),\label{eq:r-mean}\\
+ \sum_{n\le x}|r_\rho(n)|^2&=O_\rho(x).\label{eq:r-L2}
+\end{align}
+Consequently, the residuals of the fixed weights satisfy
+\[
+ R_{a_\pm}(n)=\pm\eta r_\rho(n)
+\]
+with centered mean, bounded mean square, and the pointwise estimate
+$|R_{a_\pm}(n)|\le\eta C_\rho\log n$.
+\end{proposition}
+
+\begin{proof}
+For each prime $p\le x$,
+\begin{equation}\label{eq:vp-first}
+ \sum_{n\le x}v_p(n)
+ =\sum_{\substack{k\ge1\\p^k\le x}}\left\lfloor\frac{x}{p^k}\right\rfloor
+ =\frac{x}{p-1}+O\!\left(1+\frac{\log x}{\log p}\right).
+\end{equation}
+Insert \eqref{eq:vp-first} into \eqref{eq:r-explicit}.  The complete main term vanishes by \eqref{eq:centering}.  Partial summation with $\vartheta(y)=O(y)$ bounds the omitted tail by
+\[
+ x\sum_{p>x}\frac{|c_p|}{p-1}=O_\rho(x^\rho),
+\]
+while
+\[
+ \sum_{p\le x}|c_p|\left(1+\frac{\log x}{\log p}\right)
+ =O_\rho(x^\rho).
+\]
+This proves \eqref{eq:r-mean}.
+
+For the second moment, use
+\begin{align}
+ \sum_{n\le x}v_p(n)^2
+ &\le x\sum_{k,l\ge1}p^{-\max(k,l)}
+ =x\frac{p+1}{(p-1)^2},\label{eq:vp-square}\\
+ \sum_{n\le x}v_p(n)v_q(n)
+ &\le x\sum_{k,l\ge1}p^{-k}q^{-l}
+ =\frac{x}{(p-1)(q-1)}\quad(p\ne q).\label{eq:vp-cross}
+\end{align}
+Expanding the square in \eqref{eq:r-explicit}, taking absolute values on the cross terms, and applying \eqref{eq:vp-square}--\eqref{eq:vp-cross} gives
+\[
+ \sum_{n\le x}|r_\rho(n)|^2
+ \le x\sum_p|c_p|^2\frac{p+1}{(p-1)^2}
+ +2x\sum_{p<q}\frac{|c_pc_q|}{(p-1)(q-1)}.
+\]
+The first series converges because its general term is
+$O_\rho((\log p)^2/p^{3-2\rho})$; the second is bounded by $xD_\rho^2$.
+\end{proof}
+
+\section{Selberg feedback survives the perturbation}\label{sec:selberg}
+
+\begin{proposition}[Uniform Selberg remainder]\label{prop:selberg}
+Let $a=\Lambda+e$, where $e=\pm\eta\delta_\rho$ and $|\eta|\le\eta_0$ for a fixed $\eta_0$.  Then
+\begin{equation}\label{eq:selberg-perturbed}
+ S_a(x)=2x\log x+O_{\rho,\eta_0}(x).
+\end{equation}
+\end{proposition}
+
+\begin{proof}
+Expanding the ordered convolution gives
+\begin{equation}\label{eq:S-difference}
+ S_a(x)-S_\Lambda(x)
+ =\sum_{n\le x}e(n)\log n
+ +2\sum_{mn\le x}e(m)\Lambda(n)
+ +\sum_{mn\le x}e(m)e(n).
+\end{equation}
+The first term is $O_{\rho,\eta_0}(x^\rho\log x)=O_{\rho,\eta_0}(x)$ by \eqref{eq:U}.  Choose $C_\psi$ so that $\psi(y)\le C_\psi y$ for $y\ge1$.  Then
+\[
+ \sum_{mn\le x}|e(m)|\Lambda(n)
+ \le C_\psi x\sum_{m\ge1}\frac{|e(m)|}{m}
+ \le C_\psi\eta_0D_\rho x.
+\]
+Also
+\[
+ \sum_{mn\le x}|e(m)e(n)|
+ \le x\left(\sum_{m\ge1}\frac{|e(m)|}{m}\right)^2
+ \le\eta_0^2D_\rho^2x.
+\]
+Combine these estimates with Selberg's formula \eqref{eq:selberg-classical}.
+\end{proof}
+
+\begin{proof}[Proof of Theorem~\ref{thm:conditioning}]
+Use the perturbation \eqref{eq:delta}.  Since $X\ge2$ and $\tau\le1$,
+\[
+ \eta_XC_\rho=\frac{\tau}{\log(2X)}\le\frac1{\log4}<1.
+\]
+The positivity argument from Theorem~\ref{thm:fixed-pair} therefore applies globally to $a_{X,\pm}$.  Equations \eqref{eq:residual}, \eqref{eq:exact-inversion}, and \eqref{eq:r-pointwise} yield, for $n\le2X$,
+\[
+ |R_{a_{X,\pm}}(n)|
+ =\eta_X|r_\rho(n)|
+ \le\eta_XC_\rho\log(2X)=\tau.
+\]
+By \eqref{eq:H}, enlarge $X_\rho$ until
+$|H_\rho(X)|\ge X^\rho/(2\rho)$.  Then
+\[
+ |E_{a_{X,+}}(X)-E_{a_{X,-}}(X)|
+ =2\eta_X|H_\rho(X)|
+ \ge\frac{\tau}{\rho C_\rho}\frac{X^\rho}{\log(2X)}.
+\]
+Proposition~\ref{prop:selberg} applies uniformly because
+$\eta_X\le(C_\rho\log4)^{-1}$.  Finally,
+\[
+ \|\mathcal R_X(a_{X,+})-\mathcal R_X(a_{X,-})\|_\infty
+ \le2\tau.
+\]
+Taking the quotient of the output separation by this input distance proves
+\eqref{eq:lipschitz-lower}.
+\end{proof}
+
+\section{A compact dyadic transform}\label{sec:compact}
+
+The full residual vector in Theorem~\ref{thm:conditioning} is not the only summary that loses the $x^\rho$ direction.  A simple dyadic combination produces an exactly compactly supported kernel.
+
+Define
+\begin{equation}\label{eq:K}
+ K(u)=
+ \begin{cases}
+ 0,&u\le0,\\
+ \tfrac12,&0<u\le1,\\
+ \dfrac{1}{2u^2},&u>1,
+ \end{cases}
+\end{equation}
+and set
+\begin{equation}\label{eq:transform}
+ T_a(X)=\sum_{n\ge1}a(n)K(n/X),
+ \qquad
+ M(X)=\int_1^\infty K(t/X)\,dt,
+ \qquad
+ \mathcal E_a(X)=M(X)-T_a(X).
+\end{equation}
+The series converges absolutely for the weights considered here.
+
+\begin{proposition}[Compact dyadic separation]\label{prop:compact}
+For the fixed pair $a_\pm=\Lambda\pm\eta\delta_\rho$, define
+\[
+ \mathcal D_a(X)=4\mathcal E_a(X)-\mathcal E_a(2X).
+\]
+Then
+\begin{equation}\label{eq:compact-separation}
+ \mathcal D_{a_+}(X)-\mathcal D_{a_-}(X)
+ =-2\eta(4-2^\rho)I_\rho X^\rho+o_\rho(X^\rho),
+ \qquad
+ I_\rho=\frac1{\rho(2-\rho)}.
+\end{equation}
+Equivalently, the perturbation is tested against the compactly supported kernel
+\begin{equation}\label{eq:W}
+ W(u)=4K(u)-K(u/2)=
+ \begin{cases}
+ \tfrac32,&0<u\le1,\\
+ \dfrac{2}{u^2}-\tfrac12,&1<u\le2,\\
+ 0,&u>2.
+ \end{cases}
+\end{equation}
+If
+\[
+ \mathcal Q_a(Y)=\sum_{\substack{j\ge0\\2^j\le Y}}
+ |\mathcal D_a(2^j)|^2,
+\]
+then for every $\varepsilon<2\rho-1$, at least one of $a_+$ and $a_-$ fails the estimate
+$\mathcal Q_a(Y)=O(Y^{1+\varepsilon})$.
+\end{proposition}
+
+\begin{proof}
+Stieltjes summation and \eqref{eq:H} give
+\begin{equation}\label{eq:mellin-asymptotic}
+ \sum_{n\ge1}\delta_\rho(n)K(n/X)
+ =I_\rho X^\rho+o_\rho(X^\rho),
+\end{equation}
+where
+\[
+ I_\rho=\int_0^\infty u^{\rho-1}K(u)\,du
+ =\frac1{2\rho}+\frac1{2(2-\rho)}
+ =\frac1{\rho(2-\rho)}.
+\]
+Since the common main term $M$ cancels between signs,
+\[
+ \mathcal D_{a_+}(X)-\mathcal D_{a_-}(X)
+ =-2\eta\sum_{n\ge1}\delta_\rho(n)W(n/X).
+\]
+Equations \eqref{eq:mellin-asymptotic} and \eqref{eq:W} yield
+\eqref{eq:compact-separation}.
+
+For all sufficiently large dyadic $X$,
+\[
+ |\mathcal D_{a_+}(X)|^2+|\mathcal D_{a_-}(X)|^2
+ \ge\frac12|\mathcal D_{a_+}(X)-\mathcal D_{a_-}(X)|^2
+ \gg_{\rho,\eta}X^{2\rho}.
+\]
+Summing over dyadic $X\le Y$ gives
+$\mathcal Q_{a_+}(Y)+\mathcal Q_{a_-}(Y)\gg_{\rho,\eta}Y^{2\rho}$.
+At least one fixed sign therefore violates every $O(Y^{1+\varepsilon})$ bound with
+$1+\varepsilon<2\rho$.
+\end{proof}
+
+\section{Generalized von Mangoldt recursions}\label{sec:hierarchy}
+
+Following the generalized von Mangoldt hierarchy studied by Ivi\'c and in
+subsequent Selberg-type variants \cite{Ivic1975,CalderonGarciaZarate1990,BanksSinha2025}, define
+the functions by
+\begin{equation}\label{eq:Lambda-k}
+ \Lambda_k=\mu*\log^k.
+\end{equation}
+They are nonnegative and satisfy the recursion
+\begin{equation}\label{eq:Lambda-recursion}
+ \Lambda_{k+1}=\Lambda_k\log+\Lambda_k*\Lambda
+ \qquad(k\ge1).
+\end{equation}
+For a positive weight $a$, define its companion hierarchy by
+\begin{equation}\label{eq:G-recursion}
+ G_{a,1}=a,
+ \qquad
+ G_{a,k+1}=G_{a,k}\log+G_{a,k}*a.
+\end{equation}
+This recursion agrees with \eqref{eq:Lambda-recursion} at $a=\Lambda$ and preserves nonnegativity.
+
+\begin{lemma}[Weighted prefix bound]\label{lem:prefix}
+Let $f,g\ge0$ satisfy
+\[
+ \sum_{n\le y}f(n)\le Qy\log^m(2y),
+ \qquad
+ \sum_{n\le y}g(n)\le Cy
+ \quad(y\ge1).
+\]
+With $q=1+1/\log2$,
+\[
+ \sum_{n\le x}(f*g)(n)
+ \le qCQx\log^{m+1}(2x).
+\]
+\end{lemma}
+
+\begin{proof}
+Partial summation gives
+\[
+ \sum_{n\le x}\frac{g(n)}n\le C(1+\log x)
+ \le qC\log(2x).
+\]
+Therefore
+\[
+ \sum_{uv\le x}f(u)g(v)
+ \le Qx\log^m(2x)\sum_{v\le x}\frac{g(v)}v,
+\]
+which is the asserted estimate.
+\end{proof}
+
+\begin{theorem}[Order-uniform hierarchy control]\label{thm:hierarchy}
+Let $a=a_+$ or $a_-$ be a fixed weight from Theorem~\ref{thm:fixed-pair}.  There exist constants $B,C\ge1$, depending on $\rho$ and $\eta$ but not on $k$ or $x$, such that
+\begin{equation}\label{eq:hierarchy-bound}
+ \sum_{n\le x}|G_{a,k}(n)-\Lambda_k(n)|
+ \le BC^{k-2}x\log^{k-2}(2x)
+ \qquad(k\ge2,\ x\ge1).
+\end{equation}
+\end{theorem}
+
+\begin{proof}
+Write $e=a-\Lambda$ and
+$\Delta_k=G_{a,k}-\Lambda_k$.  Choose constants $C_U,C_\psi$ such that
+\[
+ \sum_{n\le x}|e(n)|\le C_Ux^\rho,
+ \qquad
+ \psi(x)\le C_\psi x
+ \quad(x\ge1),
+\]
+and retain $D=\sum|e(n)|/n<\infty$.  The expansion at order two is
+\[
+ \Delta_2=e\log+e*\Lambda+\Lambda*e+e*e.
+\]
+Since
+$x^{\rho-1}\log x\le[e(1-\rho)]^{-1}$ for $x\ge1$, the argument of
+Proposition~\ref{prop:selberg} gives
+\begin{equation}\label{eq:base-B0}
+ \sum_{n\le x}|\Delta_2(n)|\le B_0x,
+ \quad
+ B_0=\frac{C_U}{e(1-\rho)}+2C_\psi D+D^2.
+\end{equation}
+
+Set
+\[
+ q=1+\frac1{\log2},
+ \qquad C_\Lambda=1+qC_\psi,
+ \qquad C_a=C_\psi+C_U.
+\]
+Induction from \eqref{eq:Lambda-recursion} and Lemma~\ref{lem:prefix} yields
+\begin{equation}\label{eq:Lambda-prefix}
+ \sum_{n\le x}\Lambda_k(n)
+ \le C_\psi C_\Lambda^{k-1}x\log^{k-1}(2x).
+\end{equation}
+Subtracting \eqref{eq:Lambda-recursion} from \eqref{eq:G-recursion} gives
+\begin{equation}\label{eq:Delta-recursion}
+ \Delta_{k+1}=\Delta_k\log+\Delta_k*a+\Lambda_k*e.
+\end{equation}
+
+Take
+\[
+ B\ge\max\{1,B_0,C_\psi D\},
+ \qquad
+ C\ge2\max\{1+qC_a,C_\Lambda\}.
+\]
+Assume \eqref{eq:hierarchy-bound} at order $k$.  The first two terms in
+\eqref{eq:Delta-recursion}, using Lemma~\ref{lem:prefix} for the convolution, contribute at most
+\[
+ B C^{k-2}(1+qC_a)x\log^{k-1}(2x)
+ \le\tfrac12BC^{k-1}x\log^{k-1}(2x).
+\]
+Using \eqref{eq:Lambda-prefix} and $\sum|e(n)|/n=D$, the last term contributes at most
+\[
+ C_\psi D C_\Lambda^{k-1}x\log^{k-1}(2x)
+ \le\tfrac12BC^{k-1}x\log^{k-1}(2x).
+\]
+This closes the induction.
+\end{proof}
+
+Theorem~\ref{thm:hierarchy} is deliberately order-uniform: it prints the full
+$C^{k-2}$ dependence, with all growth in $k$ visible.  For this constructed
+pair, every displayed companion recursion obeys the stated order-uniform
+envelope while the original $x^\rho$ summatory separation persists.  These
+bounds alone therefore do not exclude the pair.
+
+\section{Concluding perspective}
+
+The construction separates four statements that can look deceptively close.
+\begin{enumerate}[label=\textup{(\roman*)},leftmargin=2.2em]
+ \item The exact convolution equation $a*\1=\log$ identifies $a=\Lambda$.
+ \item A small residual $a*\1-\log$ permits unstable recovery of $A_a(X)-x$.
+ \item Positivity, actual prime-power support, chain constancy, centered first and second residual moments, and an $O(x)$ Selberg remainder still permit poor square-root conditioning.
+ \item Higher generalized von Mangoldt recursions stay quantitatively controlled along the same unstable family.
+\end{enumerate}
+Exact algebraic uniqueness coexists with an inverse-problem condition number
+that grows almost linearly with the observation scale.  Any successful
+square-root recovery argument from approximate divisor or Selberg data must
+introduce a norm, cancellation principle, spectral constraint, or analytic
+input that detects the signed prime-level direction constructed here.
+
+\appendix
+
+\section{A dense warm-up}\label{app:dense}
+
+The following model removes the prime-power restrictions and displays the same Selberg cancellation in one line of construction.
+
+\begin{proposition}\label{prop:dense}
+Fix $c>0$ and $\rho\in(1/2,1)$, and set
+\[
+ a(n)=1+c\rho\,n^{\rho-1}.
+\]
+Then
+\begin{align}
+ \sum_{n\le x}a(n)&=x+cx^\rho+O_{c,\rho}(1),\label{eq:dense-sum}\\
+ S_a(x)&=2x\log x+O_{c,\rho}(x).
+\end{align}
+\end{proposition}
+
+\begin{proof}
+Euler summation gives
+$\sum_{n\le x}n^{\rho-1}=x^\rho/\rho+O_\rho(1)$, proving
+\eqref{eq:dense-sum}.  For the constant weight $1$,
+\[
+ \sum_{n\le x}\log n+\sum_{mn\le x}1
+ =2x\log x+O(x).
+\]
+If $h(n)=c\rho n^{\rho-1}$, then
+\[
+ \sum_{n\le x}h(n)\log n=O(x^\rho\log x)=O(x),
+\]
+and
+\[
+ \sum_{mn\le x}h(m)
+ \le x\sum_{m\ge1}\frac{h(m)}m=O(x).
+\]
+The same convergent weighted sum bounds the quadratic term
+$\sum_{mn\le x}h(m)h(n)$ by $O(x)$.  Expanding $S_{1+h}$ proves the result.
+\end{proof}
+
+\enlargethispage{\baselineskip}
+\section{Verification remarks}\label{app:repro}
+
+The construction uses no numerical fitting.  The definition of $c_2$ makes
+the centering identity \eqref{eq:centering} immediate once the defining series
+and $D_\rho$ are known to converge.  In Proposition~\ref{prop:fixed-sums}, only the prime level supplies
+the term $x^\rho/\rho$; the higher prime powers and the corrected $2$-chain
+are lower order.  The residual calculation \eqref{eq:r-explicit} uses the
+diagonal density $(p+1)/(p-1)^2$ and the off-diagonal density
+$1/((p-1)(q-1))$, while \eqref{eq:S-difference} uses the factor $2$ from the
+ordered cross term.
+
+For the compact transform, the untruncated Mellin coefficient is
+$\int_0^\infty u^{\rho-1}K(u)\,du=1/(\rho(2-\rho))$.  The dyadic combination
+$4K(u)-K(u/2)$ has compact support; $K$ itself has an unbounded tail.  The constants
+$B$ and $C^{k-2}$ in \eqref{eq:hierarchy-bound} are kept explicit because
+separate bounds for fixed $k$ would not yield order-uniform control.
+
+\section*{Data and code availability}
+
+The construction and every asymptotic estimate used in the theorems are
+contained in the manuscript; no external data or numerical experiment is
+required.  An accompanying Lean~4 development checks the finite conditioning
+algebra: the distinguished correction, positivity of the signed
+perturbations, residual scaling, two-sign separation, and the resulting
+Lipschitz lower bound.  The analytic construction, asymptotic estimates, and
+order-uniform hierarchy remain manuscript-level proofs.
+
+\section*{Assistance disclosure}
+
+AI systems were used extensively in mathematical derivation, Lean proof
+development, literature discovery, organization, and typesetting.  The author
+remains responsible for every mathematical statement, proof, citation, and
+submission decision.
+
+\bibliographystyle{amsplain}
+\bibliography{references}
+
+\end{document}

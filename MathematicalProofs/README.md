@@ -17,3 +17,7 @@ Each subdirectory is a complete paper artifact containing:
   *An Obstruction to Prime-Local First-Difference Decompositions of Weil's
   Quadratic Form*.
   [doi:10.5281/zenodo.22005240](https://doi.org/10.5281/zenodo.22005240)
+- [`SelbergDivisorFeedback`](SelbergDivisorFeedback/) —
+  *Selberg Feedback and Approximate Divisor Data Do Not Stably Determine Square-Root
+  Prime Error*.
+  [doi:10.5281/zenodo.22005767](https://doi.org/10.5281/zenodo.22005767)

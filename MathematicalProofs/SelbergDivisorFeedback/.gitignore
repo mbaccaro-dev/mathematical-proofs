@@ -1,0 +1,9 @@
+Lean/.lake/
+
+Manuscript/paper.aux
+Manuscript/paper.bbl
+Manuscript/paper.blg
+Manuscript/paper.log
+Manuscript/paper.out
+Manuscript/paper.pdf
+Manuscript/build-*.txt
