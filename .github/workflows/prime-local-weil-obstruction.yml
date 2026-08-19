@@ -1,0 +1,36 @@
+name: Prime-local Weil obstruction Lean verification
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "MathematicalProofs/PrimeLocalWeilObstruction/Lean/**"
+      - ".github/workflows/prime-local-weil-obstruction.yml"
+  pull_request:
+    branches: [main]
+    paths:
+      - "MathematicalProofs/PrimeLocalWeilObstruction/Lean/**"
+      - ".github/workflows/prime-local-weil-obstruction.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v5
+
+      - name: Build the pinned Lean project
+        uses: leanprover/lean-action@v1
+        with:
+          lake-package-directory: MathematicalProofs/PrimeLocalWeilObstruction/Lean
+          build: true
+          build-args: "--wfail"
+          test: false
+
+      - name: Check the paper-wide certificate
+        working-directory: MathematicalProofs/PrimeLocalWeilObstruction/Lean
+        run: lake env lean RiemannHypothesisProofFactory/PrimeLocalWeil/PaperCertificate.lean

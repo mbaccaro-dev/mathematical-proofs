@@ -1,0 +1,29 @@
+cff-version: 1.2.0
+message: "If you use this formalization, please cite the accompanying paper."
+title: "Lean 4 formal assurance for An Obstruction to Prime-Local First-Difference Decompositions of Weil's Quadratic Form"
+type: software
+authors:
+  - family-names: "Baccaro"
+    given-names: "Mayk Loide"
+version: 1.0.0
+date-released: 2026-08-18
+abstract: >-
+  Lean 4 formal assurance accompanying a paper on the scalar-budget
+  obstruction to uncoupled prime-local first-difference decompositions of
+  Weil's quadratic form.
+keywords:
+  - Lean 4
+  - Riemann hypothesis
+  - Weil quadratic form
+  - von Mangoldt function
+  - prime powers
+  - positive quadratic forms
+preferred-citation:
+  type: article
+  authors:
+    - family-names: "Baccaro"
+      given-names: "Mayk Loide"
+  title: "An Obstruction to Prime-Local First-Difference Decompositions of Weil's Quadratic Form"
+  year: 2026
+  doi: "10.5281/zenodo.22005240"
+  url: "https://doi.org/10.5281/zenodo.22005240"

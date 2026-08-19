@@ -1,0 +1,17 @@
+import RiemannHypothesisProofFactory.PrimeLocalWeil
+
+open RiemannHypothesisProofFactory.PrimeLocalWeil
+
+#print axioms weilWeight_nonneg
+#print axioms psi_div_sqrt_le_weightedPartialSum
+#print axioms sqrt_lower_le_psi_div_sqrt
+#print axioms weightedPartialSum_tendsto_atTop
+#print axioms scalarPartialSum_tendsto_atTop
+#print axioms finitePrefix_nonnegative
+#print axioms firstDifferenceTerm_le
+#print axioms summable_firstDifferenceTerm
+#print axioms tsum_firstDifferenceTerm_nonnegative
+#print axioms localBlock_nonnegative_iff
+#print axioms localBlock_nonnegative_on_iff
+#print axioms weightedPartialSum_eq_primePowerPartialSum
+#print axioms primePowerPartialSum_tendsto_atTop

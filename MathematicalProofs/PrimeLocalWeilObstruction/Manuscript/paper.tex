@@ -1,0 +1,434 @@
+\documentclass[11pt,a4paper]{amsart}
+
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage[protrusion=true,expansion=false]{microtype}
+\usepackage{mathtools}
+\usepackage{amssymb}
+\usepackage{xcolor}
+\usepackage{hyperref}
+
+\hypersetup{
+  colorlinks=true,
+  linkcolor=blue!45!black,
+  citecolor=blue!45!black,
+  urlcolor=blue!45!black,
+  pdftitle={An Obstruction to Prime-Local First-Difference Decompositions of Weil's Quadratic Form},
+  pdfauthor={Mayk Loide Baccaro}
+}
+
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\PP}{\mathcal{P}^{\!*}}
+\newcommand{\ip}[2]{\left\langle #1,#2\right\rangle}
+\newcommand{\norm}[1]{\left\lVert #1\right\rVert_{2}}
+\setlength{\emergencystretch}{1em}
+
+\theoremstyle{plain}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{remark}[theorem]{Remark}
+
+\title[Prime-local first-difference obstruction]
+{An Obstruction to Prime-Local First-Difference\\
+Decompositions of Weil's Quadratic Form}
+\author[Mayk Loide Baccaro]{Mayk Loide Baccaro\\
+Independent researcher\\
+\href{mailto:m.baccaro7663@student.nu.edu}{\texttt{m.baccaro7663@student.nu.edu}}}
+\date{18 August 2026}
+\subjclass[2020]{Primary 11M26; Secondary 42A82}
+\keywords{Weil quadratic form, explicit formula, Riemann zeta function,
+prime powers, positive quadratic forms, translation operators}
+
+\begin{document}
+
+\begin{abstract}
+Weil's criterion makes positivity of an explicit quadratic form equivalent
+to the Riemann hypothesis, which motivates attempts to assemble that form
+from manifestly positive prime-local pieces.  We isolate the prime-power term
+and test a natural such architecture.  For a prime power
+$n$, put $w_n=\Lambda(n)/\sqrt n$, $a_n=\log n$, and let
+$T_a\varphi(x)=\varphi(x-a)$.  We prove that the scalar-completed local block
+\[
+ b_n\norm{\varphi}^{2}-2w_n\operatorname{Re}
+ \ip{\varphi}{T_{a_n}\varphi}
+\]
+is nonnegative on $C_c^\infty(\R)$ exactly when $b_n\geq 2w_n$.
+The required scalar budget therefore diverges, since
+$\sum_{n\geq2}\Lambda(n)/\sqrt n=\infty$.  For every fixed
+nonzero compactly supported test function, the ordinary sum of such positive
+blocks diverges to $+\infty$.  Consequently, the actual prime-power term
+cannot be assembled as an ordinary convergent sum of individually positive
+first-difference blocks with a fixed summable scalar completion.  Finite
+truncations and summable synthetic weights remain valid.  The obstruction
+comes from infinite-weight assembly; each local block still has an exact
+algebraic threshold.
+\end{abstract}
+
+\maketitle
+
+\section{The obstruction}
+
+Weil's positivity criterion recasts the Riemann Hypothesis as positivity of a
+quadratic functional derived from the explicit formula
+\cite{Weil1952,Bombieri2000,Conrey2003,Lagarias2007}.  Its prime-power contribution has a
+particularly simple translation structure.  That structure invites a local
+sum-of-squares construction: assign one positive first-difference block to
+each prime power, then assemble the blocks.
+
+This paper determines exactly when that construction works.  Positivity of
+the block attached to a prime power of natural weight $w_n$ forces scalar
+compensation $b_n\geq2w_n$.  For the actual Weil weights, the resulting total
+compensation is infinite.
+
+Let $C_c^\infty(\R)$ carry the inner product
+\[
+ \ip{\varphi}{\psi}=\int_{\R}\varphi(x)\overline{\psi(x)}\,dx,
+ \qquad T_a\varphi(x)=\varphi(x-a).
+\]
+For $\varphi\in C_c^\infty(\R)$ define
+\[
+ \widetilde\varphi(x)=\overline{\varphi(-x)},
+ \qquad F_\varphi=\varphi*\widetilde\varphi.
+\]
+Then
+\begin{equation}\label{eq:correlation}
+ F_\varphi(a)=\ip{\varphi}{T_a\varphi},
+ \qquad F_\varphi(-a)=\overline{F_\varphi(a)}.
+\end{equation}
+Write $\PP=\{p^k:p\text{ prime},\ k\geq1\}$ and, for $n\in\PP$, set
+\[
+ w_n=\frac{\Lambda(n)}{\sqrt n}>0,
+ \qquad a_n=\log n>0.
+\]
+Given a real scalar $b_n$, consider
+\begin{align}
+ Q_n^{(b)}(\varphi)
+ &=w_n\norm{\varphi-T_{a_n}\varphi}^{2}
+   +(b_n-2w_n)\norm{\varphi}^{2} \label{eq:block-difference}\\
+ &=b_n\norm{\varphi}^{2}
+   -2w_n\operatorname{Re}F_\varphi(a_n). \label{eq:block-correlation}
+\end{align}
+
+\begin{theorem}[Prime-local first-difference obstruction]\label{thm:main}
+Let $(b_n)_{n\in\PP}$ be real numbers.
+\begin{enumerate}
+\item The block $Q_n^{(b)}$ is nonnegative on $C_c^\infty(\R)$ if and only if
+      $b_n\geq2w_n$.
+\item If every block is nonnegative, then
+      \[
+      \sum_{n\in\PP}b_n=+\infty.
+      \]
+\item If every block is nonnegative, then for every nonzero
+      $\varphi\in C_c^\infty(\R)$,
+      \[
+      \sum_{n\in\PP}Q_n^{(b)}(\varphi)=+\infty.
+      \]
+\end{enumerate}
+Consequently, no ordinary convergent sum of individually nonnegative blocks
+of the form \eqref{eq:block-difference} can represent the prime-power term
+with a fixed summable scalar completion.
+\end{theorem}
+
+The three assertions separate the mechanism cleanly.  The first is an exact
+local positivity threshold.  The second inserts the arithmetic weights.  The
+third uses compact support to eliminate the correlation tail.  The divergent
+scalar tail remains and prevents positive assembly.
+
+\section{The exact local threshold}
+
+The threshold follows from the elementary approximate translation invariance
+of broad normalized plateaux.  This local device is standard; the arithmetic
+content begins when its sharp scalar cost is imposed simultaneously at every
+actual prime power.
+
+\begin{proposition}\label{prop:local}
+Fix $a\neq0$, $w>0$, and $b\in\R$.  The quadratic form
+\[
+ Q_{a,w,b}(\varphi)
+ =w\norm{\varphi-T_a\varphi}^{2}+(b-2w)\norm{\varphi}^{2}
+\]
+is nonnegative for every $\varphi\in C_c^\infty(\R)$ if and only if
+$b\geq2w$.
+\end{proposition}
+
+\begin{proof}
+If $b\geq2w$, both terms in the displayed expression are nonnegative.
+
+For the converse, choose a nonzero $\eta\in C_c^\infty(\R)$ and set
+\[
+ \eta_L(x)=L^{-1/2}\eta(x/L),\qquad L>0.
+\]
+The normalization gives $\norm{\eta_L}=\norm{\eta}$.  The fundamental theorem
+of calculus and a change of variables give the quantitative estimate
+\begin{equation}\label{eq:plateau-estimate}
+ \norm{\eta_L-T_a\eta_L}
+ \leq \frac{|a|}{L}\norm{\eta'}.
+\end{equation}
+Therefore
+\[
+ Q_{a,w,b}(\eta_L)
+ \longrightarrow (b-2w)\norm{\eta}^{2}
+ \qquad (L\to\infty).
+\]
+Nonnegativity for every $L$ forces $b-2w\geq0$.
+\end{proof}
+
+For each $n\in\PP$, apply Proposition~\ref{prop:local} with
+$a=a_n$, $w=w_n$, and $b=b_n$.  This proves Theorem~\ref{thm:main}(1).
+The proof uses the test space itself: every $\eta_L$ is smooth and compactly
+supported, although its support expands with $L$.  No completion of the test
+space and no spectral approximation are needed.
+
+\section{The arithmetic budget diverges}
+
+The local threshold becomes a global obstruction because the actual
+prime-power weights are not summable.
+
+\begin{proposition}\label{prop:weight-divergence}
+One has
+\[
+ \sum_{n\in\PP}\frac{\Lambda(n)}{\sqrt n}=+\infty.
+\]
+\end{proposition}
+
+\begin{proof}
+Let
+\[
+ W_N=\sum_{1\leq n\leq N}\frac{\Lambda(n)}{\sqrt n},
+ \qquad
+ \psi(N)=\sum_{1\leq n\leq N}\Lambda(n).
+\]
+Since $\Lambda(n)\geq0$ and $\sqrt n\leq\sqrt N$ on this range,
+\begin{equation}\label{eq:weighted-chebyshev}
+ W_N\geq\frac{\psi(N)}{\sqrt N}.
+\end{equation}
+We use the elementary Chebyshev bound
+\begin{equation}\label{eq:chebyshev-lower}
+ \psi(N)\geq N\log 2-\log(N+1).
+\end{equation}
+For completeness, let $L_N=\operatorname{lcm}(1,\ldots,N)$.  Prime-adic
+valuation gives $\binom Nk\mid L_N$ for $0\leq k\leq N$; hence
+\[
+ 2^N=\sum_{k=0}^{N}\binom Nk\leq(N+1)L_N.
+\]
+Taking logarithms and using $\psi(N)=\log L_N$ proves
+\eqref{eq:chebyshev-lower}.  Equations \eqref{eq:weighted-chebyshev} and
+\eqref{eq:chebyshev-lower} now give
+\[
+ W_N\geq \sqrt N\log2-\frac{\log(N+1)}{\sqrt N}.
+\]
+The right-hand side tends to $+\infty$.  Thus $W_N\to+\infty$.  Finally,
+$\Lambda(n)$ vanishes away from prime powers, so these are exactly the
+increasing-cutoff partial sums in the proposition.
+\end{proof}
+
+If every $Q_n^{(b)}$ is nonnegative, Proposition~\ref{prop:local} yields
+$b_n\geq2w_n$.  Proposition~\ref{prop:weight-divergence} therefore proves
+Theorem~\ref{thm:main}(2).
+
+\section{Failure of ordinary positive assembly}
+
+Compact support makes the prime-power correlation sum finite, but it makes the
+positive-block obstruction more transparent.
+
+\begin{proof}[Proof of Theorem~\ref{thm:main}(3)]
+Fix nonzero $\varphi\in C_c^\infty(\R)$.  The autocorrelation
+$F_\varphi=\varphi*\widetilde\varphi$ is compactly supported.  Hence there is
+$A>0$ such that
+\[
+ F_\varphi(a_n)=0\qquad\text{whenever }a_n>A.
+\]
+For all sufficiently large $n\in\PP$, equation
+\eqref{eq:block-correlation} becomes
+\[
+ Q_n^{(b)}(\varphi)=b_n\norm{\varphi}^{2}.
+\]
+Every term is nonnegative, and the tail sum diverges by part (2).  Thus the
+ordinary series diverges to $+\infty$.
+\end{proof}
+
+In the Fourier convention
+\[
+ h(r)=\int_{\R}F_\varphi(u)e^{iru}\,du,
+ \qquad
+ F_\varphi(u)=\frac{1}{2\pi}\int_{\R}h(r)e^{-iru}\,dr,
+\]
+one has $h(r)\geq0$ on $\R$.  The prime-power part of Weil's explicit formula
+in this normalization is
+\begin{align}
+ P(\varphi)
+ &=-\sum_{n\geq2}\frac{\Lambda(n)}{\sqrt n}
+     \bigl(F_\varphi(\log n)+F_\varphi(-\log n)\bigr) \label{eq:prime-pair}\\
+ &=-2\sum_{n\in\PP}w_n\operatorname{Re}F_\varphi(a_n). \label{eq:prime-real}
+\end{align}
+This is the sign and factor-of-two convention used in
+\cite{Conrey2003}; Appendix~\ref{app:normalization} records the audit.
+
+Suppose an ordinary blockwise-positive construction tried to realize
+\begin{equation}\label{eq:target-assembly}
+ P(\varphi)+B\norm{\varphi}^{2}
+ =\sum_{n\in\PP}Q_n^{(b)}(\varphi),
+ \qquad B=\sum_{n\in\PP}b_n<\infty.
+\end{equation}
+Equations \eqref{eq:block-correlation} and \eqref{eq:prime-real} give the
+formal identity, but Theorem~\ref{thm:main} rules out its positive ordinary
+assembly: blockwise positivity forces $B=+\infty$, and the right-hand side
+diverges on every nonzero test function.
+
+\begin{corollary}\label{cor:weil-scope}
+The actual prime-power contribution to Weil's quadratic form admits no
+decomposition of the form \eqref{eq:target-assembly} with all of the following
+properties:
+\begin{enumerate}
+\item one uncoupled block is assigned to each prime power;
+\item each block is a scalar-completed first translation difference as in
+      \eqref{eq:block-difference};
+\item each block is nonnegative on all of $C_c^\infty(\R)$; and
+\item the scalar completion is an ordinary summable series independent of the
+      test function.
+\end{enumerate}
+\end{corollary}
+
+Corollary~\ref{cor:weil-scope} resolves this architecture.  Cross-prime
+couplings, nonlocal quadratic forms, operator-valued completions,
+test-function-dependent counterterms, and independently justified
+renormalized sums do not satisfy its hypotheses and require separate
+analysis.  The theorem neither proves nor disproves the Riemann Hypothesis.
+
+\section{Controls that isolate the mechanism}
+
+Two controls show exactly where the obstruction enters.
+
+\begin{proposition}[Finite-prefix control]\label{prop:finite-control}
+For every finite set $E\subset\PP$, the choice $b_n=2w_n$ gives
+\[
+ \sum_{n\in E}Q_n^{(b)}(\varphi)
+ =\sum_{n\in E}w_n\norm{\varphi-T_{a_n}\varphi}^{2}\geq0.
+\]
+Thus every finite prefix has a valid positive first-difference decomposition.
+\end{proposition}
+
+\begin{proposition}[Summable-weight control]\label{prop:summable-control}
+Let $(c_j)_{j\geq1}$ be nonnegative with $\sum_jc_j<\infty$, and let
+$(\alpha_j)_{j\geq1}\subset\R$.  Then
+\[
+ \sum_{j\geq1}c_j\norm{\varphi-T_{\alpha_j}\varphi}^{2}
+\]
+converges for every $\varphi\in L^2(\R)$ and defines a nonnegative quadratic
+form.
+\end{proposition}
+
+\begin{proof}
+Translation is unitary, so
+\[
+ c_j\norm{\varphi-T_{\alpha_j}\varphi}^{2}
+ \leq4c_j\norm{\varphi}^{2}.
+\]
+The asserted convergence follows by comparison with $4\norm{\varphi}^2
+\sum_jc_j$.
+\end{proof}
+
+The finite-prefix control verifies the local algebra against the actual
+weights.  The summable-weight control verifies the infinite assembly against a
+convergent model.  Together they locate the failure in the conjunction of
+actual prime-power weights, per-block positivity, and ordinary uncoupled
+summation.
+
+\section{Relation to existing formulations}
+
+Weil's original criterion established the global positivity framework
+\cite{Weil1952}.  Burnol's place-by-place expositions emphasize how local
+terms enter the explicit formula \cite{Burnol1998,Burnol2000}, while Conrey gives a
+convenient normalization of the zeta explicit formula and its positivity
+criterion \cite{Conrey2003}; Lagarias relates Li coefficients to values of
+Weil's quadratic functional on explicit test functions \cite{Lagarias2007}.
+Yoshida studied Hermitian forms attached to zeta
+functions \cite{Yoshida1992}.  Bombieri analyzed Weil's quadratic functional,
+including compact-support restrictions, finite truncations, and associated
+spectral questions \cite{Bombieri2000}.  Recent screw-function formulations
+organize several positivity approaches through nonlocal operator structures
+\cite{Suzuki2026}.  Finite Galerkin dictionaries and numerical realizations
+now study truncated or nonlocal Weil operators directly
+\cite{Groskin2026,KimEtAl2026}.
+
+The present result addresses a different, sharply specified question: whether
+the prime-power term itself can be assembled from uncoupled, individually
+positive first-translation-difference blocks using a fixed summable scalar
+budget.  Theorem~\ref{thm:main} answers that question exactly.  Its local
+threshold is an elementary approximate-invariance calculation; the theorem's
+content is the sharp application of that threshold to the actual prime-power
+weights and the resulting infinite-assembly exclusion.  The cited
+global, finite-dimensional, and nonlocal formulations remain outside the
+excluded class.
+
+\appendix
+
+\section{Normalization audit}\label{app:normalization}
+
+This appendix makes the sign, conjugation, and factor of two independently
+checkable.  Starting from the definitions,
+\begin{align*}
+F_\varphi(a)
+&=\int_{\R}\varphi(y)\widetilde\varphi(a-y)\,dy\\
+&=\int_{\R}\varphi(y)\overline{\varphi(y-a)}\,dy
+=\ip{\varphi}{T_a\varphi}.
+\end{align*}
+Changing variables and conjugating gives
+$F_\varphi(-a)=\overline{F_\varphi(a)}$.  Consequently,
+\[
+ -w\bigl(F_\varphi(a)+F_\varphi(-a)\bigr)
+ =-2w\operatorname{Re}\ip{\varphi}{T_a\varphi}.
+\]
+Unitarity of $T_a$ gives
+\begin{align*}
+\norm{\varphi-T_a\varphi}^{2}
+&=\norm{\varphi}^{2}+\norm{T_a\varphi}^{2}
+  -2\operatorname{Re}\ip{\varphi}{T_a\varphi}\\
+&=2\norm{\varphi}^{2}
+  -2\operatorname{Re}F_\varphi(a).
+\end{align*}
+Multiplying by $w$ and adding $(b-2w)\norm{\varphi}^{2}$ yields
+\eqref{eq:block-correlation}.  These identities fix every sign and numerical
+factor used in the main theorem.
+
+\section{Verification remarks}\label{app:reproducibility}
+
+The proof is symbolic and requires no numerical experiment.  Its two key
+calculations are the expansion of the translation-difference norm in
+\eqref{eq:block-correlation} and the normalized-dilation estimate
+\eqref{eq:plateau-estimate}, which together give the sharp threshold
+$b\geq2w$.  Proposition~\ref{prop:weight-divergence} then follows from
+the lcm form of Chebyshev's lower bound \eqref{eq:chebyshev-lower}, while compact support
+of $F_\varphi$ identifies the tail
+$Q_n^{(b)}(\varphi)=b_n\norm{\varphi}^{2}$.  The finite-prefix and
+summable-weight controls in Propositions~\ref{prop:finite-control} and
+\ref{prop:summable-control} record the adjacent regimes in which the same
+algebra does assemble correctly.
+
+\paragraph{Data and code availability.}
+The theorem and both controls are proved completely in the text and use no
+external data or numerical certificate.  An accompanying Lean~4 development
+checks the arithmetic divergence with exact prime-power indexing, the abstract
+local threshold and scalar obstruction, and both controls.  Its stated scope
+does not include the concrete $C_c^\infty$ dilation argument or the
+explicit-formula normalization, which remain proved in the text.
+
+\section*{Assistance disclosure}
+
+AI systems were used extensively in mathematical derivation, Lean proof
+development, literature discovery, organization, and typesetting.  The author
+remains responsible for every mathematical statement, proof, citation, and
+submission decision.
+
+\begingroup\footnotesize
+\bibliographystyle{amsplain}
+\bibliography{references}
+\endgroup
+
+\end{document}

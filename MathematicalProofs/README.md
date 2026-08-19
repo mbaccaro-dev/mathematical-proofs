@@ -13,3 +13,7 @@ Each subdirectory is a complete paper artifact containing:
   *A Boundary-Constant Obstruction to Real-Rooted Riemann
   Incomplete-Gamma Approximants*.
   [doi:10.5281/zenodo.21941655](https://doi.org/10.5281/zenodo.21941655)
+- [`PrimeLocalWeilObstruction`](PrimeLocalWeilObstruction/) —
+  *An Obstruction to Prime-Local First-Difference Decompositions of Weil's
+  Quadratic Form*.
+  [doi:10.5281/zenodo.22005240](https://doi.org/10.5281/zenodo.22005240)
