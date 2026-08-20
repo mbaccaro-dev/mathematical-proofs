@@ -1,4 +1,5 @@
 import RiemannHypothesisProofFactory.CriticalExponentTransforms.PaperCertificate
+import RiemannHypothesisProofFactory.CriticalExponentTransforms.PurePowerGap
 
 /-!
 # Critical-exponent transforms formal-assurance surface

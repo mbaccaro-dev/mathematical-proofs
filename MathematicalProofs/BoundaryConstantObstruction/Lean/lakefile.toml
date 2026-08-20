@@ -9,3 +9,11 @@ rev = "v4.33.0"
 
 [[lean_lib]]
 name = "BoundaryConstantObstruction"
+
+[[lean_lib]]
+name = "Challenge"
+roots = ["Challenge"]
+
+[[lean_lib]]
+name = "Solution"
+roots = ["Solution"]

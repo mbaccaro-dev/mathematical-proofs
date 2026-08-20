@@ -13,7 +13,7 @@ accompanying paper.
 From this `Lean` directory, run:
 
 ```text
-lake build
+lake build --wfail
 ```
 
 The axiom-reporting certificate is:

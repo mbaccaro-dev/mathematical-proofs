@@ -1,0 +1,24 @@
+{
+  "challenge_module": "Challenge",
+  "solution_module": "Solution",
+  "theorem_names": [
+    "RiemannHypothesisProofFactory.CriticalExponentTransforms.pure_power_gap_law",
+    "RiemannHypothesisProofFactory.CriticalExponentTransforms.multilinear_gap_identity",
+    "RiemannHypothesisProofFactory.CriticalExponentTransforms.multilinear_successive_exponent_lt",
+    "RiemannHypothesisProofFactory.CriticalExponentTransforms.multilinear_adjacent_gap_identity",
+    "RiemannHypothesisProofFactory.CriticalExponentTransforms.homogeneous_gap_identity",
+    "RiemannHypothesisProofFactory.CriticalExponentTransforms.scalar_pure_power_normal_form",
+    "RiemannHypothesisProofFactory.CriticalExponentTransforms.saturation_gap_identity",
+    "RiemannHypothesisProofFactory.CriticalExponentTransforms.germ_gap_identity",
+    "RiemannHypothesisProofFactory.CriticalExponentTransforms.abs_saturation_lt_one",
+    "RiemannHypothesisProofFactory.CriticalExponentTransforms.saturation_inverse",
+    "RiemannHypothesisProofFactory.CriticalExponentTransforms.inverse_symbol_lower_bound"
+  ],
+  "definition_names": [
+    "RiemannHypothesisProofFactory.CriticalExponentTransforms.powerMode",
+    "RiemannHypothesisProofFactory.CriticalExponentTransforms.inputDilation",
+    "RiemannHypothesisProofFactory.CriticalExponentTransforms.outputDilation"
+  ],
+  "permitted_axioms": ["propext", "Quot.sound", "Classical.choice"],
+  "enable_nanoda": true
+}

@@ -1,0 +1,17 @@
+{
+  "challenge_module": "Challenge",
+  "solution_module": "Solution",
+  "theorem_names": ["IncompleteGammaApproximant.theorem_A"],
+  "definition_names": [
+    "IncompleteGammaApproximant.kernelTerm",
+    "IncompleteGammaApproximant.S",
+    "IncompleteGammaApproximant.phiTerm",
+    "IncompleteGammaApproximant.Phi",
+    "IncompleteGammaApproximant.boundaryTerm",
+    "IncompleteGammaApproximant.boundaryConstant",
+    "IncompleteGammaApproximant.H",
+    "IncompleteGammaApproximant.F"
+  ],
+  "permitted_axioms": ["propext", "Quot.sound", "Classical.choice"],
+  "enable_nanoda": true
+}

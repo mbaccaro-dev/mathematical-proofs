@@ -1,0 +1,80 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/mathlib-initiative/formalization.yaml/main/schema/formalization.schema.json
+version: "v0.4"
+
+project:
+  name: "Boundary-constant obstruction for finite Riemann incomplete-gamma approximants"
+  description: >-
+    A Lean 4 proof that every finite member of the stated positive-shift
+    incomplete-gamma family has a nonreal zero.
+  authors:
+    - "Mayk Loide Baccaro"
+  license: "Apache-2.0"
+  responsible_maintainers:
+    - "Mayk Loide Baccaro"
+
+classification:
+  arxiv: ["math.CV", "math.NT"]
+  msc2020: ["30D15", "11M26"]
+
+sources:
+  - title: "A Boundary-Constant Obstruction to Real-Rooted Riemann Incomplete-Gamma Approximants"
+    authors:
+      - "Mayk Loide Baccaro"
+    id: "10.5281/zenodo.21941655"
+    type: "paper"
+    location: "https://doi.org/10.5281/zenodo.21941655"
+    relationship: "formalizes"
+    note: "The formal theorem is the fully quantified main theorem of the paper."
+    license: "unknown"
+    author_endorsement: "participated"
+
+related_formalizations: []
+
+status:
+  scope: >-
+    The submission formalizes the paper's main theorem for every finite N at
+    least one and every real shift parameter t in the interval (0,1]. It also
+    formalizes the analytic and entire-function lemmas used by that theorem.
+  sorry_count: 0
+  sorry_in_definitions: 0
+  axioms: ["propext", "Quot.sound", "Classical.choice"]
+  main_results:
+    - declaration: "IncompleteGammaApproximant.theorem_A"
+      file: "BoundaryConstantObstruction/IncompleteGamma/PaperTheorem.lean"
+      sorry_count: 0
+      axioms: ["propext", "Quot.sound", "Classical.choice"]
+      comparator_config: "comparator.json"
+
+automation:
+  methods:
+    - method: "agent"
+      models: ["OpenAI GPT-5 (Codex)"]
+      framework: "Codex"
+      tool_setup: "Human-directed AI-assisted Lean development using Mathlib tactics, statement comparison, Comparator, the Lean kernel, and NanoDa."
+      cost:
+        wall_time: "not tracked"
+        spend_usd: "subscription-based"
+        hardware: "local machine"
+      prompting_notes: "The human owner selected the theorem and directed formalization, auditing, and release preparation."
+  spend_usd: "subscription-based"
+  notes: "The proof was repeatedly built with its pinned toolchain and checked against the manuscript statement."
+
+fidelity:
+  divergences: "None known for the submitted main theorem."
+
+review:
+  status: "agent-reviewed"
+  reviewers:
+    - "OpenAI GPT-5 (Codex)"
+  notes: "Independent agent lanes audited the statement, hypotheses, quantifiers, definitions, axiom report, and paper correspondence. No human peer review is claimed."
+
+alignment:
+  namespace: "IncompleteGammaApproximant"
+  statements:
+    - source: "Theorem A"
+      lean: "IncompleteGammaApproximant.theorem_A"
+      module: "BoundaryConstantObstruction.IncompleteGamma.PaperTheorem"
+      status: "proved"
+      note: "The Lean declaration preserves the finite-level and shift-parameter quantifiers and the nonreal-zero conclusion."
+
+acknowledgements: "Mathlib, Lean, Comparator, Lean4export, Landrun, and NanoDa."

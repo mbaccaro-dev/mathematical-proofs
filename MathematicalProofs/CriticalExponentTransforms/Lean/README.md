@@ -32,6 +32,7 @@ lake env lean RiemannHypothesisProofFactory/CriticalExponentTransforms/PaperCert
 
 Lean checks:
 
+- the operator-level pure-power normal form and exact critical exponent gap;
 - the multilinear orderwise and adjacent exponent-gap identities;
 - strict decrease of successive multilinear exponents when `rho < sigma`;
 - the shared homogeneous and phase exponent-gap identity;
@@ -42,7 +43,7 @@ Lean checks:
 
 Lean does not check the Abel integral; the vector-valued multilinear expansion
 and asymptotics; the phase-orbit normal form and periodic block analysis; the
-operator-level pure-power theorem; the complex-measure Mellin theorem; the
-saturation pure-power asymptotic and connector; the two-sided-germ comparison;
-or any dyadic energy law. Those are proved in the manuscript. Literature,
+pure-power energy integral; the complex-measure Mellin theorem; the saturation
+pure-power asymptotic and connector; the two-sided-germ comparison; or any
+dyadic energy law. Those are proved in the manuscript. Literature,
 novelty, exposition, and publication judgments are also outside the kernel.

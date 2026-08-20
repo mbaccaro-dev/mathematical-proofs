@@ -1,0 +1,19 @@
+{
+  "challenge_module": "Challenge",
+  "solution_module": "Solution",
+  "theorem_names": [
+    "RiemannHypothesisProofFactory.PrimeLocalWeil.localBlock_nonnegative_iff",
+    "RiemannHypothesisProofFactory.PrimeLocalWeil.scalarPartialSum_tendsto_atTop",
+    "RiemannHypothesisProofFactory.PrimeLocalWeil.weightedPartialSum_tendsto_atTop",
+    "RiemannHypothesisProofFactory.PrimeLocalWeil.primePowerPartialSum_tendsto_atTop"
+  ],
+  "definition_names": [
+    "RiemannHypothesisProofFactory.PrimeLocalWeil.localBlock",
+    "RiemannHypothesisProofFactory.PrimeLocalWeil.weilWeight",
+    "RiemannHypothesisProofFactory.PrimeLocalWeil.weightedPartialSum",
+    "RiemannHypothesisProofFactory.PrimeLocalWeil.primePowerPartialSum",
+    "RiemannHypothesisProofFactory.PrimeLocalWeil.scalarPartialSum"
+  ],
+  "permitted_axioms": ["propext", "Quot.sound", "Classical.choice"],
+  "enable_nanoda": true
+}

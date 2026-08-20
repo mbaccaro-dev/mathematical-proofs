@@ -7,3 +7,4 @@ open RiemannHypothesisProofFactory.SelbergConditioning
 #print axioms scaled_residual_le_tolerance
 #print axioms scaled_two_sign_separation
 #print axioms lipschitz_constant_lower_bound
+#print axioms finite_two_sign_conditioning_obstruction

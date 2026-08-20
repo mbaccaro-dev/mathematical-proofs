@@ -1,0 +1,113 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/mathlib-initiative/formalization.yaml/main/schema/formalization.schema.json
+version: "v0.4"
+
+project:
+  name: "Prime-local Weil obstruction: formal kernel"
+  description: >-
+    A Lean 4 proof of the sharp local first-difference threshold, divergence
+    of the manuscript's exact prime-power Weil budget, and the resulting
+    infinite scalar-budget obstruction.
+  authors:
+    - "Mayk Loide Baccaro"
+  license: "Apache-2.0"
+  responsible_maintainers:
+    - "Mayk Loide Baccaro"
+
+classification:
+  arxiv: ["math.NT"]
+  msc2020: ["11M26", "11N05"]
+
+sources:
+  - title: "A Prime-Local Weil Obstruction"
+    authors:
+      - "Mayk Loide Baccaro"
+    id: "10.5281/zenodo.22005240"
+    type: "paper"
+    location: "https://doi.org/10.5281/zenodo.22005240"
+    relationship: "formalizes"
+    note: "The formalization covers the sharp local threshold and exact divergent arithmetic budget used in the paper."
+    license: "unknown"
+    author_endorsement: "participated"
+
+related_formalizations: []
+
+status:
+  scope: >-
+    The submission proves the local block threshold, divergence of the
+    von-Mangoldt weighted prefix, its exact prime-power-indexed form, and the
+    resulting divergence of every scalar budget paying the sharp local cost. The
+    compactly supported smooth dilation, autocorrelation tail argument, and
+    explicit-formula normalization remain manuscript-level mathematics.
+  sorry_count: 0
+  sorry_in_definitions: 0
+  axioms: ["propext", "Quot.sound", "Classical.choice"]
+  main_results:
+    - declaration: "RiemannHypothesisProofFactory.PrimeLocalWeil.scalarPartialSum_tendsto_atTop"
+      file: "RiemannHypothesisProofFactory/PrimeLocalWeil/BudgetObstruction.lean"
+      sorry_count: 0
+      axioms: ["propext", "Quot.sound", "Classical.choice"]
+      comparator_config: "comparator.json"
+    - declaration: "RiemannHypothesisProofFactory.PrimeLocalWeil.localBlock_nonnegative_iff"
+      file: "RiemannHypothesisProofFactory/PrimeLocalWeil/LocalKernel.lean"
+      sorry_count: 0
+      axioms: ["propext", "Quot.sound", "Classical.choice"]
+      comparator_config: "comparator.json"
+    - declaration: "RiemannHypothesisProofFactory.PrimeLocalWeil.weightedPartialSum_tendsto_atTop"
+      file: "RiemannHypothesisProofFactory/PrimeLocalWeil/LocalKernel.lean"
+      sorry_count: 0
+      axioms: ["propext", "Quot.sound", "Classical.choice"]
+      comparator_config: "comparator.json"
+    - declaration: "RiemannHypothesisProofFactory.PrimeLocalWeil.primePowerPartialSum_tendsto_atTop"
+      file: "RiemannHypothesisProofFactory/PrimeLocalWeil/LocalKernel.lean"
+      sorry_count: 0
+      axioms: ["propext", "Quot.sound", "Classical.choice"]
+      comparator_config: "comparator.json"
+
+automation:
+  methods:
+    - method: "agent"
+      models: ["OpenAI GPT-5 (Codex)"]
+      framework: "Codex"
+      tool_setup: "Human-directed AI-assisted Lean development using Mathlib tactics, statement comparison, Comparator, the Lean kernel, and NanoDa."
+      cost:
+        wall_time: "not tracked"
+        spend_usd: "subscription-based"
+        hardware: "local machine"
+      prompting_notes: "The human owner selected the result and directed formalization, auditing, and release preparation."
+  spend_usd: "subscription-based"
+  notes: "The proof was built with a pinned Lean and Mathlib environment and audited against the manuscript."
+
+fidelity:
+  divergences: "The submitted formal surface is a stated subset of the paper and does not claim a kernel proof of its smooth-function or explicit-formula steps."
+
+review:
+  status: "agent-reviewed"
+  reviewers:
+    - "OpenAI GPT-5 (Codex)"
+  notes: "Independent agent lanes audited the submitted statement types, definitions, arithmetic indexing, axiom reports, and paper correspondence. No human peer review is claimed."
+
+alignment:
+  namespace: "RiemannHypothesisProofFactory.PrimeLocalWeil"
+  statements:
+    - source: "Prime-local scalar-budget obstruction"
+      lean: "RiemannHypothesisProofFactory.PrimeLocalWeil.scalarPartialSum_tendsto_atTop"
+      module: "RiemannHypothesisProofFactory.PrimeLocalWeil.BudgetObstruction"
+      status: "proved"
+      note: "Every scalar budget that pays at least the sharp local cost at each prime-power index diverges to positive infinity."
+    - source: "Sharp local threshold"
+      lean: "RiemannHypothesisProofFactory.PrimeLocalWeil.localBlock_nonnegative_iff"
+      module: "RiemannHypothesisProofFactory.PrimeLocalWeil.LocalThreshold"
+      status: "proved"
+      note: "This is the exact functional-analytic threshold used by the manuscript."
+    - source: "Divergent scalar budget"
+      lean: "RiemannHypothesisProofFactory.PrimeLocalWeil.weightedPartialSum_tendsto_atTop"
+      module: "RiemannHypothesisProofFactory.PrimeLocalWeil.ArithmeticBudget"
+      status: "proved"
+      note: "The proof uses Chebyshev's lower bound for the exact weighted prefix."
+    - source: "Prime-power indexing bridge"
+      lean: "RiemannHypothesisProofFactory.PrimeLocalWeil.primePowerPartialSum_tendsto_atTop"
+      module: "RiemannHypothesisProofFactory.PrimeLocalWeil.PrimePowerBridge"
+      status: "proved"
+      note: "Terms away from prime powers vanish, so the manuscript indexing has the same divergence."
+
+acknowledgements: "Mathlib, Lean, Comparator, Lean4export, Landrun, and NanoDa."

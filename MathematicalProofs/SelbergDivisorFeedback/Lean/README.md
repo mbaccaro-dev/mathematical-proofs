@@ -32,6 +32,8 @@ lake env lean RiemannHypothesisProofFactory/SelbergConditioning/PaperCertificate
 
 Lean checks:
 
+- the combined finite implication from two analytic witness estimates to
+  normalized residual bounds, output separation, and the Lipschitz lower bound;
 - the algebraic rewrite from a distinguished-chain correction to a negative tail;
 - strict positivity of both signed weights under the printed relative bound;
 - normalization of a pointwise residual bound to the tolerance `tau`;

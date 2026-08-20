@@ -1,13 +1,15 @@
 import RiemannHypothesisProofFactory.MobiusResidualComplexity.CombinatorialKernel
+import RiemannHypothesisProofFactory.MobiusResidualComplexity.ExactCompression
 
 /-!
 # Möbius residual-complexity paper certificate
 
-The imported module checks the paper's finite cancellation bound, zero-sum
-cell balance, final exponent contradiction, square-root constant identity,
-and endpoint-doubling connector. The analytic, residual-matching, compression,
-and global sparse-jump obligations listed in `CombinatorialKernel.lean` remain
-manuscript-level proofs.
+The imported modules check the paper's finite cancellation bound, zero-sum
+cell balance, exact rank-pair crossing count, common-core residual-budget
+inheritance, final exponent contradiction, square-root constant identity, and
+endpoint-doubling connector. The analytic inputs, the construction of the
+ranked Möbius lists, sign parity after gcd removal, and the global sparse-jump
+obligations remain manuscript-level proofs.
 -/
 
 #print axioms RiemannHypothesisProofFactory.MobiusResidualComplexity.opposite_sign_pair_cancel
@@ -18,3 +20,7 @@ manuscript-level proofs.
 #print axioms RiemannHypothesisProofFactory.MobiusResidualComplexity.square_root_threshold_identity
 #print axioms RiemannHypothesisProofFactory.MobiusResidualComplexity.cell_max_le_twice_endpoint
 #print axioms RiemannHypothesisProofFactory.MobiusResidualComplexity.cell_max_le_doubled_cutoff
+#print axioms RiemannHypothesisProofFactory.MobiusResidualComplexity.rankCrossingIndices_eq_Ico
+#print axioms RiemannHypothesisProofFactory.MobiusResidualComplexity.exact_rank_pair_crossing_count
+#print axioms RiemannHypothesisProofFactory.MobiusResidualComplexity.exact_rank_pair_crossing_balance
+#print axioms RiemannHypothesisProofFactory.MobiusResidualComplexity.common_core_residual_budget

@@ -1,0 +1,98 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/mathlib-initiative/formalization.yaml/main/schema/formalization.schema.json
+version: "v0.4"
+
+project:
+  name: "Selberg feedback conditioning: finite formal kernel"
+  description: >-
+    A Lean 4 verification of the exact finite two-sign witness that turns
+    bounded approximate divisor data into a quantitative instability bound.
+  authors:
+    - "Mayk Loide Baccaro"
+  license: "Apache-2.0"
+  responsible_maintainers:
+    - "Mayk Loide Baccaro"
+
+classification:
+  arxiv: ["math.NT"]
+  msc2020: ["11N05", "11M26"]
+
+sources:
+  - title: "Selberg Feedback from Approximate Divisor Data"
+    authors:
+      - "Mayk Loide Baccaro"
+    id: "10.5281/zenodo.22005767"
+    type: "paper"
+    location: "https://doi.org/10.5281/zenodo.22005767"
+    relationship: "formalizes"
+    note: "The formalization checks the paper's finite conditioning algebra after its analytic estimates are assumed."
+    license: "unknown"
+    author_endorsement: "participated"
+
+related_formalizations: []
+
+status:
+  scope: >-
+    The submission packages the residual normalization, two-sign output
+    separation, and final Lipschitz lower bound into one finite conditioning
+    obstruction. It also proves direct centering and positivity of signed
+    perturbations. It does not formalize the prime number theorem, Selberg's
+    formula, residual moment estimates, or the compact and hierarchy
+    asymptotics in the manuscript.
+  sorry_count: 0
+  sorry_in_definitions: 0
+  axioms: ["propext", "Quot.sound", "Classical.choice"]
+  main_results:
+    - declaration: "RiemannHypothesisProofFactory.SelbergConditioning.finite_two_sign_conditioning_obstruction"
+      file: "RiemannHypothesisProofFactory/SelbergConditioning/ConditioningWitness.lean"
+      sorry_count: 0
+      axioms: ["propext", "Quot.sound", "Classical.choice"]
+      comparator_config: "comparator.json"
+    - declaration: "RiemannHypothesisProofFactory.SelbergConditioning.lipschitz_constant_lower_bound"
+      file: "RiemannHypothesisProofFactory/SelbergConditioning/FiniteKernel.lean"
+      sorry_count: 0
+      axioms: ["propext", "Quot.sound", "Classical.choice"]
+      comparator_config: "comparator.json"
+
+automation:
+  methods:
+    - method: "agent"
+      models: ["OpenAI GPT-5 (Codex)"]
+      framework: "Codex"
+      tool_setup: "Human-directed AI-assisted Lean development using Mathlib tactics, statement comparison, Comparator, the Lean kernel, and NanoDa."
+      cost:
+        wall_time: "not tracked"
+        spend_usd: "subscription-based"
+        hardware: "local machine"
+      prompting_notes: "The human owner selected the result and directed formalization, auditing, and release preparation."
+  spend_usd: "subscription-based"
+  notes: "The finite kernel was built with a pinned toolchain and its exact paper boundary was audited."
+
+fidelity:
+  divergences: "The submission proves the complete finite implication from the paper's residual and signed-sum witness hypotheses to its normalized separation and Lipschitz lower bound; the analytic construction of those witnesses remains outside the formal claim."
+
+review:
+  status: "agent-reviewed"
+  reviewers:
+    - "OpenAI GPT-5 (Codex)"
+  notes: "Independent agent lanes checked the formulas, signs, hypotheses, scaling constants, axiom reports, and manuscript correspondence. No human peer review is claimed."
+
+alignment:
+  namespace: "RiemannHypothesisProofFactory.SelbergConditioning"
+  statements:
+    - source: "Finite two-sign conditioning obstruction"
+      lean: "RiemannHypothesisProofFactory.SelbergConditioning.finite_two_sign_conditioning_obstruction"
+      module: "RiemannHypothesisProofFactory.SelbergConditioning.ConditioningWitness"
+      status: "proved"
+      note: "This is the combined finite implication from the manuscript's analytic witness estimates to both normalized residual bounds, output separation, and the Lipschitz lower bound."
+    - source: "Finite conditioning step in the main theorem"
+      lean: "RiemannHypothesisProofFactory.SelbergConditioning.lipschitz_constant_lower_bound"
+      module: "RiemannHypothesisProofFactory.SelbergConditioning.FiniteKernel"
+      status: "partial"
+      note: "This proves the exact final algebraic implication; the analytic number-theory estimates supplying its premises are not formalized here."
+    - source: "Signed perturbation and separation lemmas"
+      lean: "RiemannHypothesisProofFactory.SelbergConditioning.signed_perturbations_pos"
+      module: "RiemannHypothesisProofFactory.SelbergConditioning.FiniteKernel"
+      status: "proved"
+      note: "The submitted theorem list also includes centering, tolerance scaling, and two-sign separation."
+
+acknowledgements: "Mathlib, Lean, Comparator, Lean4export, Landrun, and NanoDa."

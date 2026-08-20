@@ -1,0 +1,53 @@
+name: Palomar Registry preflight
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "MathematicalProofs/**/Lean/**"
+      - "scripts/verify-palomar.sh"
+      - ".github/workflows/palomar-registry.yml"
+      - "LICENSE"
+  pull_request:
+    branches: [main]
+    paths:
+      - "MathematicalProofs/**/Lean/**"
+      - "scripts/verify-palomar.sh"
+      - ".github/workflows/palomar-registry.yml"
+      - "LICENSE"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    name: ${{ matrix.project }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    strategy:
+      fail-fast: false
+      matrix:
+        project:
+          - MathematicalProofs/BoundaryConstantObstruction/Lean
+          - MathematicalProofs/PrimeLocalWeilObstruction/Lean
+          - MathematicalProofs/SelbergDivisorFeedback/Lean
+          - MathematicalProofs/CriticalExponentTransforms/Lean
+          - MathematicalProofs/MobiusResidualComplexity/Lean
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+        with:
+          persist-credentials: false
+      - uses: leanprover/lean-action@38fbc41a8c28c4cbaec22d7f7de508ec2e7c0dd9
+        with:
+          lake-package-directory: ${{ matrix.project }}
+          build: false
+      - uses: actions/setup-go@b7ad1dad31e06c5925ef5d2fc7ad053ef454303e
+        with:
+          go-version: "1.24.0"
+          cache: false
+      - uses: ruby/setup-ruby@95ef2b042f9d7a56d8268cba8559e2842e2ad01b
+        with:
+          ruby-version: "3.3.12"
+      - name: Run exact Palomar verifier stack
+        run: bash scripts/verify-palomar.sh "${{ matrix.project }}"

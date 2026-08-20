@@ -1,0 +1,23 @@
+{
+  "challenge_module": "Challenge",
+  "solution_module": "Solution",
+  "theorem_names": [
+    "RiemannHypothesisProofFactory.MobiusResidualComplexity.exact_rank_pair_crossing_count",
+    "RiemannHypothesisProofFactory.MobiusResidualComplexity.exact_rank_pair_crossing_balance",
+    "RiemannHypothesisProofFactory.MobiusResidualComplexity.common_core_residual_budget",
+    "RiemannHypothesisProofFactory.MobiusResidualComplexity.opposite_sign_pair_cancel",
+    "RiemannHypothesisProofFactory.MobiusResidualComplexity.abs_sum_le_card",
+    "RiemannHypothesisProofFactory.MobiusResidualComplexity.finite_matching_bound",
+    "RiemannHypothesisProofFactory.MobiusResidualComplexity.zero_sum_unit_cell_balanced",
+    "RiemannHypothesisProofFactory.MobiusResidualComplexity.strict_exponent_sandwich_impossible",
+    "RiemannHypothesisProofFactory.MobiusResidualComplexity.square_root_threshold_identity",
+    "RiemannHypothesisProofFactory.MobiusResidualComplexity.cell_max_le_twice_endpoint",
+    "RiemannHypothesisProofFactory.MobiusResidualComplexity.cell_max_le_doubled_cutoff"
+  ],
+  "definition_names": [
+    "RiemannHypothesisProofFactory.MobiusResidualComplexity.omega",
+    "RiemannHypothesisProofFactory.MobiusResidualComplexity.rankCrossingIndices"
+  ],
+  "permitted_axioms": ["propext", "Quot.sound", "Classical.choice"],
+  "enable_nanoda": true
+}

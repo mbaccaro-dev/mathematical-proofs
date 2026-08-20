@@ -1,0 +1,127 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/mathlib-initiative/formalization.yaml/main/schema/formalization.schema.json
+version: "v0.4"
+
+project:
+  name: "Logarithmic residual-complexity barriers: rank-pair and combinatorial kernel"
+  description: >-
+    A Lean 4 verification of the exact rank-pair crossing count, common-core
+    residual-budget inheritance, finite matching bound, balance and exponent
+    identities, and endpoint connectors used in the Möbius residual argument.
+  authors:
+    - "Mayk Loide Baccaro"
+  license: "Apache-2.0"
+  responsible_maintainers:
+    - "Mayk Loide Baccaro"
+
+classification:
+  arxiv: ["math.NT"]
+  msc2020: ["11N37", "11A25"]
+
+sources:
+  - title: "Logarithmic Residual-Complexity Barriers for Local Möbius Cancellation"
+    authors:
+      - "Mayk Loide Baccaro"
+    id: "10.5281/zenodo.22006119"
+    type: "paper"
+    location: "https://doi.org/10.5281/zenodo.22006119"
+    relationship: "formalizes"
+    note: "The formalization checks the paper's finite algebraic and combinatorial kernel."
+    license: "unknown"
+    author_endorsement: "participated"
+
+related_formalizations: []
+
+status:
+  scope: >-
+    The submission proves the exact number of rank pairs crossing a sign
+    cutoff, the equivalent signed prefix-balance formula, common-core
+    residual-budget inheritance under passage to a pairwise gcd, pair
+    cancellation, a finite matching estimate, zero-sum cell balance, the
+    terminal exponent contradiction, the square-root threshold identity, and
+    endpoint-doubling connectors. It does not formalize the prime number
+    theorem, binomial and logarithmic scale estimates, construction and
+    ordering of the Möbius-sign lists, sign parity after gcd removal, or the
+    global sparse-jump theorem.
+  sorry_count: 0
+  sorry_in_definitions: 0
+  axioms: ["propext", "Quot.sound", "Classical.choice"]
+  main_results:
+    - declaration: "RiemannHypothesisProofFactory.MobiusResidualComplexity.exact_rank_pair_crossing_count"
+      file: "RiemannHypothesisProofFactory/MobiusResidualComplexity/ExactCompression.lean"
+      sorry_count: 0
+      axioms: ["propext", "Quot.sound", "Classical.choice"]
+      comparator_config: "comparator.json"
+    - declaration: "RiemannHypothesisProofFactory.MobiusResidualComplexity.common_core_residual_budget"
+      file: "RiemannHypothesisProofFactory/MobiusResidualComplexity/ExactCompression.lean"
+      sorry_count: 0
+      axioms: ["propext", "Quot.sound", "Classical.choice"]
+      comparator_config: "comparator.json"
+    - declaration: "RiemannHypothesisProofFactory.MobiusResidualComplexity.finite_matching_bound"
+      file: "RiemannHypothesisProofFactory/MobiusResidualComplexity/CombinatorialKernel.lean"
+      sorry_count: 0
+      axioms: ["propext", "Quot.sound", "Classical.choice"]
+      comparator_config: "comparator.json"
+    - declaration: "RiemannHypothesisProofFactory.MobiusResidualComplexity.strict_exponent_sandwich_impossible"
+      file: "RiemannHypothesisProofFactory/MobiusResidualComplexity/CombinatorialKernel.lean"
+      sorry_count: 0
+      axioms: ["propext", "Quot.sound", "Classical.choice"]
+      comparator_config: "comparator.json"
+    - declaration: "RiemannHypothesisProofFactory.MobiusResidualComplexity.cell_max_le_doubled_cutoff"
+      file: "RiemannHypothesisProofFactory/MobiusResidualComplexity/CombinatorialKernel.lean"
+      sorry_count: 0
+      axioms: ["propext", "Quot.sound", "Classical.choice"]
+      comparator_config: "comparator.json"
+
+automation:
+  methods:
+    - method: "agent"
+      models: ["OpenAI GPT-5 (Codex)"]
+      framework: "Codex"
+      tool_setup: "Human-directed AI-assisted Lean development using Mathlib tactics, statement comparison, Comparator, the Lean kernel, and NanoDa."
+      cost:
+        wall_time: "not tracked"
+        spend_usd: "subscription-based"
+        hardware: "local machine"
+      prompting_notes: "The human owner selected the result and directed formalization, auditing, and release preparation."
+  spend_usd: "subscription-based"
+  notes: "The finite kernel was built with a pinned environment and checked against the paper's exact claim boundary."
+
+fidelity:
+  divergences: "The submission formalizes the exact rank-crossing count and gcd budget-inheritance connectors, plus the finite algebraic kernel. It does not claim the manuscript's analytic inputs, the construction and ordering of the Möbius-sign lists, sign parity after gcd removal, or the global sparse-jump result."
+
+review:
+  status: "agent-reviewed"
+  reviewers:
+    - "OpenAI GPT-5 (Codex)"
+  notes: "Independent agent lanes audited the matching decomposition, cardinality bounds, signs, exponent constants, connector hypotheses, axiom reports, and paper correspondence. No human peer review is claimed."
+
+alignment:
+  namespace: "RiemannHypothesisProofFactory.MobiusResidualComplexity"
+  statements:
+    - source: "Exact fixed-budget rank-pair compression"
+      lean: "RiemannHypothesisProofFactory.MobiusResidualComplexity.exact_rank_pair_crossing_count"
+      module: "RiemannHypothesisProofFactory.MobiusResidualComplexity.ExactCompression"
+      status: "partial"
+      note: "This proves exactly that rank pairing leaves the absolute prefix imbalance many crossing pairs. Construction and ordering of the manuscript's Möbius-sign lists and the sign-parity step after gcd removal remain outside Lean."
+    - source: "Common-core residual-budget inheritance"
+      lean: "RiemannHypothesisProofFactory.MobiusResidualComplexity.common_core_residual_budget"
+      module: "RiemannHypothesisProofFactory.MobiusResidualComplexity.ExactCompression"
+      status: "proved"
+      note: "Replacing a common divisor by the pairwise gcd can only remove residual prime factors, so both residual budgets are preserved."
+    - source: "Finite matching estimate"
+      lean: "RiemannHypothesisProofFactory.MobiusResidualComplexity.finite_matching_bound"
+      module: "RiemannHypothesisProofFactory.MobiusResidualComplexity.CombinatorialKernel"
+      status: "partial"
+      note: "This proves the bound once crossing and uncovered sets are supplied; it does not formalize the manuscript's matching construction."
+    - source: "Terminal exponent obstruction"
+      lean: "RiemannHypothesisProofFactory.MobiusResidualComplexity.strict_exponent_sandwich_impossible"
+      module: "RiemannHypothesisProofFactory.MobiusResidualComplexity.CombinatorialKernel"
+      status: "proved"
+      note: "The square-root threshold identity used with this contradiction is also submitted."
+    - source: "Sparse-jump endpoint connector"
+      lean: "RiemannHypothesisProofFactory.MobiusResidualComplexity.cell_max_le_doubled_cutoff"
+      module: "RiemannHypothesisProofFactory.MobiusResidualComplexity.CombinatorialKernel"
+      status: "partial"
+      note: "This is the exact local connector, without a claim to formalize the global sparse-jump argument."
+
+acknowledgements: "Mathlib, Lean, Comparator, Lean4export, Landrun, and NanoDa."
