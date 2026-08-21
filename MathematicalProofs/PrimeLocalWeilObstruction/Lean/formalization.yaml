@@ -6,7 +6,8 @@ project:
   description: >-
     Formalizes the prime-local obstruction by proving the sharp threshold for
     each local block, divergence of the associated von Mangoldt and prime-power
-    budgets, and the resulting obstruction to every finite scalar budget.
+    budgets, and divergence of every scalar budget satisfying the sharp
+    pointwise lower bound at every natural-number index.
   authors:
     - "Mayk Loide Baccaro"
   license: "Apache-2.0"
@@ -35,9 +36,12 @@ status:
   scope: >-
     The submission proves the local block threshold, divergence of the
     von-Mangoldt weighted prefix, its exact prime-power-indexed form, and the
-    resulting divergence of every scalar budget paying the sharp local cost. The
-    compactly supported smooth dilation, autocorrelation tail argument, and
-    explicit-formula normalization remain manuscript-level mathematics.
+    resulting divergence of every scalar budget satisfying twice the Weil-weight
+    lower bound at every natural-number index. Since the Weil weight vanishes
+    away from prime powers, this hypothesis also requires nonnegative
+    off-support terms. The compactly supported smooth dilation, autocorrelation
+    tail argument, and explicit-formula normalization remain manuscript-level
+    mathematics.
   sorry_count: 0
   sorry_in_definitions: 0
   axioms: ["propext", "Quot.sound", "Classical.choice"]
@@ -93,7 +97,7 @@ alignment:
       lean: "RiemannHypothesisProofFactory.PrimeLocalWeil.scalarPartialSum_tendsto_atTop"
       module: "RiemannHypothesisProofFactory.PrimeLocalWeil.BudgetObstruction"
       status: "proved"
-      note: "Every scalar budget that pays at least the sharp local cost at each prime-power index diverges to positive infinity."
+      note: "If b(n) is at least twice the Weil weight at every natural-number index, then its ordinary partial sums diverge to positive infinity. In particular, b(n) is nonnegative away from prime powers, where the Weil weight vanishes."
     - source: "Sharp local threshold"
       lean: "RiemannHypothesisProofFactory.PrimeLocalWeil.localBlock_nonnegative_iff"
       module: "RiemannHypothesisProofFactory.PrimeLocalWeil.LocalThreshold"

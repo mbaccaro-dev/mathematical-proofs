@@ -7,8 +7,11 @@ Mayk Loide Baccaro, 2026.
 The paper isolates a natural prime-local positive-block construction inside
 Weil's quadratic form. It proves that each block is nonnegative exactly when
 its scalar completion pays at least twice the corresponding Weil weight, and
-that the actual prime-power weights make the total required budget diverge.
-Thus the specified ordinary, uncoupled, fixed-scalar assembly cannot work.
+that the actual prime-power weights make the total required budget diverge. The
+lower bound is imposed at every natural-number index; away from prime powers,
+where the Weil weight vanishes, it requires the scalar completion to remain
+nonnegative. Thus the specified ordinary, uncoupled, fixed-scalar assembly
+cannot work.
 The result does not prove or disprove the Riemann hypothesis and does not
 exclude cross-prime, nonlocal, operator-valued, test-dependent, or separately
 renormalized constructions.

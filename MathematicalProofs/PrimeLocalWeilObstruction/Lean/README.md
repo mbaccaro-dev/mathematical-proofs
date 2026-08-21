@@ -35,7 +35,9 @@ Lean checks:
 - divergence of the exact weights `Lambda(n) / sqrt(n)`;
 - equality of the positive-integer and prime-power-filtered prefixes;
 - the abstract sharp local threshold from approximate fixed vectors;
-- divergence of every scalar budget that pays the required local cost; and
+- divergence of every scalar budget satisfying `2 * weilWeight n <= b n` at
+  every natural-number index, including nonnegativity away from prime powers;
+  and
 - the finite-prefix and summable-weight controls.
 
 The concrete `C_c^∞` normalized-dilation construction, the compact-support
