@@ -73,9 +73,18 @@ automation:
         wall_time: "not tracked"
         spend_usd: "subscription-based"
         hardware: "local machine"
-      prompting_notes: "The human author selected the result and directed formalization and auditing."
+      prompting_notes: >-
+        AI systems assisted extensively with mathematical derivation, Lean proof
+        development, literature discovery, organization, typesetting, and
+        verification. The author selected the results, directed the work, and
+        remains responsible for every mathematical statement, proof, citation,
+        and submission decision. The pinned manuscript gives the full assistance
+        disclosure in its final section.
   spend_usd: "subscription-based"
-  notes: "The exact endpoint conventions, conservation law, recurrence, and claim boundary were checked against the paper."
+  notes: >-
+    The proof uses the pinned Lean and Mathlib environment recorded in this
+    directory. The full assistance disclosure is pinned in
+    Manuscript/paper.tex under "Assistance disclosure."
 
 fidelity:
   divergences: >-

@@ -32,13 +32,12 @@ scan excluding `Challenge.lean` found no `sorry`, `admit`, `unsafe`, explicit
 
 ## Independent statement checks
 
-The exact one-theorem Challenge/Solution surface passed Comparator at commit
+The comparator configuration selects the exact one-theorem Challenge/Solution
+surface. The repository workflow runs Comparator at commit
 `68a064109f01c08f47c8edc9f51d6a2bbffaa188`, Lean4export at commit
 `15f6055e299ad5b89345e533cc2192f4cc00f659`, the Lean default kernel, and
-NanoDa at commit `68d5ca9db226849b41a6fff59d796ff19d0a8840`.
-
-The local Windows replay covered statement comparison and both kernels. The
-repository workflow supplies the isolated Linux execution.
+NanoDa at commit `68d5ca9db226849b41a6fff59d796ff19d0a8840` in an isolated Linux
+execution. Its result is bound to the tested Git commit.
 
 ## Verified scope
 
@@ -68,8 +67,8 @@ e0b7ba28d972aaf75163c74a3134f6d30f0136ab4c1b826b0cf46b07c5f1ce03  Manuscript/pap
 164214a01546aa76a57e4199a196f4d556c1485cfa717bbd69cf90a3d972f4c6  Lean/RiemannHypothesisProofFactory/MobiusResidualComplexity/ExactCompression.lean
 3f696d5cfb9b7b4c95362cf93af8e5cd8b3f7c63f9a3a91388e2887aab1d269d  Lean/RiemannHypothesisProofFactory/MobiusResidualComplexity/PairCompression.lean
 37852840e69da2e1ebf75f9e26f9f644738547e8fcf65a6409fa291c4f8abe38  Lean/RiemannHypothesisProofFactory/MobiusResidualComplexity/PaperCertificate.lean
-ffd1f5d5e574a4fd1fd1874ccdf5c43d8c05315dfe65d1f85235c4127bc304e7  Lean/Challenge.lean
+aa5d2fb3c92d1f9749d72b1501d53acd912c27dd9f1380231f1d8c88693835a5  Lean/Challenge.lean
 c60a8a31c9098d04b7fb727e55a4e968971e3b30eaffd73d98b7f388f987d70a  Lean/Solution.lean
 579d2ccb32d7a9957780ab0265f05f6a1bf0e9cea0fc87691973470a5655d2cd  Lean/comparator.json
-8ce770396750b91a3c678fc8916c1f20679dac1ca3e7408f21949f92cf6f38d1  Lean/formalization.yaml
+9850601da289788f111faec1379be053c6398d9e59e4a425161b31c72a3494b1  Lean/formalization.yaml
 ```

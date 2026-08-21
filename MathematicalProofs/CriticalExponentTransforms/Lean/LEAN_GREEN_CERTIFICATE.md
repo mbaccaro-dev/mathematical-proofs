@@ -21,24 +21,24 @@ lake env lean Solution.lean
 lake env lean RiemannHypothesisProofFactory/CriticalExponentTransforms/PaperCertificate.lean
 ```
 
-The pinned project build completed successfully (3,253 jobs). The direct
+The pinned project build completed successfully (3,254 jobs). The direct
 challenge, solution, and certificate checks completed with exit code 0. The
-three `sorry` declarations are the intended holes in `Challenge.lean`.
+six `sorry` declarations are the intended holes in `Challenge.lean`.
 
-The certificate prints nine axiom reports. Each contains only the standard
+The certificate prints thirteen axiom reports. Each contains only the standard
 Lean/Mathlib axioms `propext`, `Classical.choice`, and `Quot.sound`. A source
 scan excluding `Challenge.lean` found no `sorry`, `admit`, `unsafe`, explicit
-`axiom`, `partial`, `sorryAx`, `set_option`, or `decreasing_by` declaration.
+`axiom`, `partial`, `sorryAx`, `Lean.ofReduceBool`, `set_option`, or
+`decreasing_by` declaration.
 
 ## Independent statement checks
 
-The exact three-theorem Challenge/Solution surface passed Comparator at commit
+The comparator configuration selects the exact four-theorem Challenge/Solution
+surface. The repository workflow runs Comparator at commit
 `68a064109f01c08f47c8edc9f51d6a2bbffaa188`, Lean4export at commit
 `15f6055e299ad5b89345e533cc2192f4cc00f659`, the Lean default kernel, and
-NanoDa at commit `68d5ca9db226849b41a6fff59d796ff19d0a8840`.
-
-The local Windows replay covered statement comparison and both kernels. The
-repository workflow supplies the isolated Linux execution.
+NanoDa at commit `68d5ca9db226849b41a6fff59d796ff19d0a8840` in an isolated Linux
+execution. Its result is bound to the tested Git commit.
 
 ## Verified scope
 
@@ -47,11 +47,14 @@ exact finite perturbation expansion from multilinearity and dilation
 covariance. It proves the normalized dyadic-energy limit by dominated
 convergence. Under the exact first-visible-term hypotheses, it also proves the
 leading norm limit, strict positivity of the energy constant, and the exact
-critical-exponent gap.
+critical-exponent gap. For nonlinear periodic phase orbits, Lean derives the
+complete logarithmic normal form. Given one positive dyadic-energy block, it
+proves the exact full-turn recurrence and positivity of the next block, so the
+selected phase theorem cannot collapse to the zero orbit.
 
-The paper's zero-channel and error-term cases, phase-orbit argument,
-complex-measure Mellin theorem, saturation connector, and two-sided-germ
-comparison remain manuscript proofs.
+The measure-theoretic derivation of a positive phase block and the paper's
+zero-channel, error-term, complex-measure Mellin, saturation, and two-sided-germ
+branches remain manuscript proofs.
 
 ## Exact artifact hashes
 
@@ -71,9 +74,10 @@ fde5e8f28fd84a9998f1e567fc111ceae8599af1e356def5f3ce340b526ff270  Lean/RiemannHy
 b4be536f16e762d1b3d1ba2a9bca4a8b3eeb6da58054d1ea2eb71e80043996f1  Lean/RiemannHypothesisProofFactory/CriticalExponentTransforms/MultilinearMixture.lean
 4e6eb3911f85876778aae749b96f82aaa938a9cc2cb2d54f17581fefde527ff3  Lean/RiemannHypothesisProofFactory/CriticalExponentTransforms/MixtureEnergy.lean
 c2ba1cc1b368635550c264bd6f43c08b5d64023575a411174af6365bcccdffd1  Lean/RiemannHypothesisProofFactory/CriticalExponentTransforms/MixtureGapLaw.lean
-25385fd6f3d2d887dab8c93c9879bbff7ae386e5c840db8effd7157c67696c7f  Lean/RiemannHypothesisProofFactory/CriticalExponentTransforms/PaperCertificate.lean
-ac78c575e5366733efa606391fae06798186efa20daf083ae4faeaa50b4ed418  Lean/Challenge.lean
-97ab21bcac810e861b772e918faff0015aca4fd21f687942a2a0022e08db6859  Lean/Solution.lean
-5a15c255e15dc166b000a1439531275302896464d9d215e3b7a3c0c8f0ab4c3b  Lean/comparator.json
-b49e20b54b657864adbcfb88dd7b6dcc0d36e0cd7cdba921dca4b53ddcb33597  Lean/formalization.yaml
+a3fb2616152a3a95af6ccac73ea60aa57ed0ef8e550f0d194eee13ea97cf76f3  Lean/RiemannHypothesisProofFactory/CriticalExponentTransforms/PhaseOrbit.lean
+0a147d18f7504bc48c8f01c51f37d30a69ae17493c3f630529c2988ca6fc182b  Lean/RiemannHypothesisProofFactory/CriticalExponentTransforms/PaperCertificate.lean
+eabee44282504ea281445e52098a6f717abc5d1cbc12df3877220af8b2266a87  Lean/Challenge.lean
+a098c5952adc626141bf47380cdae024b54226f4c0f8655628ffe884e51a4b25  Lean/Solution.lean
+bf44421561687537cf91a44220e019b226bc1b4d2b19effd85fe64e5e144da06  Lean/comparator.json
+027b0e4d35facf0768b6a7c52cb458473c177c8ca60fcbb42d8c16de3d58d7b6  Lean/formalization.yaml
 ```

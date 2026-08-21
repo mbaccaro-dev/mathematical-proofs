@@ -26,8 +26,10 @@ GitHub Actions rebuilds the pinned Lean project and checks the public axiom
 report on every push and pull request. For real-valued continuous signals on
 the positive half-line, Lean derives the finite multilinear mixture expansion
 and proves its first-visible norm and dyadic-energy limits, including the
-positive leading constant and exponent gap. The zero-channel, error-term, and
-other transform branches retain their manuscript proofs.
+positive leading constant and exponent gap. For a nonlinear phase orbit with
+a positive energy block, it also derives the exact normal form and propagates
+that positive block through the full-turn geometric recurrence. The remaining transform branches
+retain their manuscript proofs.
 
 ## Cite the paper
 

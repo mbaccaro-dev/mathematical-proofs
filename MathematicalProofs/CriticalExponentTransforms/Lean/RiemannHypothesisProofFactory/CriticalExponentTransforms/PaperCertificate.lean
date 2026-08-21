@@ -1,4 +1,5 @@
 import RiemannHypothesisProofFactory.CriticalExponentTransforms.MixtureGapLaw
+import RiemannHypothesisProofFactory.CriticalExponentTransforms.PhaseOrbit
 
 /-!
 # Critical-exponent transforms certificate
@@ -18,3 +19,7 @@ strict critical-exponent gap.
 #print axioms RiemannHypothesisProofFactory.CriticalExponentTransforms.mixtureDyadicEnergyLeadingConstant_pos
 #print axioms RiemannHypothesisProofFactory.CriticalExponentTransforms.scale_normalized_operator_profile_eq
 #print axioms RiemannHypothesisProofFactory.CriticalExponentTransforms.multilinear_mixture_gap_law
+#print axioms RiemannHypothesisProofFactory.CriticalExponentTransforms.phase_orbit_normal_form
+#print axioms RiemannHypothesisProofFactory.CriticalExponentTransforms.log_dyadic_energy_reduction
+#print axioms RiemannHypothesisProofFactory.CriticalExponentTransforms.phase_orbit_energy_recurrence
+#print axioms RiemannHypothesisProofFactory.CriticalExponentTransforms.phase_orbit_full_turn_energy_law

@@ -2,11 +2,17 @@
   "challenge_module": "Challenge",
   "solution_module": "Solution",
   "theorem_names": [
-    "RiemannHypothesisProofFactory.SelbergConditioning.finite_prime_factor_conditioning_construction"
+    "RiemannHypothesisProofFactory.SelbergConditioning.finite_prime_factor_conditioning_construction",
+    "RiemannHypothesisProofFactory.SelbergConditioning.finite_two_sign_conditioning_obstruction",
+    "RiemannHypothesisProofFactory.SelbergConditioning.finite_selberg_feedback_stability"
   ],
   "definition_names": [
     "RiemannHypothesisProofFactory.SelbergConditioning.primeFactorResidual",
-    "RiemannHypothesisProofFactory.SelbergConditioning.centeredPrimeCoefficient"
+    "RiemannHypothesisProofFactory.SelbergConditioning.centeredPrimeCoefficient",
+    "RiemannHypothesisProofFactory.SelbergConditioning.orderedHyperbolaSum",
+    "RiemannHypothesisProofFactory.SelbergConditioning.logarithmicMoment",
+    "RiemannHypothesisProofFactory.SelbergConditioning.harmonicMass",
+    "RiemannHypothesisProofFactory.SelbergConditioning.selbergPerturbation"
   ],
   "permitted_axioms": ["propext", "Quot.sound", "Classical.choice"],
   "enable_nanoda": true

@@ -33,13 +33,12 @@ scan excluding `Challenge.lean` found no `sorry`, `admit`, `unsafe`, explicit
 
 ## Independent statement checks
 
-The exact two-theorem Challenge/Solution surface passed Comparator at commit
+The comparator configuration selects the exact two-theorem Challenge/Solution
+surface. The repository workflow runs Comparator at commit
 `68a064109f01c08f47c8edc9f51d6a2bbffaa188`, Lean4export at commit
 `15f6055e299ad5b89345e533cc2192f4cc00f659`, the Lean default kernel, and
-NanoDa at commit `68d5ca9db226849b41a6fff59d796ff19d0a8840`.
-
-The local Windows replay covered statement comparison and both kernels. The
-repository workflow supplies the isolated Linux execution.
+NanoDa at commit `68d5ca9db226849b41a6fff59d796ff19d0a8840` in an isolated Linux
+execution. Its result is bound to the tested Git commit.
 
 ## Verified scope
 
@@ -70,5 +69,5 @@ e30615f9444f4d0bf0e8d155b13ab6afa4e445d41a98fc9a8e5faacd9ca7f918  Lean/RiemannHy
 f376eadef39f23b957e9394fb723ddac205d4b854a2435e31f80a32653e3643b  Lean/Challenge.lean
 09af9493458d577177123cdbf3cd07229f194333bd4db3452183314b527f153f  Lean/Solution.lean
 09a33c4a0bbd824e1322fea4d8a382310865bf7f14471a1b650c4dcd0cd72e72  Lean/comparator.json
-187c15b21d142749679144205bd154ee762ca5cf1fdf5fc18fefc9aebb1abc69  Lean/formalization.yaml
+3b7dd2e35bd435fd750e5844efa93818839bbd668cb7da645ee842beb2b8c7e1  Lean/formalization.yaml
 ```

@@ -24,9 +24,11 @@ prime-counting error or prove or disprove the Riemann hypothesis.
 
 GitHub Actions rebuilds the pinned Lean project and checks the public axiom
 report on every push and pull request. The certificate states the exact scope:
-Lean verifies a nonzero construction supported on a finite set of primes, its
-exact centering identity, and its global logarithmic divisor-residual bound.
-The paper's analytic number theory remains a manuscript-level proof obligation.
+Lean verifies the finite prime-factor construction, the nondegenerate
+two-sign conditioning calculation, and a quantitative bound for the complete
+ordered Selberg perturbation, including its logarithmic, linear hyperbola, and
+quadratic hyperbola terms. The prime-number asymptotics that supply the
+near-linear scale remain manuscript-level proofs.
 
 ## Cite the paper
 

@@ -1,7 +1,7 @@
 # Lean verification
 
 This self-contained Lean 4 project proves the finite multilinear mixture law
-for real-valued continuous signals on the positive half-line.
+and a nonlinear periodic phase-orbit energy law.
 
 ## Pinned environment
 
@@ -36,6 +36,12 @@ convergence. Given the first nonzero grouped coefficient, it proves the leading
 norm limit, positivity of the energy constant, and the strict
 critical-exponent gap.
 
-The paper's zero-channel and error-term branches, together with its phase-orbit,
-positive-homogeneous, Mellin, saturation, and two-sided-germ results, are
-separate manuscript arguments.
+For normed-space-valued phase orbits, Lean derives the complete logarithmic
+normal form from exact covariance and proves the periodic norm profile and
+off-critical exponent gap. Given one positive dyadic-energy block, the selected
+theorem rules out the zero orbit and proves that the next full-turn block is
+positive with the exact geometric scaling factor.
+
+The phase theorem's measure-theoretic block-selection step and the paper's
+zero-channel, error-term, positive-homogeneous, Mellin, saturation, and
+two-sided-germ results are separate manuscript arguments.

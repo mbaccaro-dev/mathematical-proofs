@@ -1,12 +1,20 @@
 import Mathlib.Data.Finset.Sort
 import Mathlib.Algebra.GCDMonoid.Finset
 import Mathlib.NumberTheory.ArithmeticFunction.Moebius
-import RiemannHypothesisProofFactory.MobiusResidualComplexity.ExactCompression
+import Mathlib.Data.Nat.Dist
+import Mathlib.Data.Nat.PrimeFin
+import Mathlib.Tactic
 
 namespace RiemannHypothesisProofFactory.MobiusResidualComplexity
 
 open ArithmeticFunction
 open scoped ArithmeticFunction.Moebius
+
+def omega (n : ℕ) : ℕ := n.primeFactors.card
+
+def rankCrossingIndices (m positivePrefix negativePrefix : ℕ) : Finset ℕ :=
+  (Finset.range m).filter fun i =>
+    (i < positivePrefix) ≠ (i < negativePrefix)
 
 def positiveVertices (H : Finset ℕ) : Finset ℕ :=
   H.filter fun n => μ n = 1

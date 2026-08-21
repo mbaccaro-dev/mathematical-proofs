@@ -2,12 +2,14 @@
 version: "v0.4"
 
 project:
-  name: "Critical-exponent scale transforms: multilinear mixture law"
+  name: "Critical-exponent scale transforms: mixtures and phase orbits"
   description: >-
     A Lean 4 proof that a dilation-covariant multilinear observable has an
     exact finite perturbation expansion whose first nonzero grouped term
     controls both its leading norm and its dyadic energy, with a strict
-    critical-exponent gap.
+    critical-exponent gap. For a nonlinear periodic phase orbit with a visible
+    energy block, it also proves the exact logarithmic normal form and a
+    nonzero geometric energy recurrence after a full phase turn.
   authors:
     - "Mayk Loide Baccaro"
   license: "Apache-2.0"
@@ -26,7 +28,7 @@ sources:
     type: "paper"
     location: "https://doi.org/10.5281/zenodo.22005931"
     relationship: "formalizes"
-    note: "The formalization proves the finite multilinear mixture law, its first-visible asymptotic, and its normalized dyadic-energy limit."
+    note: "The formalization proves the finite multilinear mixture law and a nonlinear phase-orbit energy law."
     license: "unknown"
     author_endorsement: "participated"
 
@@ -39,8 +41,13 @@ status:
     and dilation covariance. It proves the normalized dyadic-energy limit by
     dominated convergence. Under an exact nonzero first-visible-term hypothesis,
     it then proves the leading norm limit, strict positivity of the energy
-    constant, and the exact critical-exponent gap. The paper's zero-channel,
-    error-term, and other transform branches remain outside this result.
+    constant, and the exact critical-exponent gap. For a normed-space-valued
+    nonlinear phase orbit, it derives the complete normal form from exact
+    covariance. An explicit positive-block hypothesis excludes the zero orbit;
+    the selected theorem propagates that positivity through the exact geometric
+    recurrence. The paper's zero-channel,
+    error-term, Mellin, saturation, and germ branches remain outside these
+    results.
   sorry_count: 0
   sorry_in_definitions: 0
   axioms: ["propext", "Quot.sound", "Classical.choice"]
@@ -60,6 +67,11 @@ status:
       sorry_count: 0
       axioms: ["propext", "Quot.sound", "Classical.choice"]
       comparator_config: "comparator.json"
+    - declaration: "RiemannHypothesisProofFactory.CriticalExponentTransforms.phase_orbit_full_turn_energy_law"
+      file: "RiemannHypothesisProofFactory/CriticalExponentTransforms/PhaseOrbit.lean"
+      sorry_count: 0
+      axioms: ["propext", "Quot.sound", "Classical.choice"]
+      comparator_config: "comparator.json"
 
 automation:
   methods:
@@ -71,18 +83,27 @@ automation:
         wall_time: "not tracked"
         spend_usd: "subscription-based"
         hardware: "local machine"
-      prompting_notes: "AI assistance was used for Lean development and theorem alignment under human direction."
+      prompting_notes: >-
+        AI systems assisted extensively with mathematical derivation, Lean proof
+        development, literature discovery, organization, typesetting, and
+        verification. The author selected the results, directed the work, and
+        remains responsible for every mathematical statement, proof, citation,
+        and submission decision. The pinned manuscript gives the full assistance
+        disclosure in its final section.
   spend_usd: "subscription-based"
-  notes: "The theorem was built with a pinned environment and checked against the paper's multilinear mixture and dyadic-energy formulas."
+  notes: >-
+    The proofs use the pinned Lean and Mathlib environment recorded in this
+    directory. The full assistance disclosure is pinned in
+    Manuscript/paper.tex under "Assistance disclosure."
 
 fidelity:
-  divergences: "The selected results give the exact full-Signal finite mixture expansion, first-visible asymptotic, dyadic-energy limit, and gap. The paper's zero-channel and error-term cases, along with its phase, homogeneous, Mellin, saturation, and germ results, remain outside these theorems."
+  divergences: "The selected results give the exact full-Signal finite mixture expansion, first-visible asymptotic, dyadic-energy limit, and gap, together with the exact nonlinear phase-orbit normal form and a nonzero block-energy recurrence under an explicit positive-block hypothesis. The manuscript's measure-theoretic derivation of such a block from positive period mass, and its zero-channel, error-term, homogeneous, Mellin, saturation, and germ results, remain manuscript-level."
 
 review:
   status: "agent-reviewed"
   reviewers:
     - "OpenAI GPT-5 (Codex)"
-  notes: "The exponent formulas, hypotheses, definitions, constants, axiom reports, and paper correspondence were checked. No human peer review is claimed."
+  notes: "The exponent formulas, covariance direction, phase periodicity, energy normalization, recurrence constant, hypotheses, axiom reports, and paper correspondence were checked. No human peer review is claimed."
 
 alignment:
   namespace: "RiemannHypothesisProofFactory.CriticalExponentTransforms"
@@ -102,5 +123,10 @@ alignment:
       module: "RiemannHypothesisProofFactory.CriticalExponentTransforms.MixtureGapLaw"
       status: "proved"
       note: "The coefficient vectors are derived from the multilinear operator, and the energy limit includes strict positivity of its leading constant."
+    - source: "Nonlinear phase-orbit normal form and full-turn energy law"
+      lean: "RiemannHypothesisProofFactory.CriticalExponentTransforms.phase_orbit_full_turn_energy_law"
+      module: "RiemannHypothesisProofFactory.CriticalExponentTransforms.PhaseOrbit"
+      status: "proved"
+      note: "Exact covariance gives the complete logarithmic normal form, periodic phase profile, norm law, and off-critical exponent gap. An explicit positive-block hypothesis rules out the zero orbit, and the theorem proves positivity and exact geometric scaling at the next full-turn block."
 
 acknowledgements: "Mathlib, Lean, Comparator, Lean4export, Landrun, and NanoDa."

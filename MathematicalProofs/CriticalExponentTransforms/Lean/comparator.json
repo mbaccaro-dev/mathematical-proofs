@@ -4,7 +4,8 @@
   "theorem_names": [
     "RiemannHypothesisProofFactory.CriticalExponentTransforms.paper_multilinear_operator_expansion",
     "RiemannHypothesisProofFactory.CriticalExponentTransforms.paper_normalized_mixture_dyadic_energy_limit",
-    "RiemannHypothesisProofFactory.CriticalExponentTransforms.multilinear_mixture_gap_law"
+    "RiemannHypothesisProofFactory.CriticalExponentTransforms.multilinear_mixture_gap_law",
+    "RiemannHypothesisProofFactory.CriticalExponentTransforms.phase_orbit_full_turn_energy_law"
   ],
   "definition_names": [
     "RiemannHypothesisProofFactory.CriticalExponentTransforms.operatorDifference",
@@ -12,7 +13,10 @@
     "RiemannHypothesisProofFactory.CriticalExponentTransforms.normalizedOperatorDifference",
     "RiemannHypothesisProofFactory.CriticalExponentTransforms.normalizedMixtureProfile",
     "RiemannHypothesisProofFactory.CriticalExponentTransforms.normalizedMixtureDyadicEnergy",
-    "RiemannHypothesisProofFactory.CriticalExponentTransforms.mixtureDyadicEnergyLeadingConstant"
+    "RiemannHypothesisProofFactory.CriticalExponentTransforms.mixtureDyadicEnergyLeadingConstant",
+    "RiemannHypothesisProofFactory.CriticalExponentTransforms.phaseProfile",
+    "RiemannHypothesisProofFactory.CriticalExponentTransforms.logDyadicEnergy",
+    "RiemannHypothesisProofFactory.CriticalExponentTransforms.phaseBlockEnergy"
   ],
   "permitted_axioms": ["propext", "Quot.sound", "Classical.choice"],
   "enable_nanoda": true

@@ -17,6 +17,7 @@ theorem finite_two_sign_conditioning_obstruction
     (htau : 0 < tau)
     (hcoefficientBound : 0 < coefficientBound)
     (hell : 0 < ell)
+    (hxPow : 0 < xPow)
     (hresidualPlus : |residualPlus| ≤ coefficientBound * ell)
     (hresidualMinus : |residualMinus| ≤ coefficientBound * ell)
     (hsignedSum : xPow / (2 * rho) ≤ |signedSum|)
@@ -31,7 +32,8 @@ theorem finite_two_sign_conditioning_obstruction
       tau * xPow / (rho * coefficientBound * ell) ≤
         |(tau / (coefficientBound * ell)) * signedSum -
           (-(tau / (coefficientBound * ell)) * signedSum)| ∧
-      xPow / (2 * rho * coefficientBound * ell) ≤ lipschitzConstant := by
+      xPow / (2 * rho * coefficientBound * ell) ≤ lipschitzConstant ∧
+      0 < lipschitzConstant := by
   have hplus := scaled_residual_le_tolerance residualPlus tau
     coefficientBound ell htau.le hcoefficientBound hell hresidualPlus
   have hminus := scaled_residual_le_tolerance residualMinus tau
@@ -43,6 +45,8 @@ theorem finite_two_sign_conditioning_obstruction
     (-(tau / (coefficientBound * ell)) * signedSum) inputDistance
     lipschitzConstant hrho htau hcoefficientBound hell hinputDistance
     hlipschitzNonneg hseparation hlipschitz
-  exact ⟨hplus, hminus, hseparation, hlower⟩
+  have hlowerPositive : 0 < xPow / (2 * rho * coefficientBound * ell) := by
+    positivity
+  exact ⟨hplus, hminus, hseparation, hlower, hlowerPositive.trans_le hlower⟩
 
 end RiemannHypothesisProofFactory.SelbergConditioning
