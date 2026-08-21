@@ -71,7 +71,7 @@ e347641d400eb5107f9470b142f3e480c7ae3187b1fae088371feeeda0d82e14  Lean/RiemannHy
 fb7a76f16d8bf33aca006162ef08f2c2c5e80d07e0cfb0e42ed623555e599cdb  Lean/Challenge.lean
 2da9ac2c25626ec6f4d75cd760fe107c0d1868848893ea61915f6fd84b195393  Lean/Solution.lean
 70b439bc7e0e86085b893f636675b412aa8fd985d6dd80dbd84a2bc85b8d49ba  Lean/comparator.json
-42e1b6b5df16b3f2304ea5aa5db831b54c188f6e19eef57c10b5ded75eb1fc65  Lean/formalization.yaml
+7a018cbfc24d4c71c734c423d1c3bb08ac771e9ecba3f648979dbcca2a86232a  Lean/formalization.yaml
 ```
 
 No commit, push, registry upload, or submission is certified here.

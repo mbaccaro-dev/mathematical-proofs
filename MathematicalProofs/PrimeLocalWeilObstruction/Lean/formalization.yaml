@@ -4,9 +4,9 @@ version: "v0.4"
 project:
   name: "Prime-local Weil obstruction: formal kernel"
   description: >-
-    A Lean 4 proof of the sharp local first-difference threshold, divergence
-    of the manuscript's exact prime-power Weil budget, and the resulting
-    infinite scalar-budget obstruction.
+    Formalizes the prime-local obstruction by proving the sharp threshold for
+    each local block, divergence of the associated von Mangoldt and prime-power
+    budgets, and the resulting obstruction to every finite scalar budget.
   authors:
     - "Mayk Loide Baccaro"
   license: "Apache-2.0"
