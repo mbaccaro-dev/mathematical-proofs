@@ -24,8 +24,9 @@ sources:
   - title: "Subpower Energy and Dyadic Defect Criteria for the Riemann Hypothesis"
     authors:
       - "Mayk Loide Baccaro"
+    id: "10.5281/zenodo.22038521"
     type: "paper"
-    location: "../Manuscript/subpower_dyadic_mobius_mangoldt_equivalence_baccaro_20260820.pdf"
+    location: "https://doi.org/10.5281/zenodo.22038521"
     relationship: "formalizes"
     note: "The formalization checks the paper's discrete conditional theorem core."
     license: "unknown"

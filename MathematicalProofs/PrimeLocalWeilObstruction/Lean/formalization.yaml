@@ -48,17 +48,17 @@ status:
       axioms: ["propext", "Quot.sound", "Classical.choice"]
       comparator_config: "comparator.json"
     - declaration: "RiemannHypothesisProofFactory.PrimeLocalWeil.localBlock_nonnegative_iff"
-      file: "RiemannHypothesisProofFactory/PrimeLocalWeil/LocalKernel.lean"
+      file: "RiemannHypothesisProofFactory/PrimeLocalWeil/LocalThreshold.lean"
       sorry_count: 0
       axioms: ["propext", "Quot.sound", "Classical.choice"]
       comparator_config: "comparator.json"
     - declaration: "RiemannHypothesisProofFactory.PrimeLocalWeil.weightedPartialSum_tendsto_atTop"
-      file: "RiemannHypothesisProofFactory/PrimeLocalWeil/LocalKernel.lean"
+      file: "RiemannHypothesisProofFactory/PrimeLocalWeil/ArithmeticBudget.lean"
       sorry_count: 0
       axioms: ["propext", "Quot.sound", "Classical.choice"]
       comparator_config: "comparator.json"
     - declaration: "RiemannHypothesisProofFactory.PrimeLocalWeil.primePowerPartialSum_tendsto_atTop"
-      file: "RiemannHypothesisProofFactory/PrimeLocalWeil/LocalKernel.lean"
+      file: "RiemannHypothesisProofFactory/PrimeLocalWeil/PrimePowerBridge.lean"
       sorry_count: 0
       axioms: ["propext", "Quot.sound", "Classical.choice"]
       comparator_config: "comparator.json"
