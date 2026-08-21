@@ -12,15 +12,15 @@ abbrev PosReal := {x : ℝ // 0 < x}
 abbrev Signal := PosReal → ℝ
 abbrev Observable (V : Type*) := PosReal → V
 
-noncomputable def powerMode (rho : ℝ) : Signal :=
+noncomputable def powerMode (rho : ℝ) : PosReal → ℝ :=
   fun x ↦ x.1 ^ rho
 
 noncomputable def inputDilation (a : ℝ) (ha : 0 < a)
-    (f : Signal) : Signal :=
+    (f : PosReal → ℝ) : PosReal → ℝ :=
   fun x ↦ f ⟨a * x.1, mul_pos ha x.2⟩
 
 noncomputable def outputDilation {V : Type*} (a : ℝ) (ha : 0 < a)
-    (g : Observable V) : Observable V :=
+    (g : PosReal → V) : PosReal → V :=
   fun x ↦ g ⟨a * x.1, mul_pos ha x.2⟩
 
 def mixtureExponent (d r : ℕ) (sigma rho kappa : ℝ) : ℝ :=
