@@ -1,24 +1,20 @@
-import RiemannHypothesisProofFactory.CriticalExponentTransforms.AlgebraicKernel
-import RiemannHypothesisProofFactory.CriticalExponentTransforms.PurePowerGap
+import RiemannHypothesisProofFactory.CriticalExponentTransforms.MixtureGapLaw
 
 /-!
-# Critical-exponent transforms paper certificate
+# Critical-exponent transforms certificate
 
-The imported kernels check the paper's operator-level pure-power normal form
-and exact critical exponent gap, shared exponent arithmetic, a scalar-valued
-specialization, exact saturation inversion, and the Mellin inverse-symbol
-modulus step. The analytic, asymptotic, and energy-integral obligations remain
-manuscript-level proofs.
+The main theorem derives the finite perturbation mixture from a multilinear
+operator and its dilation covariance. It proves the first-visible norm and
+dyadic-energy limits, positivity of the leading energy constant, and the
+strict critical-exponent gap.
 -/
 
-#print axioms RiemannHypothesisProofFactory.CriticalExponentTransforms.multilinear_gap_identity
-#print axioms RiemannHypothesisProofFactory.CriticalExponentTransforms.multilinear_successive_exponent_lt
-#print axioms RiemannHypothesisProofFactory.CriticalExponentTransforms.multilinear_adjacent_gap_identity
-#print axioms RiemannHypothesisProofFactory.CriticalExponentTransforms.homogeneous_gap_identity
-#print axioms RiemannHypothesisProofFactory.CriticalExponentTransforms.scalar_pure_power_normal_form
-#print axioms RiemannHypothesisProofFactory.CriticalExponentTransforms.saturation_gap_identity
-#print axioms RiemannHypothesisProofFactory.CriticalExponentTransforms.germ_gap_identity
-#print axioms RiemannHypothesisProofFactory.CriticalExponentTransforms.abs_saturation_lt_one
-#print axioms RiemannHypothesisProofFactory.CriticalExponentTransforms.saturation_inverse
-#print axioms RiemannHypothesisProofFactory.CriticalExponentTransforms.inverse_symbol_lower_bound
-#print axioms RiemannHypothesisProofFactory.CriticalExponentTransforms.pure_power_gap_law
+#print axioms RiemannHypothesisProofFactory.CriticalExponentTransforms.multilinear_power_tuple_law
+#print axioms RiemannHypothesisProofFactory.CriticalExponentTransforms.multilinear_operator_expansion
+#print axioms RiemannHypothesisProofFactory.CriticalExponentTransforms.paper_multilinear_operator_expansion
+#print axioms RiemannHypothesisProofFactory.CriticalExponentTransforms.multilinear_grouped_expansion
+#print axioms RiemannHypothesisProofFactory.CriticalExponentTransforms.normalizedMixtureDyadicEnergy_tendsto
+#print axioms RiemannHypothesisProofFactory.CriticalExponentTransforms.paper_normalized_mixture_dyadic_energy_limit
+#print axioms RiemannHypothesisProofFactory.CriticalExponentTransforms.mixtureDyadicEnergyLeadingConstant_pos
+#print axioms RiemannHypothesisProofFactory.CriticalExponentTransforms.scale_normalized_operator_profile_eq
+#print axioms RiemannHypothesisProofFactory.CriticalExponentTransforms.multilinear_mixture_gap_law

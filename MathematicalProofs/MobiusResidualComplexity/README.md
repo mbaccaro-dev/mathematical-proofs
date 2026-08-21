@@ -30,10 +30,11 @@ proof or disproof of the Riemann hypothesis.
 The GitHub release metadata records DOI
 [10.5281/zenodo.22006119](https://doi.org/10.5281/zenodo.22006119). The
 manuscript intentionally omits repository-deposit metadata. The Lean project
-certifies the finite algebraic and combinatorial kernel listed in its README.
-The analytic number theory, asymptotic counting, and full matching model
-remain manuscript-level proof obligations. GitHub Actions repeats the pinned
-Lean build and public-certificate check.
+proves the exact finite fixed-budget pair-compression theorem using the gcd of
+the cell, including sign pairing, pairwise-gcd budget preservation,
+cell-diameter control, and the exact cutoff-crossing pairs. The analytic number theory, asymptotic counting, and
+global sparse-jump argument remain manuscript-level proof obligations. GitHub
+Actions repeats the pinned Lean build and public-certificate check.
 
 ## Cite the paper
 

@@ -2,14 +2,12 @@
   "challenge_module": "Challenge",
   "solution_module": "Solution",
   "theorem_names": [
-    "RiemannHypothesisProofFactory.SelbergConditioning.finite_two_sign_conditioning_obstruction",
-    "RiemannHypothesisProofFactory.SelbergConditioning.distinguished_correction_eq_neg_tail",
-    "RiemannHypothesisProofFactory.SelbergConditioning.signed_perturbations_pos",
-    "RiemannHypothesisProofFactory.SelbergConditioning.scaled_residual_le_tolerance",
-    "RiemannHypothesisProofFactory.SelbergConditioning.scaled_two_sign_separation",
-    "RiemannHypothesisProofFactory.SelbergConditioning.lipschitz_constant_lower_bound"
+    "RiemannHypothesisProofFactory.SelbergConditioning.finite_prime_factor_conditioning_construction"
   ],
-  "definition_names": [],
+  "definition_names": [
+    "RiemannHypothesisProofFactory.SelbergConditioning.primeFactorResidual",
+    "RiemannHypothesisProofFactory.SelbergConditioning.centeredPrimeCoefficient"
+  ],
   "permitted_axioms": ["propext", "Quot.sound", "Classical.choice"],
   "enable_nanoda": true
 }

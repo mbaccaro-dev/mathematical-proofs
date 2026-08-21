@@ -2,10 +2,12 @@
 version: "v0.4"
 
 project:
-  name: "Critical-exponent scale transforms: pure-power gap law"
+  name: "Critical-exponent scale transforms: multilinear mixture law"
   description: >-
-    A Lean 4 proof of the paper's operator-level pure-power normal form and
-    critical exponent gap, with additional algebraic certificates.
+    A Lean 4 proof that a dilation-covariant multilinear observable has an
+    exact finite perturbation expansion whose first nonzero grouped term
+    controls both its leading norm and its dyadic energy, with a strict
+    critical-exponent gap.
   authors:
     - "Mayk Loide Baccaro"
   license: "Apache-2.0"
@@ -24,7 +26,7 @@ sources:
     type: "paper"
     location: "https://doi.org/10.5281/zenodo.22005931"
     relationship: "formalizes"
-    note: "The formalization proves the general pure-power operator normal form and gap law and checks supporting algebraic seams from the paper."
+    note: "The formalization proves the finite multilinear mixture law, its first-visible asymptotic, and its normalized dyadic-energy limit."
     license: "unknown"
     author_endorsement: "participated"
 
@@ -32,34 +34,29 @@ related_formalizations: []
 
 status:
   scope: >-
-    The submission proves the general operator-level pure-power normal form
-    and its exact critical exponent gap. It also proves ten supporting
-    algebraic statements covering multilinear and homogeneous gaps, a scalar
-    specialization, saturation inversion, and an inverse-symbol norm bound.
-    It does not formalize the Abel analysis, vector-valued multilinear
-    asymptotics, phase-orbit argument, complex Mellin theorem, or dyadic
-    energy integrals.
+    For real-valued continuous signals on the positive half-line, the
+    formalization derives the full finite mixture expansion from multilinearity
+    and dilation covariance. It proves the normalized dyadic-energy limit by
+    dominated convergence. Under an exact nonzero first-visible-term hypothesis,
+    it then proves the leading norm limit, strict positivity of the energy
+    constant, and the exact critical-exponent gap. The paper's zero-channel,
+    error-term, and other transform branches remain outside this result.
   sorry_count: 0
   sorry_in_definitions: 0
   axioms: ["propext", "Quot.sound", "Classical.choice"]
   main_results:
-    - declaration: "RiemannHypothesisProofFactory.CriticalExponentTransforms.pure_power_gap_law"
-      file: "RiemannHypothesisProofFactory/CriticalExponentTransforms/PurePowerGap.lean"
+    - declaration: "RiemannHypothesisProofFactory.CriticalExponentTransforms.paper_multilinear_operator_expansion"
+      file: "RiemannHypothesisProofFactory/CriticalExponentTransforms/MixtureGapLaw.lean"
       sorry_count: 0
       axioms: ["propext", "Quot.sound", "Classical.choice"]
       comparator_config: "comparator.json"
-    - declaration: "RiemannHypothesisProofFactory.CriticalExponentTransforms.multilinear_gap_identity"
-      file: "RiemannHypothesisProofFactory/CriticalExponentTransforms/AlgebraicKernel.lean"
+    - declaration: "RiemannHypothesisProofFactory.CriticalExponentTransforms.paper_normalized_mixture_dyadic_energy_limit"
+      file: "RiemannHypothesisProofFactory/CriticalExponentTransforms/MixtureGapLaw.lean"
       sorry_count: 0
       axioms: ["propext", "Quot.sound", "Classical.choice"]
       comparator_config: "comparator.json"
-    - declaration: "RiemannHypothesisProofFactory.CriticalExponentTransforms.saturation_inverse"
-      file: "RiemannHypothesisProofFactory/CriticalExponentTransforms/AlgebraicKernel.lean"
-      sorry_count: 0
-      axioms: ["propext", "Quot.sound", "Classical.choice"]
-      comparator_config: "comparator.json"
-    - declaration: "RiemannHypothesisProofFactory.CriticalExponentTransforms.inverse_symbol_lower_bound"
-      file: "RiemannHypothesisProofFactory/CriticalExponentTransforms/AlgebraicKernel.lean"
+    - declaration: "RiemannHypothesisProofFactory.CriticalExponentTransforms.multilinear_mixture_gap_law"
+      file: "RiemannHypothesisProofFactory/CriticalExponentTransforms/MixtureGapLaw.lean"
       sorry_count: 0
       axioms: ["propext", "Quot.sound", "Classical.choice"]
       comparator_config: "comparator.json"
@@ -74,41 +71,36 @@ automation:
         wall_time: "not tracked"
         spend_usd: "subscription-based"
         hardware: "local machine"
-      prompting_notes: "The human owner selected the result and directed formalization, auditing, and release preparation."
+      prompting_notes: "AI assistance was used for Lean development and theorem alignment under human direction."
   spend_usd: "subscription-based"
-  notes: "The algebraic kernel was built with a pinned environment and checked against the paper's displayed formulas."
+  notes: "The theorem was built with a pinned environment and checked against the paper's multilinear mixture and dyadic-energy formulas."
 
 fidelity:
-  divergences: "The operator-level normal form and gap are exact; the displayed energy identity and the paper's other analytic or asymptotic theorems remain outside the formal claim."
+  divergences: "The selected results give the exact full-Signal finite mixture expansion, first-visible asymptotic, dyadic-energy limit, and gap. The paper's zero-channel and error-term cases, along with its phase, homogeneous, Mellin, saturation, and germ results, remain outside these theorems."
 
 review:
   status: "agent-reviewed"
   reviewers:
     - "OpenAI GPT-5 (Codex)"
-  notes: "Independent agent lanes audited the exponent formulas, hypotheses, definitions, constants, axiom reports, and paper correspondence. No human peer review is claimed."
+  notes: "The exponent formulas, hypotheses, definitions, constants, axiom reports, and paper correspondence were checked. No human peer review is claimed."
 
 alignment:
   namespace: "RiemannHypothesisProofFactory.CriticalExponentTransforms"
   statements:
-    - source: "Pure-power gap law"
-      lean: "RiemannHypothesisProofFactory.CriticalExponentTransforms.pure_power_gap_law"
-      module: "RiemannHypothesisProofFactory.CriticalExponentTransforms.PurePowerGap"
+    - source: "Exact multilinear perturbation expansion"
+      lean: "RiemannHypothesisProofFactory.CriticalExponentTransforms.paper_multilinear_operator_expansion"
+      module: "RiemannHypothesisProofFactory.CriticalExponentTransforms.MixtureGapLaw"
       status: "proved"
-      note: "This is the paper's general homogeneous-covariant operator normal form and exact critical exponent gap; only its separate energy integral is omitted."
-    - source: "Multilinear and homogeneous critical-gap formulas"
-      lean: "RiemannHypothesisProofFactory.CriticalExponentTransforms.multilinear_gap_identity"
-      module: "RiemannHypothesisProofFactory.CriticalExponentTransforms.AlgebraicKernel"
+      note: "The expansion is derived from multilinearity and dilation covariance for the full Signal space."
+    - source: "Normalized finite-mixture dyadic-energy limit"
+      lean: "RiemannHypothesisProofFactory.CriticalExponentTransforms.paper_normalized_mixture_dyadic_energy_limit"
+      module: "RiemannHypothesisProofFactory.CriticalExponentTransforms.MixtureGapLaw"
       status: "proved"
-      note: "Adjacent-order and homogeneous identities are also included in the Comparator theorem list."
-    - source: "Scalar pure-power normal form"
-      lean: "RiemannHypothesisProofFactory.CriticalExponentTransforms.scalar_pure_power_normal_form"
-      module: "RiemannHypothesisProofFactory.CriticalExponentTransforms.AlgebraicKernel"
-      status: "partial"
-      note: "This is the scalar specialization and does not claim the paper's operator-level theorem."
-    - source: "Saturation inversion and Mellin-symbol bound"
-      lean: "RiemannHypothesisProofFactory.CriticalExponentTransforms.saturation_inverse"
-      module: "RiemannHypothesisProofFactory.CriticalExponentTransforms.AlgebraicKernel"
+      note: "Dominated convergence identifies the complete leading energy integral after lower-order coefficients vanish."
+    - source: "Finite multilinear mixture and first-visible dyadic-energy law"
+      lean: "RiemannHypothesisProofFactory.CriticalExponentTransforms.multilinear_mixture_gap_law"
+      module: "RiemannHypothesisProofFactory.CriticalExponentTransforms.MixtureGapLaw"
       status: "proved"
-      note: "The inverse-symbol lower bound is separately included in the submitted theorem list."
+      note: "The coefficient vectors are derived from the multilinear operator, and the energy limit includes strict positivity of its leading constant."
 
 acknowledgements: "Mathlib, Lean, Comparator, Lean4export, Landrun, and NanoDa."

@@ -1,7 +1,7 @@
 # Lean verification
 
-This self-contained Lean 4 project checks the algebraic kernel of the
-accompanying paper.
+This self-contained Lean 4 project proves the finite multilinear mixture law
+for real-valued continuous signals on the positive half-line.
 
 ## Pinned environment
 
@@ -30,20 +30,12 @@ lake env lean RiemannHypothesisProofFactory/CriticalExponentTransforms/PaperCert
 
 ## Exact scope
 
-Lean checks:
+Lean derives the exact finite perturbation expansion from multilinearity and
+dilation covariance and proves the normalized dyadic-energy limit by dominated
+convergence. Given the first nonzero grouped coefficient, it proves the leading
+norm limit, positivity of the energy constant, and the strict
+critical-exponent gap.
 
-- the operator-level pure-power normal form and exact critical exponent gap;
-- the multilinear orderwise and adjacent exponent-gap identities;
-- strict decrease of successive multilinear exponents when `rho < sigma`;
-- the shared homogeneous and phase exponent-gap identity;
-- a scalar pure-power normal-form specialization from its scale equation;
-- the saturation and two-sided-germ exponent arithmetic;
-- strict interiority and exact inversion of saturation at positive scale; and
-- the inverse Mellin-symbol lower bound from a bounded reciprocal symbol.
-
-Lean does not check the Abel integral; the vector-valued multilinear expansion
-and asymptotics; the phase-orbit normal form and periodic block analysis; the
-pure-power energy integral; the complex-measure Mellin theorem; the saturation
-pure-power asymptotic and connector; the two-sided-germ comparison; or any
-dyadic energy law. Those are proved in the manuscript. Literature,
-novelty, exposition, and publication judgments are also outside the kernel.
+The paper's zero-channel and error-term branches, together with its phase-orbit,
+positive-homogeneous, Mellin, saturation, and two-sided-germ results, are
+separate manuscript arguments.

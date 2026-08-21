@@ -1,26 +1,18 @@
-import RiemannHypothesisProofFactory.MobiusResidualComplexity.CombinatorialKernel
-import RiemannHypothesisProofFactory.MobiusResidualComplexity.ExactCompression
+import RiemannHypothesisProofFactory.MobiusResidualComplexity.PairCompression
 
 /-!
 # Möbius residual-complexity paper certificate
 
-The imported modules check the paper's finite cancellation bound, zero-sum
-cell balance, exact rank-pair crossing count, common-core residual-budget
-inheritance, final exponent contradiction, square-root constant identity, and
-endpoint-doubling connector. The analytic inputs, the construction of the
-ranked Möbius lists, sign parity after gcd removal, and the global sparse-jump
-obligations remain manuscript-level proofs.
+The imported modules check the exact fixed-budget compression of a finite
+zero-sum squarefree cell into increasing-rank opposite-sign pairs. The formal
+result includes the pairwise-gcd residual budgets, the cell-diameter bound, and
+the exact crossing count at every real cutoff. The asymptotic lower bound and
+the global sparse-jump argument remain manuscript-level proofs.
 -/
 
-#print axioms RiemannHypothesisProofFactory.MobiusResidualComplexity.opposite_sign_pair_cancel
-#print axioms RiemannHypothesisProofFactory.MobiusResidualComplexity.abs_sum_le_card
-#print axioms RiemannHypothesisProofFactory.MobiusResidualComplexity.finite_matching_bound
-#print axioms RiemannHypothesisProofFactory.MobiusResidualComplexity.zero_sum_unit_cell_balanced
-#print axioms RiemannHypothesisProofFactory.MobiusResidualComplexity.strict_exponent_sandwich_impossible
-#print axioms RiemannHypothesisProofFactory.MobiusResidualComplexity.square_root_threshold_identity
-#print axioms RiemannHypothesisProofFactory.MobiusResidualComplexity.cell_max_le_twice_endpoint
-#print axioms RiemannHypothesisProofFactory.MobiusResidualComplexity.cell_max_le_doubled_cutoff
-#print axioms RiemannHypothesisProofFactory.MobiusResidualComplexity.rankCrossingIndices_eq_Ico
-#print axioms RiemannHypothesisProofFactory.MobiusResidualComplexity.exact_rank_pair_crossing_count
-#print axioms RiemannHypothesisProofFactory.MobiusResidualComplexity.exact_rank_pair_crossing_balance
+#print axioms RiemannHypothesisProofFactory.MobiusResidualComplexity.squarefree_cell_mass_eq_card_sub_card
+#print axioms RiemannHypothesisProofFactory.MobiusResidualComplexity.zero_mass_squarefree_cell_balanced
 #print axioms RiemannHypothesisProofFactory.MobiusResidualComplexity.common_core_residual_budget
+#print axioms RiemannHypothesisProofFactory.MobiusResidualComplexity.exact_rank_pair_crossing_balance
+#print axioms RiemannHypothesisProofFactory.MobiusResidualComplexity.exact_fixed_budget_pair_compression
+#print axioms RiemannHypothesisProofFactory.MobiusResidualComplexity.exact_cell_gcd_pair_compression

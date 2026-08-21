@@ -1,2 +1,3 @@
 import RiemannHypothesisProofFactory.SubpowerDyadicEnergy.DiscreteKernel
+import RiemannHypothesisProofFactory.SubpowerDyadicEnergy.DyadicBalance
 import RiemannHypothesisProofFactory.SubpowerDyadicEnergy.PaperCertificate

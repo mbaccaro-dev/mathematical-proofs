@@ -1,10 +1,7 @@
-import RiemannHypothesisProofFactory.SelbergConditioning
+import RiemannHypothesisProofFactory.SelbergConditioning.PrimeFactorConstruction
 
 open RiemannHypothesisProofFactory.SelbergConditioning
 
-#print axioms distinguished_correction_eq_neg_tail
-#print axioms signed_perturbations_pos
-#print axioms scaled_residual_le_tolerance
-#print axioms scaled_two_sign_separation
-#print axioms lipschitz_constant_lower_bound
-#print axioms finite_two_sign_conditioning_obstruction
+#print axioms centeredPrimeCoefficient_weighted_sum_zero
+#print axioms primeFactorResidual_abs_le_log
+#print axioms finite_prime_factor_conditioning_construction

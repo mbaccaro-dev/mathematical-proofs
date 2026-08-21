@@ -1,83 +1,39 @@
+import Mathlib.Analysis.SpecialFunctions.Log.Basic
 import Mathlib.Tactic
 
-open Real
+open scoped BigOperators
 
 namespace RiemannHypothesisProofFactory.SelbergConditioning
 
-theorem distinguished_correction_eq_neg_tail
-    (distinguished total tail : ℝ)
-    (htotal : total = distinguished + tail) :
-    distinguished - total = -tail := by
-  sorry
+noncomputable def primeFactorResidual (c : ℕ → ℝ) (n : ℕ) : ℝ :=
+  ∑ p ∈ n.factorization.support, (n.factorization p : ℝ) * c p
 
-theorem signed_perturbations_pos
-    (base perturbation scale coefficientBound : ℝ)
-    (hbase : 0 < base)
-    (hbound : |perturbation| ≤ coefficientBound * base)
-    (hsmall : |scale| * coefficientBound < 1) :
-    0 < base + scale * perturbation ∧
-      0 < base - scale * perturbation := by
-  sorry
+noncomputable def centeredPrimeCoefficient
+    (P : Finset ℕ) (q : ℕ) (raw : ℕ → ℝ) (p : ℕ) : ℝ :=
+  if p ∉ P then 0
+  else if p = q then
+    -((q : ℝ) - 1) * ∑ r ∈ P.erase q, raw r / ((r : ℝ) - 1)
+  else raw p
 
-theorem scaled_residual_le_tolerance
-    (residual tau coefficientBound ell : ℝ)
-    (htau : 0 ≤ tau)
-    (hcoefficientBound : 0 < coefficientBound)
-    (hell : 0 < ell)
-    (hresidual : |residual| ≤ coefficientBound * ell) :
-    |(tau / (coefficientBound * ell)) * residual| ≤ tau := by
-  sorry
-
-theorem scaled_two_sign_separation
-    (rho tau coefficientBound ell xPow signedSum : ℝ)
-    (hrho : 0 < rho)
-    (htau : 0 ≤ tau)
-    (hcoefficientBound : 0 < coefficientBound)
-    (hell : 0 < ell)
-    (hsignedSum : xPow / (2 * rho) ≤ |signedSum|) :
-    tau * xPow / (rho * coefficientBound * ell) ≤
-      |(tau / (coefficientBound * ell)) * signedSum -
-        (-(tau / (coefficientBound * ell)) * signedSum)| := by
-  sorry
-
-theorem lipschitz_constant_lower_bound
-    (rho tau coefficientBound ell xPow outputPlus outputMinus
-      inputDistance lipschitzConstant : ℝ)
-    (hrho : 0 < rho)
-    (htau : 0 < tau)
-    (hcoefficientBound : 0 < coefficientBound)
-    (hell : 0 < ell)
-    (hinputDistance : inputDistance ≤ 2 * tau)
-    (hlipschitzNonneg : 0 ≤ lipschitzConstant)
-    (houtput : tau * xPow / (rho * coefficientBound * ell) ≤
-      |outputPlus - outputMinus|)
-    (hlipschitz : |outputPlus - outputMinus| ≤
-      lipschitzConstant * inputDistance) :
-    xPow / (2 * rho * coefficientBound * ell) ≤ lipschitzConstant := by
-  sorry
-
-theorem finite_two_sign_conditioning_obstruction
-    (rho tau coefficientBound ell xPow signedSum
-      residualPlus residualMinus inputDistance lipschitzConstant : ℝ)
-    (hrho : 0 < rho)
-    (htau : 0 < tau)
-    (hcoefficientBound : 0 < coefficientBound)
-    (hell : 0 < ell)
-    (hresidualPlus : |residualPlus| ≤ coefficientBound * ell)
-    (hresidualMinus : |residualMinus| ≤ coefficientBound * ell)
-    (hsignedSum : xPow / (2 * rho) ≤ |signedSum|)
-    (hinputDistance : inputDistance ≤ 2 * tau)
-    (hlipschitzNonneg : 0 ≤ lipschitzConstant)
-    (hlipschitz :
-      |(tau / (coefficientBound * ell)) * signedSum -
-          (-(tau / (coefficientBound * ell)) * signedSum)| ≤
-        lipschitzConstant * inputDistance) :
-    |(tau / (coefficientBound * ell)) * residualPlus| ≤ tau ∧
-      |(tau / (coefficientBound * ell)) * residualMinus| ≤ tau ∧
-      tau * xPow / (rho * coefficientBound * ell) ≤
-        |(tau / (coefficientBound * ell)) * signedSum -
-          (-(tau / (coefficientBound * ell)) * signedSum)| ∧
-      xPow / (2 * rho * coefficientBound * ell) ≤ lipschitzConstant := by
+/-- A centered finite prime coefficient family gives an exact mean-zero
+prime-power perturbation and a logarithmically controlled divisor residual. -/
+theorem finite_prime_factor_conditioning_construction
+    (P : Finset ℕ) (q : ℕ) (raw : ℕ → ℝ) (C : ℝ)
+    (hprime : ∀ p ∈ P, Nat.Prime p)
+    (hqP : q ∈ P)
+    (hnonzero : ∃ p ∈ P.erase q, raw p ≠ 0)
+    (hC : 0 ≤ C)
+    (hcoeff : ∀ p ∈ P,
+      |centeredPrimeCoefficient P q raw p| ≤ C * Real.log p) :
+    (∑ p ∈ P,
+        centeredPrimeCoefficient P q raw p / ((p : ℝ) - 1) = 0) ∧
+      (∀ n : ℕ,
+        |primeFactorResidual (centeredPrimeCoefficient P q raw) n| ≤
+          C * Real.log n) ∧
+      ∃ p ∈ P,
+        centeredPrimeCoefficient P q raw p ≠ 0 ∧
+        primeFactorResidual (centeredPrimeCoefficient P q raw) p =
+          centeredPrimeCoefficient P q raw p := by
   sorry
 
 end RiemannHypothesisProofFactory.SelbergConditioning

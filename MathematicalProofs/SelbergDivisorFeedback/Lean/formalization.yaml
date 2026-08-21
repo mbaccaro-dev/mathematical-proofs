@@ -2,10 +2,13 @@
 version: "v0.4"
 
 project:
-  name: "Selberg feedback conditioning: finite formal kernel"
+  name: "Finite prime-factor conditioning construction"
   description: >-
-    A Lean 4 verification of the exact finite two-sign witness that turns
-    bounded approximate divisor data into a quantitative instability bound.
+    A Lean 4 proof that correcting one distinguished coefficient in a finite
+    set of primes centers a nonzero prime-power perturbation exactly, while the prime factorization
+    formula turns coefficient bounds into a uniform logarithmic divisor-residual
+    bound. This is the arithmetic construction at the core of the paper's
+    conditioning witness.
   authors:
     - "Mayk Loide Baccaro"
   license: "Apache-2.0"
@@ -17,14 +20,14 @@ classification:
   msc2020: ["11N05", "11M26"]
 
 sources:
-  - title: "Selberg Feedback from Approximate Divisor Data"
+  - title: "Selberg Feedback and Approximate Divisor Data Do Not Stably Determine Square-Root Prime Error"
     authors:
       - "Mayk Loide Baccaro"
     id: "10.5281/zenodo.22005767"
     type: "paper"
     location: "https://doi.org/10.5281/zenodo.22005767"
     relationship: "formalizes"
-    note: "The formalization checks the paper's finite conditioning algebra after its analytic estimates are assumed."
+    note: "The selected theorem formalizes the finite prime-factor construction and its exact residual estimate."
     license: "unknown"
     author_endorsement: "participated"
 
@@ -32,23 +35,19 @@ related_formalizations: []
 
 status:
   scope: >-
-    The submission packages the residual normalization, two-sign output
-    separation, and final Lipschitz lower bound into one finite conditioning
-    obstruction. It also proves direct centering and positivity of signed
-    perturbations. It does not formalize the prime number theorem, Selberg's
-    formula, residual moment estimates, or the compact and hierarchy
-    asymptotics in the manuscript.
+    The selected theorem starts with a finite set containing only primes,
+    extends its centered coefficients by zero off that set, proves exact
+    weighted centering, exhibits a prime where the residual is nonzero, and
+    proves the logarithmic bound for the divisor residual at every integer
+    through the exact prime factorization formula. The prime-number asymptotics,
+    near-linear output separation, Selberg remainder, residual moments, and
+    generalized von Mangoldt hierarchy remain manuscript-level arguments.
   sorry_count: 0
   sorry_in_definitions: 0
   axioms: ["propext", "Quot.sound", "Classical.choice"]
   main_results:
-    - declaration: "RiemannHypothesisProofFactory.SelbergConditioning.finite_two_sign_conditioning_obstruction"
-      file: "RiemannHypothesisProofFactory/SelbergConditioning/ConditioningWitness.lean"
-      sorry_count: 0
-      axioms: ["propext", "Quot.sound", "Classical.choice"]
-      comparator_config: "comparator.json"
-    - declaration: "RiemannHypothesisProofFactory.SelbergConditioning.lipschitz_constant_lower_bound"
-      file: "RiemannHypothesisProofFactory/SelbergConditioning/FiniteKernel.lean"
+    - declaration: "RiemannHypothesisProofFactory.SelbergConditioning.finite_prime_factor_conditioning_construction"
+      file: "RiemannHypothesisProofFactory/SelbergConditioning/PrimeFactorConstruction.lean"
       sorry_count: 0
       axioms: ["propext", "Quot.sound", "Classical.choice"]
       comparator_config: "comparator.json"
@@ -63,36 +62,29 @@ automation:
         wall_time: "not tracked"
         spend_usd: "subscription-based"
         hardware: "local machine"
-      prompting_notes: "The human owner selected the result and directed formalization, auditing, and release preparation."
+      prompting_notes: "The author selected the result and directed formalization and auditing."
   spend_usd: "subscription-based"
-  notes: "The finite kernel was built with a pinned toolchain and its exact paper boundary was audited."
+  notes: "The proof uses the pinned Lean and Mathlib environment recorded in this directory."
 
 fidelity:
-  divergences: "The submission proves the complete finite implication from the paper's residual and signed-sum witness hypotheses to its normalized separation and Lipschitz lower bound; the analytic construction of those witnesses remains outside the formal claim."
+  divergences: >-
+    The selected theorem proves the finite arithmetic construction and exact
+    logarithmic residual bound. It does not formalize the analytic asymptotics
+    that produce the paper's near-linear output separation.
 
 review:
   status: "agent-reviewed"
   reviewers:
     - "OpenAI GPT-5 (Codex)"
-  notes: "Independent agent lanes checked the formulas, signs, hypotheses, scaling constants, axiom reports, and manuscript correspondence. No human peer review is claimed."
+  notes: "The statements, hypotheses, exact centering identity, factorization formula, and axiom reports were checked. No human peer review is claimed."
 
 alignment:
   namespace: "RiemannHypothesisProofFactory.SelbergConditioning"
   statements:
-    - source: "Finite two-sign conditioning obstruction"
-      lean: "RiemannHypothesisProofFactory.SelbergConditioning.finite_two_sign_conditioning_obstruction"
-      module: "RiemannHypothesisProofFactory.SelbergConditioning.ConditioningWitness"
+    - source: "Prime-power conditioning construction and divisor-residual bound"
+      lean: "RiemannHypothesisProofFactory.SelbergConditioning.finite_prime_factor_conditioning_construction"
+      module: "RiemannHypothesisProofFactory.SelbergConditioning.PrimeFactorConstruction"
       status: "proved"
-      note: "This is the combined finite implication from the manuscript's analytic witness estimates to both normalized residual bounds, output separation, and the Lipschitz lower bound."
-    - source: "Finite conditioning step in the main theorem"
-      lean: "RiemannHypothesisProofFactory.SelbergConditioning.lipschitz_constant_lower_bound"
-      module: "RiemannHypothesisProofFactory.SelbergConditioning.FiniteKernel"
-      status: "partial"
-      note: "This proves the exact final algebraic implication; the analytic number-theory estimates supplying its premises are not formalized here."
-    - source: "Signed perturbation and separation lemmas"
-      lean: "RiemannHypothesisProofFactory.SelbergConditioning.signed_perturbations_pos"
-      module: "RiemannHypothesisProofFactory.SelbergConditioning.FiniteKernel"
-      status: "proved"
-      note: "The submitted theorem list also includes centering, tolerance scaling, and two-sign separation."
+      note: "One coefficient enforces the exact weighted mean-zero constraint on a finite prime set; zero extension, a nonzero witness, and prime factorization give the global logarithmic residual bound."
 
 acknowledgements: "Mathlib, Lean, Comparator, Lean4export, Landrun, and NanoDa."

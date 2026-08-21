@@ -12,16 +12,15 @@ and does not prove the Riemann hypothesis.
 
 ## Formal result in plain words
 
-The Lean project checks four discrete steps from the paper:
+The Lean project checks the central discrete energy route from the paper:
 
-- expanding the square of a weighted prefix sum gives the paper's exact
-  dyadic identity, including both possible right endpoints;
-- if the stated two-endpoint defect condition holds, one large prefix is
-  bounded by the prefix at half its length plus the energy in the intervening
-  block;
-- the same estimate can be iterated along repeated halvings; and
-- this iteration gives an explicit cubic logarithmic bound for the normalized
-  prefix energy.
+- each half-open dyadic block satisfies an exact conservation law connecting
+  its defect, its variation, and the change in positive cumulative energy;
+- the identity handles both possible right endpoints and the strict
+  predecessor convention; and
+- if the stated two-endpoint defect condition holds, repeated halving gives an
+  explicit cubic logarithmic bound for the paper's positive cumulative prefix
+  energy at every endpoint.
 
 The two-endpoint condition is an assumption of the formal result. The Lean
 project does not prove it.
@@ -35,9 +34,9 @@ project does not prove it.
 
 ## Verification
 
-The Lean project checks the exact dyadic prefix-square identity, the sharp
-one-step recurrence, its binary form, and the explicit cubic prefix-energy
-bound under the paper's universal two-endpoint condition. The analytic
+The Lean project checks the exact dyadic energy conservation law and the
+explicit cubic cumulative-energy bound under the paper's universal
+two-endpoint condition. The analytic
 equivalence with the Riemann hypothesis, Mellin-Plancherel argument,
 continuation of reciprocal zeta, zero-simplicity argument, and residue budget
 remain manuscript-level proofs.

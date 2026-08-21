@@ -2,22 +2,17 @@
   "challenge_module": "Challenge",
   "solution_module": "Solution",
   "theorem_names": [
-    "RiemannHypothesisProofFactory.CriticalExponentTransforms.pure_power_gap_law",
-    "RiemannHypothesisProofFactory.CriticalExponentTransforms.multilinear_gap_identity",
-    "RiemannHypothesisProofFactory.CriticalExponentTransforms.multilinear_successive_exponent_lt",
-    "RiemannHypothesisProofFactory.CriticalExponentTransforms.multilinear_adjacent_gap_identity",
-    "RiemannHypothesisProofFactory.CriticalExponentTransforms.homogeneous_gap_identity",
-    "RiemannHypothesisProofFactory.CriticalExponentTransforms.scalar_pure_power_normal_form",
-    "RiemannHypothesisProofFactory.CriticalExponentTransforms.saturation_gap_identity",
-    "RiemannHypothesisProofFactory.CriticalExponentTransforms.germ_gap_identity",
-    "RiemannHypothesisProofFactory.CriticalExponentTransforms.abs_saturation_lt_one",
-    "RiemannHypothesisProofFactory.CriticalExponentTransforms.saturation_inverse",
-    "RiemannHypothesisProofFactory.CriticalExponentTransforms.inverse_symbol_lower_bound"
+    "RiemannHypothesisProofFactory.CriticalExponentTransforms.paper_multilinear_operator_expansion",
+    "RiemannHypothesisProofFactory.CriticalExponentTransforms.paper_normalized_mixture_dyadic_energy_limit",
+    "RiemannHypothesisProofFactory.CriticalExponentTransforms.multilinear_mixture_gap_law"
   ],
   "definition_names": [
-    "RiemannHypothesisProofFactory.CriticalExponentTransforms.powerMode",
-    "RiemannHypothesisProofFactory.CriticalExponentTransforms.inputDilation",
-    "RiemannHypothesisProofFactory.CriticalExponentTransforms.outputDilation"
+    "RiemannHypothesisProofFactory.CriticalExponentTransforms.operatorDifference",
+    "RiemannHypothesisProofFactory.CriticalExponentTransforms.orderCoefficient",
+    "RiemannHypothesisProofFactory.CriticalExponentTransforms.normalizedOperatorDifference",
+    "RiemannHypothesisProofFactory.CriticalExponentTransforms.normalizedMixtureProfile",
+    "RiemannHypothesisProofFactory.CriticalExponentTransforms.normalizedMixtureDyadicEnergy",
+    "RiemannHypothesisProofFactory.CriticalExponentTransforms.mixtureDyadicEnergyLeadingConstant"
   ],
   "permitted_axioms": ["propext", "Quot.sound", "Classical.choice"],
   "enable_nanoda": true

@@ -1,7 +1,7 @@
 # Lean verification
 
-This self-contained Lean 4 project checks the finite algebraic kernel of the
-accompanying paper.
+This self-contained Lean 4 project checks the finite prime-factor construction
+at the core of the accompanying paper's conditioning witness.
 
 ## Pinned environment
 
@@ -30,18 +30,13 @@ lake env lean RiemannHypothesisProofFactory/SelbergConditioning/PaperCertificate
 
 ## Exact scope
 
-Lean checks:
-
-- the combined finite implication from two analytic witness estimates to
-  normalized residual bounds, output separation, and the Lipschitz lower bound;
-- the algebraic rewrite from a distinguished-chain correction to a negative tail;
-- strict positivity of both signed weights under the printed relative bound;
-- normalization of a pointwise residual bound to the tolerance `tau`;
-- the two-sign output separation after scale normalization; and
-- the final Lipschitz lower-bound quotient.
+Lean checks a nonzero coefficient family supported on a finite set containing
+only primes. Correcting one distinguished prime makes the weighted
+prime-power mean exactly zero. The corrected family is zero off that finite
+set, remains nonzero at a prime, and the exact prime factorization formula for
+`log n` bounds its divisor residual by `C log n` for every integer.
 
 Lean does not check the prime number theorem, Chebyshev or partial-summation
-estimates, Selberg's formula, residual first and second moments, the compact
-transform asymptotics, or the generalized von Mangoldt hierarchy.  Those are
-proved in the manuscript.  Literature, novelty, exposition, and publication
-judgments are also outside the kernel.
+estimates, near-linear output separation, Selberg's formula, residual moments,
+the compact transform asymptotics, or the generalized von Mangoldt hierarchy.
+Those are proved in the manuscript.

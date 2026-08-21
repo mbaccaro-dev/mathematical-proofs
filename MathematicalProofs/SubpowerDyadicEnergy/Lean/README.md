@@ -1,7 +1,7 @@
 # Lean verification
 
-This self-contained Lean 4 project checks the discrete theorem core of the
-accompanying paper.
+This self-contained Lean 4 project proves the paper's central discrete
+cumulative-energy consequence.
 
 ## Pinned environment
 
@@ -17,7 +17,7 @@ lake build --wfail
 lake env lean RiemannHypothesisProofFactory/SubpowerDyadicEnergy/PaperCertificate.lean
 ```
 
-The Palomar statement and proof surfaces are `Challenge.lean` and
+The public statement and proof surfaces are `Challenge.lean` and
 `Solution.lean`. Their exact comparison configuration is `comparator.json`.
 
 ## Exact scope
@@ -25,10 +25,12 @@ The Palomar statement and proof surfaces are `Challenge.lean` and
 Lean checks:
 
 - the literal Möbius-logarithm weights, prefix sums, and half-open dyadic blocks;
-- the exact identity `2D = 3V - H`, including the strict predecessor and endpoint completion terms;
-- the sharp parity-uniform one-step prefix-energy recursion under the universal two-endpoint condition;
-- the logarithmic block estimate and floor-halving recurrence; and
-- the resulting explicit cubic bound for normalized prefix energy.
+- the exact conservation law joining dyadic defect, block variation, and
+  completed cumulative energy, including both right endpoints;
+- the logarithmic block estimate and floor-halving recurrence under the
+  universal two-endpoint condition; and
+- the resulting explicit cubic bound for the paper's positive cumulative
+  prefix energy at every endpoint.
 
 Lean does not check the paper's subpower-energy equivalences, Mellin or Fourier
 analysis, holomorphic continuation of reciprocal zeta, functional-equation

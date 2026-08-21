@@ -1,12 +1,12 @@
 import RiemannHypothesisProofFactory.SelbergConditioning.FiniteKernel
 import RiemannHypothesisProofFactory.SelbergConditioning.ConditioningWitness
+import RiemannHypothesisProofFactory.SelbergConditioning.PrimeFactorConstruction
 
 /-!
 # Selberg divisor-feedback formal-assurance surface
 
-The imported module certifies the finite algebraic kernel of the standalone
-paper: direct centering, positivity under a relative perturbation bound,
-residual normalization, two-sign output separation, and their combined finite
-conditioning obstruction. The arithmetic construction and analytic asymptotics remain
-manuscript-level obligations and are not represented as Lean-verified here.
+The imported modules certify the paper's finite prime-factor construction:
+one distinguished coefficient centers the prime-power mean exactly, and the
+factorization formula gives the logarithmic divisor-residual bound. The
+analytic asymptotics remain manuscript-level obligations.
 -/

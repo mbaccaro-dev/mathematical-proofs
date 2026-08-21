@@ -23,9 +23,11 @@ outside its scope.
 ## Verification
 
 GitHub Actions rebuilds the pinned Lean project and checks the public axiom
-report on every push and pull request. The certificate states the exact scope:
-Lean verifies the algebraic kernel listed there, while the paper's analytic and
-vector-valued results remain manuscript-level proof obligations.
+report on every push and pull request. For real-valued continuous signals on
+the positive half-line, Lean derives the finite multilinear mixture expansion
+and proves its first-visible norm and dyadic-energy limits, including the
+positive leading constant and exponent gap. The zero-channel, error-term, and
+other transform branches retain their manuscript proofs.
 
 ## Cite the paper
 

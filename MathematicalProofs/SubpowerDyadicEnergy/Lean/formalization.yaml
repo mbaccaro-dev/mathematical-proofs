@@ -2,11 +2,13 @@
 version: "v0.4"
 
 project:
-  name: "Subpower dyadic Möbius energy: discrete conditional kernel"
+  name: "Cumulative dyadic energy for Möbius-logarithm prefixes"
   description: >-
-    A Lean 4 verification of the exact dyadic prefix-square identity and the
-    explicit cubic normalized prefix-energy bound implied by the paper's
-    universal two-endpoint defect condition.
+    A Lean 4 proof of the exact conservation law connecting the paper's
+    dyadic defect, block variation, and positive cumulative prefix energy.
+    Under the stated universal two-endpoint condition, the formalization
+    derives an explicit cubic logarithmic bound for that cumulative energy at
+    every endpoint.
   authors:
     - "Mayk Loide Baccaro"
   license: "Apache-2.0"
@@ -28,7 +30,7 @@ sources:
     type: "paper"
     location: "https://doi.org/10.5281/zenodo.22038521"
     relationship: "formalizes"
-    note: "The formalization checks the paper's discrete conditional theorem core."
+    note: "The formalization proves the paper's central discrete cumulative-energy consequence."
     license: "unknown"
     author_endorsement: "participated"
 
@@ -36,35 +38,27 @@ related_formalizations: []
 
 status:
   scope: >-
-    The submission proves the exact prefix-square identity with both dyadic
-    endpoints and the strict predecessor convention. Assuming the paper's
-    universal two-endpoint nonnegativity condition, it proves the sharp
-    one-step recursion, a binary recurrence, and an explicit cubic bound for
-    normalized prefix energy. It does not prove the condition itself or
-    formalize the analytic equivalence with the Riemann hypothesis, Mellin and
-    Fourier analysis, reciprocal-zeta continuation, zero simplicity, or the
-    reciprocal-residue budget.
+    The selected statements use the paper's exact Möbius-logarithm weights,
+    strict predecessor convention, half-open dyadic blocks, and both right
+    endpoints. They prove the exact conservation law between dyadic defect,
+    block variation, and completed cumulative energy. Assuming the universal
+    two-endpoint nonnegativity condition, they derive an explicit cubic
+    logarithmic bound for the positive cumulative energy at every integer
+    endpoint. The condition itself is not proved. The analytic equivalence
+    with the Riemann hypothesis, Mellin and Fourier analysis, reciprocal-zeta
+    continuation, zero simplicity, and reciprocal-residue budget remain
+    manuscript-level mathematics.
   sorry_count: 0
   sorry_in_definitions: 0
   axioms: ["propext", "Quot.sound", "Classical.choice"]
   main_results:
-    - declaration: "RiemannHypothesisProofFactory.SubpowerDyadicEnergy.prefix_square_identity"
-      file: "RiemannHypothesisProofFactory/SubpowerDyadicEnergy/DiscreteKernel.lean"
+    - declaration: "RiemannHypothesisProofFactory.SubpowerDyadicEnergy.dyadic_energy_conservation"
+      file: "RiemannHypothesisProofFactory/SubpowerDyadicEnergy/DyadicBalance.lean"
       sorry_count: 0
       axioms: ["propext", "Quot.sound", "Classical.choice"]
       comparator_config: "comparator.json"
-    - declaration: "RiemannHypothesisProofFactory.SubpowerDyadicEnergy.paperP1_implies_sharp_recursion"
-      file: "RiemannHypothesisProofFactory/SubpowerDyadicEnergy/DiscreteKernel.lean"
-      sorry_count: 0
-      axioms: ["propext", "Quot.sound", "Classical.choice"]
-      comparator_config: "comparator.json"
-    - declaration: "RiemannHypothesisProofFactory.SubpowerDyadicEnergy.paperP1_implies_binary_recurrence"
-      file: "RiemannHypothesisProofFactory/SubpowerDyadicEnergy/DiscreteKernel.lean"
-      sorry_count: 0
-      axioms: ["propext", "Quot.sound", "Classical.choice"]
-      comparator_config: "comparator.json"
-    - declaration: "RiemannHypothesisProofFactory.SubpowerDyadicEnergy.paperP1_implies_cubic_bound"
-      file: "RiemannHypothesisProofFactory/SubpowerDyadicEnergy/DiscreteKernel.lean"
+    - declaration: "RiemannHypothesisProofFactory.SubpowerDyadicEnergy.paperP1_implies_cumulative_energy_cubic_bound"
+      file: "RiemannHypothesisProofFactory/SubpowerDyadicEnergy/DyadicBalance.lean"
       sorry_count: 0
       axioms: ["propext", "Quot.sound", "Classical.choice"]
       comparator_config: "comparator.json"
@@ -79,45 +73,34 @@ automation:
         wall_time: "not tracked"
         spend_usd: "subscription-based"
         hardware: "local machine"
-      prompting_notes: "The human owner selected the result and directed formalization, auditing, and release preparation."
+      prompting_notes: "The human author selected the result and directed formalization and auditing."
   spend_usd: "subscription-based"
-  notes: "The finite kernel was checked against the paper's exact endpoint and claim boundaries."
+  notes: "The exact endpoint conventions, conservation law, recurrence, and claim boundary were checked against the paper."
 
 fidelity:
   divergences: >-
-    The submission formalizes the exact discrete identity and conditional
-    recurrence chain through the cubic normalized prefix-energy bound. It does
-    not formalize the paper's analytic RH equivalences, continuation argument,
-    sharp boundary-energy constant, simplicity theorem, or residue budget.
+    The discrete cumulative-energy theorem is formalized directly. The
+    Mellin-Plancherel and reciprocal-zeta arguments that connect subpower
+    energy to the Riemann hypothesis remain manuscript-level mathematics.
 
 review:
   status: "agent-reviewed"
   reviewers:
     - "OpenAI GPT-5 (Codex)"
-  notes: "Independent audits checked endpoint ownership, constants, quantifiers, the statement-to-paper map, and the formal claim ceiling. No human peer review is claimed."
+  notes: "Independent checks covered endpoint ownership, strict predecessors, constants, quantifiers, recurrence iteration, axioms, and source correspondence. No human peer review is claimed."
 
 alignment:
   namespace: "RiemannHypothesisProofFactory.SubpowerDyadicEnergy"
   statements:
-    - source: "Exact dyadic prefix-square identity"
-      lean: "RiemannHypothesisProofFactory.SubpowerDyadicEnergy.prefix_square_identity"
-      module: "RiemannHypothesisProofFactory.SubpowerDyadicEnergy.DiscreteKernel"
+    - source: "Exact dyadic defect-variation-cumulative-energy conservation law"
+      lean: "RiemannHypothesisProofFactory.SubpowerDyadicEnergy.dyadic_energy_conservation"
+      module: "RiemannHypothesisProofFactory.SubpowerDyadicEnergy.DyadicBalance"
       status: "proved"
-      note: "This includes the strict predecessor, both endpoint terms, and the nonnegative completion sum."
-    - source: "Sharp one-step recursion under the universal two-endpoint condition"
-      lean: "RiemannHypothesisProofFactory.SubpowerDyadicEnergy.paperP1_implies_sharp_recursion"
-      module: "RiemannHypothesisProofFactory.SubpowerDyadicEnergy.DiscreteKernel"
+      note: "The identity includes both right endpoints and the exact boundary completion term."
+    - source: "Cubic cumulative-energy bound under the universal two-endpoint condition"
+      lean: "RiemannHypothesisProofFactory.SubpowerDyadicEnergy.paperP1_implies_cumulative_energy_cubic_bound"
+      module: "RiemannHypothesisProofFactory.SubpowerDyadicEnergy.DyadicBalance"
       status: "proved"
-      note: "The condition is an explicit hypothesis; the formalization does not prove it."
-    - source: "Binary recurrence under the universal two-endpoint condition"
-      lean: "RiemannHypothesisProofFactory.SubpowerDyadicEnergy.paperP1_implies_binary_recurrence"
-      module: "RiemannHypothesisProofFactory.SubpowerDyadicEnergy.DiscreteKernel"
-      status: "proved"
-      note: "This bounds one normalized prefix by the half-size prefix plus an explicit logarithmic term, so the estimate can be iterated."
-    - source: "Cubic normalized prefix-energy bound"
-      lean: "RiemannHypothesisProofFactory.SubpowerDyadicEnergy.paperP1_implies_cubic_bound"
-      module: "RiemannHypothesisProofFactory.SubpowerDyadicEnergy.DiscreteKernel"
-      status: "proved"
-      note: "This is the discrete recurrence consequence and does not include the paper's analytic RH implication."
+      note: "The universal condition is an explicit hypothesis; the conclusion controls the paper's positive cumulative energy at every endpoint."
 
 acknowledgements: "Mathlib, Lean, Comparator, Lean4export, Landrun, and NanoDa."

@@ -1,2 +1,1 @@
-import RiemannHypothesisProofFactory.CriticalExponentTransforms.AlgebraicKernel
-import RiemannHypothesisProofFactory.CriticalExponentTransforms.PurePowerGap
+import RiemannHypothesisProofFactory.CriticalExponentTransforms.MixtureGapLaw

@@ -1,1 +1,1 @@
-import RiemannHypothesisProofFactory.SubpowerDyadicEnergy.DiscreteKernel
+import RiemannHypothesisProofFactory.SubpowerDyadicEnergy.DyadicBalance
