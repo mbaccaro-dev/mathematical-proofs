@@ -24,3 +24,9 @@ Each subdirectory is a complete paper artifact containing:
 - [`CriticalExponentTransforms`](CriticalExponentTransforms/) —
   *Scale-Covariant Transforms Preserve Critical-Exponent Gaps*.
   [doi:10.5281/zenodo.22005931](https://doi.org/10.5281/zenodo.22005931)
+- [`MobiusResidualComplexity`](MobiusResidualComplexity/) —
+  *Logarithmic Residual-Complexity Barriers for Local Möbius Cancellation*.
+  [doi:10.5281/zenodo.22006119](https://doi.org/10.5281/zenodo.22006119)
+- [`SubpowerDyadicEnergy`](SubpowerDyadicEnergy/) —
+  *Subpower Energy and Dyadic Defect Criteria for the Riemann Hypothesis*.
+  [doi:10.5281/zenodo.22038521](https://doi.org/10.5281/zenodo.22038521)

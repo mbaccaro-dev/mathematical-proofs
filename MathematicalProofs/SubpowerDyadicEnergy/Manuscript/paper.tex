@@ -1,0 +1,655 @@
+\documentclass[11pt,a4paper]{amsart}
+
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{amsmath,amssymb,mathtools}
+\usepackage[protrusion=true,expansion=false]{microtype}
+\usepackage[a4paper,margin=30mm]{geometry}
+\usepackage[dvipsnames]{xcolor}
+\usepackage[colorlinks=true,linkcolor=MidnightBlue,citecolor=MidnightBlue,urlcolor=MidnightBlue]{hyperref}
+\hypersetup{
+  pdftitle={Subpower Energy and Dyadic Defect Criteria for the Riemann Hypothesis},
+  pdfauthor={Mayk Loide Baccaro}
+}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+
+\newcommand{\C}{\mathbb C}
+\newcommand{\R}{\mathbb R}
+\newcommand{\Pone}{\mathrm{P1}}
+\setlength{\emergencystretch}{2em}
+
+\title[Energy and dyadic defect criteria]{Subpower Energy and Dyadic Defect Criteria for the Riemann Hypothesis}
+\author[Mayk Loide Baccaro]{Mayk Loide Baccaro\\
+Independent researcher\\
+\href{mailto:m.baccaro7663@student.nu.edu}{\texttt{m.baccaro7663@student.nu.edu}}}
+\date{20 August 2026}
+\subjclass[2020]{Primary 11M26; Secondary 11N37, 11M06}
+\keywords{Riemann hypothesis, M\"obius function, Mellin transform, dyadic decomposition, reciprocal zeta function}
+
+\begin{document}
+
+\begin{abstract}
+Let
+\[
+ b_n=-\mu(n)\log n,
+ \qquad B_N=\sum_{n\leq N}b_n.
+\]
+We prove that the Riemann hypothesis is equivalent to subpower growth of the
+positive prefix energy
+\[
+ \sum_{n\leq X}\frac{B_n^2}{n(n+1)},
+\]
+and also to convergence of each positive power-damped version of this sum.
+The same criterion has a continuous form: for every $\sigma>1/2$, the
+weighted energy of the right-continuous step function $B(x)=B_{\lfloor
+x\rfloor}$ is finite, or equivalently its Mellin transform is square
+integrable on $\Re s=\sigma$.  An exact prefix-square identity then gives
+equivalent cumulative and individual lower bounds for signed dyadic defects.
+As a stronger sufficient condition, eventual nonnegativity of the dyadic
+defects implies the Riemann hypothesis, simplicity of all nontrivial zeros,
+and the explicit bound
+\[
+ \sum_{\rho}\left|\frac{1}{\rho\zeta'(\rho)}\right|^2
+ \leq \frac{18}{\pi^2}.
+\]
+The paper proves these equivalences, but it does not establish any of the
+equivalent estimates or the eventual-sign hypothesis.  It therefore does
+not prove the Riemann hypothesis.
+\end{abstract}
+
+\maketitle
+
+\section{Introduction}
+
+The classical Littlewood criterion expresses the Riemann hypothesis through
+cancellation in the summatory M\"obius function.  This paper studies the
+closely related coefficients
+\[
+ b_n=-\mu(n)\log n=(\mu*\Lambda)(n),
+\]
+which are the Dirichlet coefficients of the derivative of $1/\zeta(s)$.
+Their prefix sums $B_N$ lead to two views of the same criterion.
+
+The first view is positive.  It asks whether the cumulative square energy
+\[
+ A(X)=\sum_{2\leq n\leq X}\frac{B_n^2}{n(n+1)}
+\]
+grows more slowly than every fixed positive power of $X$.  Positivity makes
+this condition stable under damping and lets it pass directly to a weighted
+Mellin $L^2$ norm.
+
+The second view is signed and local.  On the block $(L,R]$, define
+\[
+ D(L,R)=\sum_{L<n\leq R}
+ \frac{b_n^2-b_nB_{n-1}}{n}.
+\]
+An exact identity relates $D(L,R)$ to the positive prefix energy.  On the
+power-of-two blocks $(2^j,2^{j+1}]$, this identity shows that subpower lower
+bounds for either each defect or their cumulative sum are equivalent to the
+Riemann hypothesis.
+
+The principal theorem is an equivalence theorem, not an estimate for the
+new quantities.  It does not prove any of its criteria.  A separate corollary
+starts from the stronger, also unproved, hypothesis that the power-of-two
+defects are eventually nonnegative.  That sign condition supplies a sharp
+leading constant in the prefix energy.  Mellin-Plancherel then yields an
+explicit boundary norm.  The poles of the differentiated reciprocal zeta
+function consume nonnegative portions of this norm, which forces simple
+zeros and the stated reciprocal-residue budget.
+
+Several $L^2$ formulations of the Riemann hypothesis are already known.
+The Nyman-Beurling theory and its refinements use approximation or closure of
+families of fractional-part functions
+\cite{Nyman1950,Beurling1955,BaezDuarte2003,Kapustin2019}.  The weak Mertens
+theory uses mean squares of the ordinary Mertens function and has strong
+consequences for reciprocal zeta residues \cite{Titchmarsh1986,Ng2004}.
+Modified mollifiers, M\"obius-convolution criteria, generalized von Mangoldt
+sums, and smoothed M\"obius transforms provide further nearby formulations
+\cite{ConreyMyerson2000,BaezDuarte2005,BanksSinha2022,Verjovsky2026}.
+The criterion here instead uses the literal prefix of $-\mu(n)\log n$, its
+positive weighted square energy, and an exact signed dyadic identity.  These
+comparisons locate the argument; they do not establish a novelty or priority
+claim.
+
+\section{The exact block identity}
+
+Let $\mu$ be the M\"obius function and $\Lambda$ the von Mangoldt function.
+For $n\geq1$, set
+\begin{equation}\label{eq:bB}
+ b_n=(\mu*\Lambda)(n)=-\mu(n)\log n,
+ \qquad
+ B_N=\sum_{n\leq N}b_n.
+\end{equation}
+The coefficient identity follows by differentiating
+$1/\zeta(s)=\sum_{n\geq1}\mu(n)n^{-s}$ in $\Re s>1$.  We also use the
+right-continuous step function
+\begin{equation}\label{eq:step}
+ B(x)=\sum_{n\leq x}b_n=B_{\lfloor x\rfloor},
+ \qquad x\geq1.
+\end{equation}
+Values at the integer endpoints do not affect the integrals below, but this
+convention fixes the discrete-to-continuous correspondence.
+
+For integers $2\leq L<R$, define
+\begin{align}
+ D(L,R)&=\sum_{L<n\leq R}
+ \frac{b_n^2-b_nB_{n-1}}{n},\label{eq:D}\\
+ V(L,R)&=\sum_{L<n\leq R}
+ \frac{\mu(n)^2\log^2 n}{n}.\label{eq:V}
+\end{align}
+
+\begin{proposition}[Prefix-square identity]\label{prop:identity}
+For every $2\leq L<R$,
+\begin{equation}\label{eq:identity}
+ 2D(L,R)=3V(L,R)-H(L,R),
+\end{equation}
+where
+\begin{equation}\label{eq:H}
+ H(L,R)=\frac{B_R^2}{R}-\frac{B_L^2}{L+1}
+ +\sum_{L<n<R}\frac{B_n^2}{n(n+1)}.
+\end{equation}
+\end{proposition}
+
+\begin{proof}
+Since $b_n=B_n-B_{n-1}$,
+\[
+ 2b_nB_{n-1}=B_n^2-B_{n-1}^2-b_n^2.
+\]
+It follows that
+\[
+ 2(b_n^2-b_nB_{n-1})
+ =3b_n^2-B_n^2+B_{n-1}^2.
+\]
+After division by $n$, summation over $L<n\leq R$ gives
+\[
+ \sum_{L<n\leq R}\frac{B_n^2-B_{n-1}^2}{n}
+ =\frac{B_R^2}{R}-\frac{B_L^2}{L+1}
+ +\sum_{L<n<R}\frac{B_n^2}{n(n+1)}.
+\]
+Now use $b_n^2=\mu(n)^2\log^2 n$.
+\end{proof}
+
+For $j\geq1$, write
+\begin{equation}\label{eq:dyadic-defects}
+ D_j=D(2^j,2^{j+1}),
+ \qquad
+ S_J=\sum_{j=1}^{J-1}D_j\quad(J\geq2).
+\end{equation}
+Summing Proposition~\ref{prop:identity} over adjacent dyadic blocks gives
+the following exact global form.
+
+\begin{corollary}[Exact dyadic balance]\label{cor:dyadic-identity}
+For $X=2^J$ with $J\geq2$,
+\begin{equation}\label{eq:dyadic-identity}
+ 2S_J+A(X)+\frac{B_X^2}{X+1}
+ =3W(X)+\frac{B_2^2}{2},
+\end{equation}
+where
+\[
+ W(X)=\sum_{2<n\leq X}\frac{\mu(n)^2\log^2n}{n}.
+\]
+\end{corollary}
+
+\begin{proof}
+At an interior dyadic boundary $n$, the adjacent endpoint terms combine as
+\[
+ \frac{B_n^2}{n}-\frac{B_n^2}{n+1}
+ =\frac{B_n^2}{n(n+1)}.
+\]
+\[
+ \sum_{j=1}^{J-1}H(2^j,2^{j+1})
+ =\frac{B_X^2}{X}-\frac{B_2^2}{3}
+ +\sum_{2<n<X}\frac{B_n^2}{n(n+1)}.
+\]
+Substitution in Proposition~\ref{prop:identity}, followed by
+\[
+ A(X)=\frac{B_2^2}{6}
+ +\sum_{2<n<X}\frac{B_n^2}{n(n+1)}
+ +\frac{B_X^2}{X(X+1)},
+\]
+gives \eqref{eq:dyadic-identity}.
+\end{proof}
+
+We shall use the standard squarefree estimate and its partial-summation
+consequence
+\begin{align}
+ \sum_{n\leq X}\mu(n)^2&=\frac{6}{\pi^2}X+O(\sqrt X),\label{eq:squarefree}\\
+ \sum_{n\leq X}\frac{\mu(n)^2\log^2n}{n}
+ &=\frac{2}{\pi^2}\log^3X+O(\log^2X).\label{eq:weighted-squarefree}
+\end{align}
+
+\section{Positive energy, Mellin energy, and dyadic defects}
+
+Define the positive cumulative energy
+\begin{equation}\label{eq:A}
+ A(X)=\sum_{2\leq n\leq X}\frac{B_n^2}{n(n+1)}.
+\end{equation}
+For $\eta>0$ and $\sigma>1/2$, also define
+\begin{align}
+ \mathcal E_\eta
+ &=\sum_{n\geq2}\frac{B_n^2}{n(n+1)}n^{-\eta},\label{eq:weighted-energy}\\
+ I(\sigma)
+ &=\int_1^\infty |B(x)|^2x^{-2\sigma-1}\,dx.\label{eq:I}
+\end{align}
+
+\begin{lemma}[Exact continuous realization]\label{lem:mellin}
+For every $\sigma>1/2$,
+\begin{equation}\label{eq:step-sum}
+ I(\sigma)=\sum_{n\geq2}B_n^2
+ \frac{n^{-2\sigma}-(n+1)^{-2\sigma}}{2\sigma}.
+\end{equation}
+If $\eta=2\sigma-1$, then
+\begin{equation}\label{eq:comparison}
+ I(\sigma)<\infty
+ \quad\Longleftrightarrow\quad
+ \mathcal E_\eta<\infty.
+\end{equation}
+Put
+\[
+ g_\sigma(y)=B(e^y)e^{-\sigma y}\mathbf 1_{[0,\infty)}(y)
+\]
+and, for $T>0$, let
+\[
+ F_{\sigma,T}(t)=\int_0^T g_\sigma(y)e^{-ity}\,dy.
+\]
+Then $I(\sigma)<\infty$ if and only if $F_{\sigma,T}$ converges in
+$L^2(\R)$ as $T\to\infty$.  Denote the limit by $F_\sigma$.  In that case,
+\begin{equation}\label{eq:plancherel}
+ \int_{-\infty}^{\infty}|F_\sigma(t)|^2\,dt
+ =2\pi I(\sigma).
+\end{equation}
+\end{lemma}
+
+\begin{proof}
+By \eqref{eq:step}, $B(x)=B_n$ on $[n,n+1)$ apart from an irrelevant
+endpoint.  Integration on each interval gives \eqref{eq:step-sum}.  The
+mean-value theorem gives
+\[
+ \frac{n^{-2\sigma}-(n+1)^{-2\sigma}}{2\sigma}
+ \asymp_\sigma n^{-2\sigma-1}
+ =n^{-2-\eta}
+ \asymp \frac{n^{-\eta}}{n(n+1)},
+\]
+which proves \eqref{eq:comparison}.  The substitution $x=e^y$ gives
+\[
+ \int_0^\infty|g_\sigma(y)|^2\,dy=I(\sigma).
+\]
+For $T>U$, Plancherel for the convention
+$\widehat g(t)=\int_\R g(y)e^{-ity}\,dy$ gives
+\[
+ \|F_{\sigma,T}-F_{\sigma,U}\|_2^2
+ =2\pi\int_U^T|g_\sigma(y)|^2\,dy.
+\]
+Thus $F_{\sigma,T}$ is Cauchy in $L^2$ exactly when $I(\sigma)$ is finite.
+Taking the limit proves \eqref{eq:plancherel}.
+\end{proof}
+
+\begin{theorem}[Equivalent subpower criteria]\label{thm:equivalence}
+The following statements are equivalent.
+\begin{enumerate}
+ \item The Riemann hypothesis is true.
+ \item For every $\varepsilon>0$,
+ \begin{equation}\label{eq:PE}
+  A(X)=O_\varepsilon(X^\varepsilon).
+ \end{equation}
+ \item For every $\eta>0$, the series $\mathcal E_\eta$ converges.
+ \item For every $\sigma>1/2$, the integral $I(\sigma)$ is finite.
+ \item For every $\sigma>1/2$, the truncated transforms
+ $F_{\sigma,T}$ in Lemma~\ref{lem:mellin} converge in $L^2(\R)$.
+ \item For every $\varepsilon>0$, there is $C_\varepsilon$ such that
+ \begin{equation}\label{eq:CDD}
+  S_J\geq-C_\varepsilon 2^{\varepsilon J}
+  \qquad(J\geq2).
+ \end{equation}
+ \item For every $\varepsilon>0$, there is $C_\varepsilon$ such that
+ \begin{equation}\label{eq:IDD}
+  D_j\geq-C_\varepsilon 2^{\varepsilon j}
+  \qquad(j\geq1).
+ \end{equation}
+\end{enumerate}
+\end{theorem}
+
+\begin{proof}
+We first connect the positive discrete conditions.  If
+\eqref{eq:PE} holds and $\eta>0$, use the bound with exponent $\eta/2$
+and partial summation against the decreasing weight $x^{-\eta}$; this
+proves $\mathcal E_\eta<\infty$.  Conversely, positivity gives
+\[
+ A(X)\leq X^\eta\mathcal E_\eta.
+\]
+Taking $\eta=\varepsilon$ proves \eqref{eq:PE}.  Lemma~\ref{lem:mellin}
+then proves the equivalence of statements 2 through 5.
+
+We next show that statement 3 implies RH.  On $\Re s>1$, partial
+summation gives
+\begin{equation}\label{eq:dirichlet-mellin}
+ F(s):=\int_1^\infty B(x)x^{-s-1}\,dx
+ =\frac{1}{s}\left(\frac{1}{\zeta(s)}\right)'.
+\end{equation}
+Let $K$ be a compact subset of $\Re s>1/2$, and choose
+$\sigma_0$ with $1/2<\sigma_0<\min_{s\in K}\Re s$.  Statement 3 and
+Lemma~\ref{lem:mellin} give $I(\sigma_0)<\infty$.  Cauchy-Schwarz yields
+\[
+ \int_1^\infty |B(x)|x^{-\Re s-1}\,dx
+ \leq I(\sigma_0)^{1/2}
+ \left(\int_1^\infty
+ x^{-2(\Re s-\sigma_0)-1}\,dx\right)^{1/2},
+\]
+uniformly on $K$.  Thus the integral defining $F$ is locally uniformly
+convergent and holomorphic in $\Re s>1/2$.
+
+The half-plane is simply connected, so $sF(s)$ has a holomorphic primitive
+$Q(s)$ there.  Normalize it at one point in $\Re s>1$ to equal
+$1/\zeta(s)$.  In $\Re s>1$, equation \eqref{eq:dirichlet-mellin} gives
+$Q'=(1/\zeta)'$, so the normalization gives $Q=1/\zeta$.  On
+$\{\Re s>1/2\}\setminus\{1\}$, the meromorphic identity theorem gives
+\[
+ \zeta(s)Q(s)=1.
+\]
+Hence $\zeta$ has no zero with real part greater than $1/2$.  The
+functional equation reflects every nontrivial zero across the critical
+line, so all nontrivial zeros lie on that line.  This proves RH.
+Moreover, $Q'=sF$ and $Q=1/\zeta$ give
+\[
+ F(s)=\frac{1}{s}\left(\frac{1}{\zeta(s)}\right)'
+ \qquad(\Re s>1/2,\ s\neq1).
+\]
+Both sides extend holomorphically across $s=1$.
+The same meromorphic expression therefore controls the approach from the
+right to a zero on the critical line.
+
+Conversely, RH implies the classical estimate
+\cite[Theorem~14.25(C)]{Titchmarsh1986}
+\[
+ M(x):=\sum_{n\leq x}\mu(n)
+ =O_\alpha(x^{1/2+\alpha})
+\]
+for every $\alpha>0$.  Partial summation in \eqref{eq:bB} gives
+\begin{equation}\label{eq:B-from-M}
+ B(x)=-M(x)\log x+\int_1^x\frac{M(t)}{t}\,dt.
+\end{equation}
+After absorbing the logarithm into a slightly larger exponent,
+$B(x)=O_\alpha(x^{1/2+\alpha})$ for every $\alpha>0$.  Substitution in
+\eqref{eq:A} proves \eqref{eq:PE}.
+
+It remains to connect the dyadic statements.  Statement 7 implies statement
+6 by summing a geometric progression.  If statement 6 holds, then
+Corollary~\ref{cor:dyadic-identity} and \eqref{eq:weighted-squarefree} give,
+for $X=2^J$,
+\[
+ A(X)\leq 3W(X)+2C_\varepsilon X^\varepsilon+O(1)
+ =O_\varepsilon(X^\varepsilon).
+\]
+Monotonicity of $A$ extends this bound to every $X$, so statement 2 follows.
+
+Finally assume RH.  Choose $\alpha>0$ so small that $2\alpha<\varepsilon$.
+The bound after \eqref{eq:B-from-M} and \eqref{eq:H} give
+\[
+ H(2^j,2^{j+1})=O_\alpha(2^{2\alpha j}).
+\]
+Since $V\geq0$, Proposition~\ref{prop:identity} yields
+\[
+ D_j\geq-O_\alpha(2^{2\alpha j}),
+\]
+which is statement 7.  All seven statements are therefore equivalent.
+\end{proof}
+
+\begin{remark}[Boundary not included]\label{rem:boundary}
+The Mellin conditions in Theorem~\ref{thm:equivalence} concern every fixed
+line $\Re s=\sigma>1/2$.  The theorem does not assert square integrability
+on the critical line itself.
+\end{remark}
+
+\section{The stronger eventual-sign condition}
+
+The equivalence theorem allows small negative dyadic defects of subpower
+size.  Eventual nonnegativity is stronger and supplies an explicit leading
+constant.
+
+\begin{theorem}[Eventual sign and boundary budget]\label{thm:eventual}
+Suppose there is $j_0$ such that
+\begin{equation}\label{eq:eventual}
+ D_j\geq0\qquad(j\geq j_0).
+\end{equation}
+Then the Riemann hypothesis is true, every nontrivial zero of $\zeta$ is
+simple, and
+\begin{equation}\label{eq:budget}
+ \sum_\rho\left|\frac{1}{\rho\zeta'(\rho)}\right|^2
+ \leq\frac{18}{\pi^2}.
+\end{equation}
+The sum includes both conjugate ordinates.  In addition,
+\begin{equation}\label{eq:A-sharp}
+ A(X)\leq\frac{6}{\pi^2}\log^3X+O(\log^2X)
+\end{equation}
+and, with $F$ as in \eqref{eq:dirichlet-mellin},
+\begin{equation}\label{eq:hardy-ceiling}
+ \limsup_{\delta\downarrow0}\delta^3
+ \int_{-\infty}^{\infty}
+ \left|F\left(\frac12+\delta+it\right)\right|^2\,dt
+ \leq\frac{9}{\pi}.
+\end{equation}
+\end{theorem}
+
+\begin{proof}
+Condition \eqref{eq:eventual} and
+Corollary~\ref{cor:dyadic-identity} give
+\[
+ A(2^J)\leq3W(2^J)+O(1).
+\]
+Equation \eqref{eq:weighted-squarefree} proves \eqref{eq:A-sharp} first at
+powers of two and then, by monotonicity, for all $X$.
+Theorem~\ref{thm:equivalence} now proves RH.
+
+For $\delta>0$, the step convention gives
+\begin{align*}
+ I\left(\frac12+\delta\right)
+ &=\sum_{n\geq2}B_n^2\int_n^{n+1}x^{-2-2\delta}\,dx\\
+ &\leq\sum_{n\geq2}
+ \frac{B_n^2}{n(n+1)}n^{-2\delta}
+ =\int_{2^-}^{\infty}x^{-2\delta}\,dA(x).
+\end{align*}
+Integration by parts and \eqref{eq:A-sharp} show that
+\begin{equation}\label{eq:I-ceiling}
+ \limsup_{\delta\downarrow0}\delta^3
+ I\left(\frac12+\delta\right)
+ \leq\frac{9}{2\pi^2}.
+\end{equation}
+Indeed,
+\[
+ \frac{6}{\pi^2}\,2\delta
+ \int_1^\infty \log^3x\,x^{-2\delta-1}\,dx
+ =\frac{9}{2\pi^2\delta^3},
+\]
+while the $O(\log^2x)$ term contributes $O(\delta^{-2})$.
+Equation \eqref{eq:plancherel} turns \eqref{eq:I-ceiling} into
+\eqref{eq:hardy-ceiling}.
+
+Let $\rho=1/2+i\gamma$ be a nontrivial zero of multiplicity $m$, and write
+\[
+ \zeta(s)=(s-\rho)^m g(s),\qquad g(\rho)\neq0.
+\]
+In a right-hand neighborhood of $\rho$, the preceding meromorphic identity
+gives
+\begin{equation}\label{eq:laurent-general}
+ F(s)=c_\rho(s-\rho)^{-m-1}
+ +O_\rho(|s-\rho|^{-m}),
+ \qquad c_\rho=-\frac{m}{\rho g(\rho)}.
+\end{equation}
+Choose $\eta>0$ so that the Laurent estimate holds in the right half of
+$|s-\rho|<2\eta$, the disk avoids $0$ and $1$, and $\rho$ is its only
+zeta zero.  Put $I_\rho=[\gamma-\eta,\gamma+\eta]$.  Scaling
+$t-\gamma=\delta u$ in \eqref{eq:laurent-general} gives
+\begin{equation}\label{eq:local-energy-general}
+ \int_{I_\rho}|F(1/2+\delta+it)|^2\,dt
+ =|c_\rho|^2C_m\delta^{-2m-1}+o_\rho(\delta^{-2m-1}),
+\end{equation}
+where
+\[
+ C_m=\int_{-\infty}^{\infty}(1+u^2)^{-m-1}\,du>0.
+\]
+Indeed, the squared remainder in \eqref{eq:laurent-general} contributes
+$O_\rho(\delta^{1-2m})$, and the cross term contributes
+$O_\rho(\delta^{-2m})$.  If $m\geq2$, multiplying
+\eqref{eq:local-energy-general} by $\delta^3$ makes its left side tend to
+infinity, contradicting the finite global limsup in
+\eqref{eq:hardy-ceiling}.  Thus every nontrivial zero is simple.
+
+For $m=1$, $g(\rho)=\zeta'(\rho)$ and
+\[
+ C_1=\int_{-\infty}^{\infty}\frac{du}{(1+u^2)^2}=\frac{\pi}{2}.
+\]
+Consequently, \eqref{eq:local-energy-general} becomes
+\begin{equation}\label{eq:local-energy}
+ \int_{I_\rho}|F(1/2+\delta+it)|^2\,dt
+ =\frac{\pi}{2\delta^3}
+ \left|\frac{1}{\rho\zeta'(\rho)}\right|^2
+ +o_\rho(\delta^{-3}).
+\end{equation}
+Fix a finite set $E$ of zeros and choose the intervals $I_\rho$ pairwise
+disjoint.  The global norm is nonnegative.  Summing
+\eqref{eq:local-energy} over $E$ and using \eqref{eq:hardy-ceiling} gives
+\[
+ \frac{\pi}{2}\sum_{\rho\in E}
+\left|\frac{1}{\rho\zeta'(\rho)}\right|^2
+ \leq\frac{9}{\pi}.
+\]
+Taking the supremum over all finite $E$ proves \eqref{eq:budget}.
+\end{proof}
+
+\section{Relation to the P1 condition}
+
+A previously considered condition asks for more than
+\eqref{eq:eventual}.  For every integer $L\geq2$ and
+$R\in\{2L,2L+1\}$, let $D(L,R)$ be as in \eqref{eq:D}.
+
+\begin{definition}[P1]\label{def:P1}
+Condition $\Pone$ asserts
+\[
+ D(L,R)\geq0
+\]
+for every $L\geq2$ and both permitted endpoints $R=2L$ and $R=2L+1$.
+\end{definition}
+
+Taking $L=2^j$ shows that $\Pone$ implies \eqref{eq:eventual}, with
+$j_0=1$.  Theorem~\ref{thm:eventual} therefore gives
+\[
+ \Pone\quad\Longrightarrow\quad
+ \text{RH, simple nontrivial zeros, and \eqref{eq:budget}}.
+\]
+This is only a one-way implication.  Theorem~\ref{thm:equivalence} proves
+that the subpower energy and defect bounds are equivalent to RH, but it does
+not prove that RH implies $\Pone$.  It also does not prove a strict logical
+separation between $\Pone$ and RH.  Condition $\Pone$ remains unproved, and
+finite verification of its inequalities cannot establish the universal
+statement.
+
+\section{Context and limitations}
+
+The Mellin map in Lemma~\ref{lem:mellin} places the positive energy criterion
+in a classical analytic setting, but its role differs from the
+Nyman-Beurling program.  Nyman and Beurling characterize RH by density of
+specified fractional-part functions in an $L^2$ space
+\cite{Nyman1950,Beurling1955}.  B\'aez-Duarte restricts the admissible
+generators to an arithmetic family \cite{BaezDuarte2003}.  Kapustin gives
+unitarily equivalent Hardy-space and weighted-$L^2$ approximation models,
+including a closure criterion for the span of $\rho(nx)$
+\cite[Theorem~1]{Kapustin2019}.  Here there is no approximation family: the tested
+object is the single step function formed by the literal prefixes of
+$-\mu(n)\log n$, and the condition is finiteness of its weighted square
+energy on every line to the right of the critical line.
+
+The weak Mertens condition also uses a positive mean square and implies RH,
+simple zeros, and summability of reciprocal residues
+\cite{Titchmarsh1986,Ng2004}.  Its summatory function is
+$M(x)=\sum_{n\leq x}\mu(n)$, whereas the present energy uses the logarithmic
+prefix $B(x)$ and arises from $(1/\zeta)'$.  The explicit constant in
+Theorem~\ref{thm:eventual} comes from the exact dyadic identity and the
+leading squarefree density.
+
+The criteria of Conrey and Myerson use modified M\"obius mollifiers in the
+Balazard-Saias framework \cite{ConreyMyerson2000}; B\'aez-Duarte develops
+general M\"obius-convolution criteria \cite{BaezDuarte2005}; Banks and Sinha
+use uniform twisted sums of generalized von Mangoldt functions
+\cite{BanksSinha2022}; and Verjovsky studies exponential smoothing and local
+Fourier formulations of M\"obius cancellation \cite{Verjovsky2026}.  These
+works share coefficients or transform methods with the present paper, but
+their stated criteria are different.
+
+No computation is used in any proof above.  In particular, finite tests of
+the signed defects and finite partial sums of \eqref{eq:budget} cannot prove
+the universal hypotheses or control their tails.  The paper establishes
+equivalences and conditional consequences only.
+
+\begin{thebibliography}{99}
+
+\bibitem{BaezDuarte2003}
+L.~B\'aez-Duarte,
+\emph{A strengthening of the Nyman-Beurling criterion for the Riemann hypothesis},
+Atti Accad. Naz. Lincei Cl. Sci. Fis. Mat. Natur. Rend. Lincei (9)
+Mat. Appl. \textbf{14} (2003), no.~1, 5--11,
+\href{https://arxiv.org/abs/math/0202141}{arXiv:math/0202141}.
+
+\bibitem{BaezDuarte2005}
+L.~B\'aez-Duarte,
+\emph{M\"obius-convolutions and the Riemann hypothesis},
+Ramanujan J. \textbf{9} (2005), 11--23,
+\href{https://doi.org/10.1007/s11139-005-0839-0}{doi:10.1007/s11139-005-0839-0}.
+
+\bibitem{BanksSinha2022}
+W.~D. Banks and S.~Sinha,
+\emph{The Riemann hypothesis via the generalized von Mangoldt function},
+arXiv:2209.11768v2,
+\href{https://arxiv.org/abs/2209.11768}{arXiv:2209.11768}.
+
+\bibitem{Beurling1955}
+A.~Beurling,
+\emph{A closure problem related to the Riemann zeta-function},
+Proc. Natl. Acad. Sci. USA \textbf{41} (1955), 312--314,
+\href{https://doi.org/10.1073/pnas.41.5.312}{doi:10.1073/pnas.41.5.312}.
+
+\bibitem{ConreyMyerson2000}
+J.~B. Conrey and G.~Myerson,
+\emph{On the Balazard-Saias criterion for the Riemann hypothesis},
+arXiv:math/0002254,
+\href{https://arxiv.org/abs/math/0002254}{arXiv:math/0002254}.
+
+\bibitem{Kapustin2019}
+V.~V. Kapustin,
+\emph{Beurling's theorem, Davenport's formula, and the Riemann hypothesis},
+St. Petersburg Math. J. \textbf{30} (2019), no.~6, 917--932,
+\href{https://doi.org/10.1090/spmj/1577}{doi:10.1090/spmj/1577}.
+
+\bibitem{Ng2004}
+N.~Ng,
+\emph{The distribution of the summatory function of the M\"obius function},
+Proc. London Math. Soc. (3) \textbf{89} (2004), 361--389,
+\href{https://doi.org/10.1112/S0024611504014741}{doi:10.1112/S0024611504014741}.
+
+\bibitem{Nyman1950}
+B.~Nyman,
+\emph{On some groups and semi-groups of translations},
+Ph.D. thesis, Uppsala University, 1950.
+
+\bibitem{Titchmarsh1986}
+E.~C. Titchmarsh,
+\emph{The Theory of the Riemann Zeta-Function},
+2nd ed., revised by D.~R. Heath-Brown,
+Oxford University Press, Oxford, 1986.
+
+\bibitem{Verjovsky2026}
+A.~Verjovsky,
+\emph{How random is the M\"obius function? Smoothing, probability, and the Riemann hypothesis},
+arXiv:2607.25002v2,
+\href{https://arxiv.org/abs/2607.25002}{arXiv:2607.25002}.
+
+\end{thebibliography}
+
+\end{document}

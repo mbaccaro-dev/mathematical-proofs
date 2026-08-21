@@ -1,0 +1,122 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/mathlib-initiative/formalization.yaml/main/schema/formalization.schema.json
+version: "v0.4"
+
+project:
+  name: "Subpower dyadic Möbius energy: discrete conditional kernel"
+  description: >-
+    A Lean 4 verification of the exact dyadic prefix-square identity and the
+    explicit cubic normalized prefix-energy bound implied by the paper's
+    universal two-endpoint defect condition.
+  authors:
+    - "Mayk Loide Baccaro"
+  license: "Apache-2.0"
+  responsible_maintainers:
+    - "Mayk Loide Baccaro"
+
+repository:
+  role: "substantive-development"
+
+classification:
+  arxiv: ["math.NT"]
+  msc2020: ["11M26", "11N37"]
+
+sources:
+  - title: "Subpower Energy and Dyadic Defect Criteria for the Riemann Hypothesis"
+    authors:
+      - "Mayk Loide Baccaro"
+    type: "paper"
+    location: "../Manuscript/subpower_dyadic_mobius_mangoldt_equivalence_baccaro_20260820.pdf"
+    relationship: "formalizes"
+    note: "The formalization checks the paper's discrete conditional theorem core."
+    license: "unknown"
+    author_endorsement: "participated"
+
+related_formalizations: []
+
+status:
+  scope: >-
+    The submission proves the exact prefix-square identity with both dyadic
+    endpoints and the strict predecessor convention. Assuming the paper's
+    universal two-endpoint nonnegativity condition, it proves the sharp
+    one-step recursion, a binary recurrence, and an explicit cubic bound for
+    normalized prefix energy. It does not prove the condition itself or
+    formalize the analytic equivalence with the Riemann hypothesis, Mellin and
+    Fourier analysis, reciprocal-zeta continuation, zero simplicity, or the
+    reciprocal-residue budget.
+  sorry_count: 0
+  sorry_in_definitions: 0
+  axioms: ["propext", "Quot.sound", "Classical.choice"]
+  main_results:
+    - declaration: "RiemannHypothesisProofFactory.SubpowerDyadicEnergy.prefix_square_identity"
+      file: "RiemannHypothesisProofFactory/SubpowerDyadicEnergy/DiscreteKernel.lean"
+      sorry_count: 0
+      axioms: ["propext", "Quot.sound", "Classical.choice"]
+      comparator_config: "comparator.json"
+    - declaration: "RiemannHypothesisProofFactory.SubpowerDyadicEnergy.paperP1_implies_sharp_recursion"
+      file: "RiemannHypothesisProofFactory/SubpowerDyadicEnergy/DiscreteKernel.lean"
+      sorry_count: 0
+      axioms: ["propext", "Quot.sound", "Classical.choice"]
+      comparator_config: "comparator.json"
+    - declaration: "RiemannHypothesisProofFactory.SubpowerDyadicEnergy.paperP1_implies_binary_recurrence"
+      file: "RiemannHypothesisProofFactory/SubpowerDyadicEnergy/DiscreteKernel.lean"
+      sorry_count: 0
+      axioms: ["propext", "Quot.sound", "Classical.choice"]
+      comparator_config: "comparator.json"
+    - declaration: "RiemannHypothesisProofFactory.SubpowerDyadicEnergy.paperP1_implies_cubic_bound"
+      file: "RiemannHypothesisProofFactory/SubpowerDyadicEnergy/DiscreteKernel.lean"
+      sorry_count: 0
+      axioms: ["propext", "Quot.sound", "Classical.choice"]
+      comparator_config: "comparator.json"
+
+automation:
+  methods:
+    - method: "agent"
+      models: ["OpenAI GPT-5 (Codex)"]
+      framework: "Codex"
+      tool_setup: "Human-directed AI-assisted Lean development using Mathlib tactics, statement comparison, Comparator, the Lean kernel, and NanoDa."
+      cost:
+        wall_time: "not tracked"
+        spend_usd: "subscription-based"
+        hardware: "local machine"
+      prompting_notes: "The human owner selected the result and directed formalization, auditing, and release preparation."
+  spend_usd: "subscription-based"
+  notes: "The finite kernel was checked against the paper's exact endpoint and claim boundaries."
+
+fidelity:
+  divergences: >-
+    The submission formalizes the exact discrete identity and conditional
+    recurrence chain through the cubic normalized prefix-energy bound. It does
+    not formalize the paper's analytic RH equivalences, continuation argument,
+    sharp boundary-energy constant, simplicity theorem, or residue budget.
+
+review:
+  status: "agent-reviewed"
+  reviewers:
+    - "OpenAI GPT-5 (Codex)"
+  notes: "Independent audits checked endpoint ownership, constants, quantifiers, the statement-to-paper map, and the formal claim ceiling. No human peer review is claimed."
+
+alignment:
+  namespace: "RiemannHypothesisProofFactory.SubpowerDyadicEnergy"
+  statements:
+    - source: "Exact dyadic prefix-square identity"
+      lean: "RiemannHypothesisProofFactory.SubpowerDyadicEnergy.prefix_square_identity"
+      module: "RiemannHypothesisProofFactory.SubpowerDyadicEnergy.DiscreteKernel"
+      status: "proved"
+      note: "This includes the strict predecessor, both endpoint terms, and the nonnegative completion sum."
+    - source: "Sharp one-step recursion under the universal two-endpoint condition"
+      lean: "RiemannHypothesisProofFactory.SubpowerDyadicEnergy.paperP1_implies_sharp_recursion"
+      module: "RiemannHypothesisProofFactory.SubpowerDyadicEnergy.DiscreteKernel"
+      status: "proved"
+      note: "The condition is an explicit hypothesis; the formalization does not prove it."
+    - source: "Binary recurrence under the universal two-endpoint condition"
+      lean: "RiemannHypothesisProofFactory.SubpowerDyadicEnergy.paperP1_implies_binary_recurrence"
+      module: "RiemannHypothesisProofFactory.SubpowerDyadicEnergy.DiscreteKernel"
+      status: "proved"
+      note: "This bounds one normalized prefix by the half-size prefix plus an explicit logarithmic term, so the estimate can be iterated."
+    - source: "Cubic normalized prefix-energy bound"
+      lean: "RiemannHypothesisProofFactory.SubpowerDyadicEnergy.paperP1_implies_cubic_bound"
+      module: "RiemannHypothesisProofFactory.SubpowerDyadicEnergy.DiscreteKernel"
+      status: "proved"
+      note: "This is the discrete recurrence consequence and does not include the paper's analytic RH implication."
+
+acknowledgements: "Mathlib, Lean, Comparator, Lean4export, Landrun, and NanoDa."

@@ -1,0 +1,29 @@
+{
+  "challenge_module": "Challenge",
+  "solution_module": "Solution",
+  "theorem_names": [
+    "RiemannHypothesisProofFactory.SubpowerDyadicEnergy.prefix_square_identity",
+    "RiemannHypothesisProofFactory.SubpowerDyadicEnergy.paperP1_implies_sharp_recursion",
+    "RiemannHypothesisProofFactory.SubpowerDyadicEnergy.paperP1_implies_binary_recurrence",
+    "RiemannHypothesisProofFactory.SubpowerDyadicEnergy.paperP1_implies_cubic_bound"
+  ],
+  "definition_names": [
+    "RiemannHypothesisProofFactory.SubpowerDyadicEnergy.moebiusReal",
+    "RiemannHypothesisProofFactory.SubpowerDyadicEnergy.weight",
+    "RiemannHypothesisProofFactory.SubpowerDyadicEnergy.weightPrefix",
+    "RiemannHypothesisProofFactory.SubpowerDyadicEnergy.rightEndpoint",
+    "RiemannHypothesisProofFactory.SubpowerDyadicEnergy.variation",
+    "RiemannHypothesisProofFactory.SubpowerDyadicEnergy.growingEnergy",
+    "RiemannHypothesisProofFactory.SubpowerDyadicEnergy.paperD",
+    "RiemannHypothesisProofFactory.SubpowerDyadicEnergy.blockEnergy",
+    "RiemannHypothesisProofFactory.SubpowerDyadicEnergy.blockDefect",
+    "RiemannHypothesisProofFactory.SubpowerDyadicEnergy.paperH",
+    "RiemannHypothesisProofFactory.SubpowerDyadicEnergy.paperP1",
+    "RiemannHypothesisProofFactory.SubpowerDyadicEnergy.baseEnergy",
+    "RiemannHypothesisProofFactory.SubpowerDyadicEnergy.binaryDepth",
+    "RiemannHypothesisProofFactory.SubpowerDyadicEnergy.recurrenceMajorant",
+    "RiemannHypothesisProofFactory.SubpowerDyadicEnergy.cubicConstant"
+  ],
+  "permitted_axioms": ["propext", "Quot.sound", "Classical.choice"],
+  "enable_nanoda": true
+}
