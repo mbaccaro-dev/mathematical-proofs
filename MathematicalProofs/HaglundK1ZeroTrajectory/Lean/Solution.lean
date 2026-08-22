@@ -1,0 +1,1 @@
+import HaglundK1ZeroTrajectory.AnalyticCertificate

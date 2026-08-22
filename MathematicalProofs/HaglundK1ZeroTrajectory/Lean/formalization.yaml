@@ -1,0 +1,154 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/mathlib-initiative/formalization.yaml/main/schema/formalization.schema.json
+version: "v0.4"
+
+project:
+  name: "Analytic certificate bridge for the first Haglund zero trajectory"
+  description: >-
+    A Lean 4 formalization of the literal first incomplete-gamma pencil and
+    the analytic interface used to control its zeros. It proves the exact
+    certificate-to-simplicity and descending-velocity implication, an
+    integral positivity theorem excluding the imaginary axis for nonnegative
+    parameters, an explicit no-escape bound from the outer-cone estimate, the
+    one-sided Puiseux-direction contradiction at real collisions, and the
+    local analytic zero branch with its exact velocity.
+  authors:
+    - "Mayk Loide Baccaro"
+  license: "Apache-2.0"
+  responsible_maintainers:
+    - "Mayk Loide Baccaro"
+
+repository:
+  role: "substantive-development"
+
+classification:
+  arxiv: ["math.CV", "math.NT", "math.NA"]
+  msc2020: ["30D15", "11M26", "65G20", "32S05"]
+
+sources:
+  - title: "Haglund's Zero-Trajectory Conjecture for the First Riemann Xi Approximant"
+    authors:
+      - "Mayk Loide Baccaro"
+    id: "10.5281/zenodo.22059236"
+    type: "paper"
+    location: "https://doi.org/10.5281/zenodo.22059236"
+    relationship: "formalizes"
+    note: >-
+      The formalization proves five load-bearing analytic interfaces used by
+      the paper; the numerical atlas and the full collision multiset
+      construction remain outside Lean.
+    license: "unknown"
+    author_endorsement: "participated"
+
+related_formalizations: []
+
+status:
+  scope: >-
+    The selected statements use the paper's literal incomplete-gamma source
+    and first interpolation pencil. They connect the exact four-way interval
+    certificate to zero simplicity and strict downward velocity, exclude the
+    imaginary axis by a direct integral-positivity proof, convert the outer
+    cone estimate into an explicit uniform branch bound, rule out a
+    right-side upper-half-plane collision branch from its scaled asymptotics,
+    and construct the locally unique analytic zero branch with the manuscript's
+    velocity. The numerical interval atlas itself, real-axis positivity,
+    Weierstrass preparation, Puiseux existence, and the full global
+    arbitrary-multiplicity collision theorem are not formalized here.
+  sorry_count: 0
+  sorry_in_definitions: 0
+  axioms: ["propext", "Quot.sound", "Classical.choice"]
+  main_results:
+    - declaration: "HaglundK1ZeroTrajectory.firstQuadrantCertificate_zero_simple_descending"
+      file: "HaglundK1ZeroTrajectory/AnalyticCertificate.lean"
+      sorry_count: 0
+      axioms: ["propext", "Quot.sound", "Classical.choice"]
+      comparator_config: "comparator.json"
+    - declaration: "HaglundK1ZeroTrajectory.realPencil_imaginaryAxis_ne_zero"
+      file: "HaglundK1ZeroTrajectory/AnalyticCertificate.lean"
+      sorry_count: 0
+      axioms: ["propext", "Quot.sound", "Classical.choice"]
+      comparator_config: "comparator.json"
+    - declaration: "HaglundK1ZeroTrajectory.branch_uniformly_bounded"
+      file: "HaglundK1ZeroTrajectory/AnalyticCertificate.lean"
+      sorry_count: 0
+      axioms: ["propext", "Quot.sound", "Classical.choice"]
+      comparator_config: "comparator.json"
+    - declaration: "HaglundK1ZeroTrajectory.no_right_upper_emergence_of_scaled_limits"
+      file: "HaglundK1ZeroTrajectory/AnalyticCertificate.lean"
+      sorry_count: 0
+      axioms: ["propext", "Quot.sound", "Classical.choice"]
+      comparator_config: "comparator.json"
+    - declaration: "HaglundK1ZeroTrajectory.exists_local_descending_zero_motion"
+      file: "HaglundK1ZeroTrajectory/AnalyticCertificate.lean"
+      sorry_count: 0
+      axioms: ["propext", "Quot.sound", "Classical.choice"]
+      comparator_config: "comparator.json"
+
+automation:
+  methods:
+    - method: "agent"
+      models: ["OpenAI GPT-5 (Codex)"]
+      framework: "Codex"
+      tool_setup: "Human-directed AI-assisted mathematical and Lean development using Mathlib tactics, statement comparison, Comparator, the Lean kernel, and NanoDa."
+      cost:
+        wall_time: "not tracked"
+        spend_usd: "subscription-based"
+        hardware: "local machine"
+      prompting_notes: >-
+        AI systems assisted extensively with mathematical derivation, Lean
+        proof development, literature discovery, organization, typesetting,
+        and verification. The author selected the result and remains
+        responsible for every mathematical statement, proof, citation, and
+        submission decision. The pinned manuscript contains the full
+        assistance disclosure.
+  spend_usd: "subscription-based"
+  notes: >-
+    The proof uses the pinned Lean and Mathlib environment recorded in this
+    directory. The assistance disclosure is pinned in Manuscript/paper.tex.
+
+fidelity:
+  divergences: >-
+    The literal first pencil and five analytic interfaces are formalized
+    directly. The numerical atlas is an external verified computation.
+    Real-axis positivity, Weierstrass preparation, Puiseux existence, the full
+    collision multiset construction, and the resulting global k=1 theorem
+    remain manuscript-level mathematics.
+
+review:
+  status: "agent-reviewed"
+  reviewers:
+    - "OpenAI GPT-5 (Codex)"
+  notes: >-
+    Independent checks covered the literal source bridge, phase and velocity
+    signs, parameter direction, endpoint ownership, quantifiers, axiom use,
+    and manuscript correspondence. No human peer review is claimed.
+
+alignment:
+  namespace: "HaglundK1ZeroTrajectory"
+  statements:
+    - source: "Interval certificate implies simple zeros and strict descent"
+      lean: "HaglundK1ZeroTrajectory.firstQuadrantCertificate_zero_simple_descending"
+      module: "HaglundK1ZeroTrajectory.AnalyticCertificate"
+      status: "proved"
+      note: "The four exact terminal alternatives are eliminated or converted to the negative velocity numerator without changing the parameter interval."
+    - source: "The imaginary axis contains no zero for a nonnegative interpolation parameter"
+      lean: "HaglundK1ZeroTrajectory.realPencil_imaginaryAxis_ne_zero"
+      module: "HaglundK1ZeroTrajectory.AnalyticCertificate"
+      status: "proved"
+      note: "Each literal incomplete-gamma source summand is strictly positive after evaluation on the imaginary axis."
+    - source: "No forward escape under the certified outer-cone estimate"
+      lean: "HaglundK1ZeroTrajectory.branch_uniformly_bounded"
+      module: "HaglundK1ZeroTrajectory.AnalyticCertificate"
+      status: "proved"
+      note: "A uniform height ceiling and the logarithmic outer-cone inequality give the explicit radius bound."
+    - source: "A collision branch cannot emerge into the upper half-plane on the right"
+      lean: "HaglundK1ZeroTrajectory.no_right_upper_emergence_of_scaled_limits"
+      module: "HaglundK1ZeroTrajectory.AnalyticCertificate"
+      status: "proved"
+      note: "Positive one-sided scaled height and velocity limits contradict the certified strict-descent law."
+    - source: "A certified simple zero has a local analytic branch with exact descending velocity"
+      lean: "HaglundK1ZeroTrajectory.exists_local_descending_zero_motion"
+      module: "HaglundK1ZeroTrajectory.AnalyticCertificate"
+      status: "proved"
+      note: "The complex inverse function theorem constructs the branch and identifies its derivative exactly."
+
+acknowledgements: "Mathlib, Lean, Comparator, Lean4export, Landrun, and NanoDa."

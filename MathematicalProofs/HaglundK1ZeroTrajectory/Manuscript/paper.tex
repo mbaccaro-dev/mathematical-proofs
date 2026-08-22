@@ -1,0 +1,358 @@
+\documentclass[11pt,a4paper]{amsart}
+
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage[protrusion=true,expansion=false]{microtype}
+\usepackage{amsmath,amssymb,mathtools}
+\usepackage{enumitem}
+\usepackage[a4paper,margin=30mm]{geometry}
+\usepackage[dvipsnames]{xcolor}
+\usepackage[colorlinks=true,linkcolor=MidnightBlue,citecolor=MidnightBlue,urlcolor=MidnightBlue]{hyperref}
+
+\hypersetup{
+  pdftitle={Haglund's Zero-Trajectory Conjecture for the First Riemann Xi Approximant},
+  pdfauthor={Mayk Loide Baccaro},
+  pdfsubject={A computer-assisted proof of Haglund Conjecture 4 for k=1},
+  pdfkeywords={Riemann Xi function, incomplete gamma function, zero trajectories, interval arithmetic, Puiseux series}
+}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+
+\newcommand{\C}{\mathbb C}
+\newcommand{\R}{\mathbb R}
+\newcommand{\PhiOne}{\Phi_{1}}
+\newcommand{\PhiTwo}{\Phi_{2}}
+\newcommand{\dd}{\,\mathrm d}
+\setlength{\emergencystretch}{2em}
+
+\title[Haglund's zero-trajectory conjecture for $k=1$]
+{Haglund's Zero-Trajectory Conjecture\\
+for the First Riemann Xi Approximant}
+\author[Mayk Loide Baccaro]{Mayk Loide Baccaro\\
+Independent researcher\\
+\href{mailto:m.baccaro7663@student.nu.edu}{\texttt{m.baccaro7663@student.nu.edu}}}
+\date{22 August 2026}
+\subjclass[2020]{Primary 30D15; Secondary 11M26, 65G20, 32S05}
+\keywords{Riemann Xi approximants, incomplete gamma function, zero trajectories, interval arithmetic, Weierstrass preparation, Puiseux series}
+
+\begin{document}
+
+\begin{abstract}
+Haglund conjectured that the nonreal zeros in a linear interpolation between
+consecutive incomplete-gamma approximants to the Riemann Xi function move
+toward the real axis, collide there, and remain real afterward.  We prove the
+complete first case.  For
+\[
+  F(z,t)=\PhiOne(z)+t\PhiTwo(z),\qquad 0\leq t\leq 1,
+\]
+every nonreal zero is simple, and the imaginary part of its analytic branch
+decreases strictly with~$t$.  Each branch stays bounded on every forward
+parameter interval.  At a real collision of any finite multiplicity, the
+full local Weierstrass--Puiseux multiset remains real to the right.  Exact
+analytic identities and a reproducible interval-arithmetic certificate cover
+the unbounded first quadrant.  These results prove Haglund's Conjecture~4 for
+$k=1$.  The cases $k\geq2$ remain open.
+\end{abstract}
+
+\maketitle
+
+\section{Introduction}
+
+Haglund introduced finite incomplete-gamma approximants to the Riemann Xi
+function and studied their zeros while adding one summand continuously
+\cite{Haglund2011}.  His Conjecture~4 predicts that upper-half-plane zeros
+descend, collide on the real axis, and remain there.  Haglund supported the
+conjecture with exploratory computations.  Ahn later sampled the same family
+in bounded rectangles with Maple plots and numerical zero data
+\cite[pp.~29--33, Appendix~D]{Ahn2012}.
+
+We prove the conjecture for the first interpolation.  Exact interval
+enclosures certify simplicity and the sign of the branch velocity throughout
+the first quadrant, including every interface between the compact and
+asymptotic regions.  Analytic continuation then gives the global branch
+theorem, while Weierstrass preparation and Puiseux expansions handle real
+collisions of arbitrary finite multiplicity.
+
+The theorem covers the pencil $\PhiOne+t\PhiTwo$.  Higher consecutive pairs
+remain open.  The zeros of the Riemann Xi function and the Riemann hypothesis
+lie outside the theorem's scope.
+
+\section{The approximants and the theorem}
+
+For $a>0$, $b\in\R$, and $z\in\C$, put
+\begin{equation}\label{eq:G-def}
+ G(z;a,b)=4\int_{0}^{\infty}\cos(2zu)\exp\!\left(2bu-ae^{2u}\right)\dd u.
+\end{equation}
+Equivalently,
+\begin{equation}\label{eq:G-gamma}
+ G(z;a,b)
+ =\frac{\Gamma(b+iz,a)}{a^{b+iz}}
+  +\frac{\Gamma(b-iz,a)}{a^{b-iz}},
+\end{equation}
+where $\Gamma(s,a)$ is the upper incomplete gamma function.  Following Haglund, define
+\begin{equation}\label{eq:Phi-def}
+ \Phi_n(z)=2\pi^2n^4G\!\left(\frac z2;n^2\pi,\frac94\right)
+ -3\pi n^2G\!\left(\frac z2;n^2\pi,\frac54\right).
+\end{equation}
+Each $\Phi_n$ is an even entire function, is real on the real axis, and obeys
+$\Phi_n(\overline z)=\overline{\Phi_n(z)}$.  The first interpolation is
+\begin{equation}\label{eq:pencil}
+ F(z,t)=\PhiOne(z)+t\PhiTwo(z),\qquad (z,t)\in\C\times[0,1].
+\end{equation}
+
+For a simple zero $F(z(t),t)=0$, implicit differentiation gives
+\begin{equation}\label{eq:velocity}
+ z'(t)=-\frac{\PhiTwo(z(t))}{F_z(z(t),t)}.
+\end{equation}
+Thus the geometric assertion that a zero descends is the concrete inequality
+\begin{equation}\label{eq:descent}
+ \operatorname{Im}z'(t)<0.
+\end{equation}
+
+\begin{theorem}[Haglund's Conjecture~4 for $k=1$]\label{thm:main}
+For the family in \eqref{eq:pencil}, the following statements hold.
+\begin{enumerate}[label=\textup{(\roman*)}]
+  \item Every zero with $\operatorname{Re}z\geq0$ and $\operatorname{Im}z>0$ is simple.  Its local analytic branch satisfies \eqref{eq:descent}.  At $t=0$ and $t=1$, this statement has the corresponding one-sided meaning.
+  \item A nonreal zero branch cannot escape to infinity as $t$ increases through a bounded subinterval of $[0,1]$.
+  \item Suppose that finitely many branches meet at a real zero at $t=t_0$.  Counted with their full Weierstrass multiplicities, every local branch remains real for $t>t_0$ sufficiently close to $t_0$.
+\end{enumerate}
+By evenness and complex conjugation, these conclusions determine the complete zero multiset.  In particular, nonreal zeros occur in quartets away from the coordinate axes, and the theorem includes all boundary and multiplicity cases.
+\end{theorem}
+
+Section~\ref{sec:motion} proves simple descent in the nonreal region.
+Section~\ref{sec:global} establishes bounded continuation and resolves real
+collisions.
+
+\section{Certified nonreal motion}\label{sec:motion}
+
+Write $P=\PhiOne$ and $Q=\PhiTwo$.  At a zero of $P+tQ$, define the real-valued velocity numerator
+\begin{equation}\label{eq:delta}
+ \Delta(z,t)=\operatorname{Im}\!\left(-Q(z)\,\overline{F_z(z,t)}\right).
+\end{equation}
+The velocity formula gives the exact identity
+\begin{equation}\label{eq:velocity-delta}
+ \operatorname{Im}z'(t)=\frac{\Delta(z,t)}{|F_z(z,t)|^2}.
+\end{equation}
+Accordingly, a certified proof that $F_z\neq0$ and $\Delta<0$ at every nonreal zero proves both simplicity and strict descent.
+
+The compact computation uses two equivalent tests.  Where $Q\neq0$, the selector
+\begin{equation}\label{eq:selector}
+ g(z)=-\frac{P(z)}{Q(z)}
+\end{equation}
+identifies a physical zero exactly by $g(z)=t\in[0,1]$.  If
+\begin{equation}\label{eq:D}
+ D(z)=P'(z)Q(z)-P(z)Q'(z),
+\end{equation}
+then $g'(z)=-D(z)/Q(z)^2$.  Away from the zeros of $Q$, every critical
+point of the selector must therefore vanish on $D$.  Denominator-free
+interval enclosures test $F$, $F_z$, and $\Delta$ on the remaining boxes.
+Every evaluation uses the defining integral and incomplete-gamma formulas,
+outward-rounded interval arithmetic, Taylor remainders, and exact rational
+ownership of box boundaries.
+
+\begin{proposition}[Certified first-quadrant theorem]\label{prop:certificate}
+For every $t\in[0,1]$, every zero of $F(\,cdot\,,t)$ in
+\[
+  \{z:\operatorname{Re}z\geq0,\ \operatorname{Im}z>0\}
+\]
+is simple and satisfies $\operatorname{Im}z'(t)<0$.  The statement is uniform on the unbounded quadrant and includes the one-sided parameter endpoints.
+\end{proposition}
+
+\begin{proof}
+The verification archive separates the quadrant into a compact core, three formerly unresolved sectors, and an explicit outer region.  The three sectors are
+\begin{align*}
+ S_1&=\{x+iy:32<y<46,\ 0\leq x<192\},\\
+ S_2&=\{x+iy:46\leq y<54,\ x\geq0,\ x^2+y^2<128^2\},\\
+ S_3&=\{x+iy:y\geq54,\ y<x,\ x^2+y^2<128^2\}.
+\end{align*}
+The archive assigns every boundary atom to exactly one module.  Its ownership
+checker proves the exact set identity obtained by deleting $S_1,S_2,S_3$
+from the previously certified complement: no obligation remains.
+
+On $S_1$, the physical locus
+$\{\operatorname{Im}g=0,\ 0\leq\operatorname{Re}g\leq1\}$ is a regular
+real-analytic one-manifold.  A complete inventory of critical points and
+poles owns every physical component.  The six through tubes, nine fold tubes,
+and top slab satisfy $F_z\neq0$ and $\Delta<0$; the east staircase contains
+no zero.
+
+On $S_2$, 238 exact source-model patches require 60,930 source evaluations.
+Deterministic subdivision terminates with 8,304 leaves and 16,370 boxes at
+depth at most nine.  On $S_3$, 323 patches require 46,514 source evaluations
+and terminate with 16,537 leaves and 32,751 boxes at depth at most ten.  Each
+terminal box satisfies one exact implication: modulus domination excludes a
+zero; $D\neq0$ and the selector interval exclude a physical level; or
+$F_z\neq0$ and $\Delta<0$ prove simplicity and descent.  The binary-forest
+counts satisfy
+\[
+  16{,}370=2(8{,}304)-238,
+  \qquad
+  32{,}751=2(16{,}537)-323,
+\]
+which independently checks the subdivision inventories.
+
+The outer module proves that every zero with $|z|\geq256$ lies in the cone
+\begin{equation}\label{eq:outer-cone}
+  \operatorname{Re}z>\operatorname{Im}z,
+  \qquad
+  \operatorname{Im}z>\frac32\log|z|,
+\end{equation}
+and satisfies $F_z\neq0$ and $\Delta<0$.  Its adjoining low-imaginary and cone boundaries are certified zero-free or are assigned to the compact modules.  The exact replay checks all source formulas, interval inequalities, hashes, and ownership seams.  It returns no unresolved leaf.  Combining the mutually exhaustive modules proves the proposition.
+\end{proof}
+
+\begin{remark}[Certified coverage]
+The finite cover proves interval implications and joins them to an analytic
+outer estimate.  A proved implication therefore owns every point of the
+unbounded first quadrant.  The computational supplement records the verifier
+roots, hashes, counts, and replay result.
+\end{remark}
+
+\section{From local descent to global branches}\label{sec:global}
+
+The certificate also verifies the two axis facts
+\begin{equation}\label{eq:real-axis-facts}
+  \PhiTwo(x)>0\quad(x\in\R),
+  \qquad
+  F(iy,t)\neq0\quad(y>0,\ 0\leq t\leq1).
+\end{equation}
+The first follows independently from the strictly convex kernel in the
+cosine-transform representation of $\PhiTwo$.  It gives
+$F_t(x,t)=\PhiTwo(x)\neq0$ at every real collision.  The second excludes
+transfer through the positive imaginary axis and shows that
+$F(\,\cdot\,,t)$ is never identically zero.
+
+\subsection{No forward escape}
+
+\begin{lemma}[Properness in the forward parameter direction]\label{lem:proper}
+Let $z(t)$ be a nonreal zero branch on $[t_0,T)$, where $T\leq1$.  Then $z(t)$ remains in a bounded subset of $\C$ as $t\uparrow T$.
+\end{lemma}
+
+\begin{proof}
+Proposition~\ref{prop:certificate} makes $\operatorname{Im}z(t)$ strictly
+decreasing.  Put $H=\operatorname{Im}z(t_0)$.  In the outer region
+$|z|\geq256$, the cone estimate gives
+\[
+  \frac32\log|z(t)|<\operatorname{Im}z(t)\leq H,
+\]
+and hence $|z(t)|<e^{2H/3}$.  Inside the complementary region, $|z(t)|<256$.  Thus the whole forward branch lies in the disk of radius
+\[
+  \max\{256,e^{2H/3}\}.
+\]
+\end{proof}
+
+\begin{lemma}[Finite endpoint of a bounded branch]\label{lem:endpoint}
+Under the hypotheses of Lemma~\ref{lem:proper}, the branch has a unique limit
+$z_T$ as $t\uparrow T$, and $F(z_T,T)=0$.  If $z_T$ is nonreal, the branch
+continues analytically through $T$.
+\end{lemma}
+
+\begin{proof}
+Choose a closed disk containing the branch.  The zeros of
+$F(\,\cdot\,,T)$ in a slightly larger disk form a finite set because this
+entire function is not identically zero.  Surround them by disjoint disks
+whose boundary circles contain no zero.  On the compact complement of these
+disks inside the larger disk, $|F(z,T)|$ has a positive minimum.  Uniform
+convergence $F(\,\cdot\,,t)\to F(\,\cdot\,,T)$ therefore excludes zeros from
+that complement when $t$ is close to $T$.  Continuity keeps $z(t)$ in one
+component.  Repeating the argument with arbitrarily small disks around its
+center proves convergence to one zero $z_T$.  If $z_T$ is
+nonreal, Proposition~\ref{prop:certificate} makes it simple, and the analytic
+implicit-function theorem continues the branch.
+\end{proof}
+
+Thus a finite forward endpoint can obstruct a nonreal branch only through a
+real collision.
+
+\subsection{Real collisions}
+
+\begin{lemma}[Right-real persistence at a multiple collision]\label{lem:collision}
+Suppose $F(x_0,t_0)=0$ with $x_0\in\R$ and finite multiplicity $m\geq2$ as a zero in $z$.  Then, for all sufficiently small $s=t-t_0>0$, the $m$ local zeros supplied by the Weierstrass preparation theorem are real, counted with multiplicity.
+\end{lemma}
+
+\begin{proof}
+Apply the Weierstrass preparation theorem near $(x_0,t_0)$.  Since $F$ is real under conjugation, its distinguished polynomial has real coefficients for real $s$.  After a finite ramification $s=\tau^q$, its complete multiset of roots is represented by convergent Puiseux series \cite[Ch.~2]{Wall2004}; see also \cite{Chirka1989}.  Conjugation permutes these series.
+
+Assume that a nonreal upper-half-plane branch occurs for arbitrarily small $s>0$.  Choose a Puiseux representative
+\[
+  z(s)=x_0+\sum_{j\geq j_0}a_j s^{j/q}
+\]
+and let $j_*>0$ be the first index for which
+$\operatorname{Im}a_{j_*}\neq0$.  Since this representative enters the upper
+half-plane along the positive $s$-axis,
+$\operatorname{Im}a_{j_*}>0$.  Differentiation then gives
+\[
+  \operatorname{Im}z'(s)
+  =\frac{j_*}{q}\operatorname{Im}(a_{j_*})s^{j_*/q-1}
+   +o\!\left(s^{j_*/q-1}\right)>0
+\]
+for all sufficiently small positive $s$ at which the root is nonreal.
+Proposition~\ref{prop:certificate} makes these roots simple and gives
+$\operatorname{Im}z'(s)<0$, a contradiction.  Hence no upper nonreal branch
+emerges to the right.  Conjugation excludes lower nonreal branches, and the
+full $m$-element Weierstrass multiset remains real.
+\end{proof}
+
+\begin{proof}[Proof of Theorem~\ref{thm:main}]
+Proposition~\ref{prop:certificate} proves part~(i), and
+Lemma~\ref{lem:proper} proves part~(ii).  At a real collision,
+Lemma~\ref{lem:collision} keeps the complete local zero multiset on the real
+axis to the right.  A simple real zero also stays real by uniqueness of its
+local analytic continuation.  If a real descendant became nonreal later,
+its first exit from the real axis would therefore be a multiple real zero,
+and Lemma~\ref{lem:collision} would give a right-hand real neighborhood, a
+contradiction.  Lemmas~\ref{lem:proper} and~\ref{lem:endpoint}, together with
+the outer zero-free bound on the real axis, prevent loss at a finite parameter
+or spatial boundary.  Compactness of $[0,1]$ then gives the global
+continuation.  Evenness and conjugation supply the reflected branches and
+their multiplicities.
+\end{proof}
+
+\section{Relation to earlier work and scope}
+
+Haglund stated the general conjecture and reported computations suggesting
+the predicted motion \cite{Haglund2011}.  Ahn's thesis studied fourteen
+linear combinations in a bounded rectangle and included samples of the first
+family at $t=0.1,0.5,0.9,$ and $0.95$
+\cite[pp.~29--33, 78--80]{Ahn2012}.  These computations motivate the problem.
+They leave exhaustive spatial coverage, certified branch velocities, and
+multiple collisions untreated.
+
+Lagarias and Montague analyze a separate deformation motivated by the de
+Bruijn--Newman theory \cite{LagariasMontague2011}.  The implicit-function,
+Weierstrass, Puiseux, and interval-arithmetic tools used here are classical
+\cite{Chirka1989,Wall2004,MooreKearfottCloud2009}.  Our contribution applies
+them to the first Haglund pencil and supplies a complete exact certificate.
+
+A bounded search of the cited and adjacent literature found no theorem that
+duplicates Theorem~\ref{thm:main}.  The wider priority question and the all-$k$
+conjecture remain open.
+
+\section*{Computational reproducibility}
+
+The companion verification archive contains the source formulas, exact model
+data, interval bounds, ownership tables, independent audit scripts, and a
+top-level replay checker.  The checker binds each parent result by SHA-256 and
+replays the nonreal join, outer properness estimate, real-axis positivity,
+Puiseux direction argument, and ownership equality.  Every source evaluation
+uses certified interval arithmetic; floating-point zero samples carry no
+proof obligation.  The computational supplement gives the complete file
+inventory and replay instructions.
+
+\section*{Assistance disclosure}
+
+AI systems were used extensively in mathematical derivation, Lean proof
+development, literature discovery, organization, and typesetting.  The author
+remains responsible for every mathematical statement, proof, citation, and
+submission decision.
+
+\bibliographystyle{plain}
+\bibliography{references}
+
+\end{document}

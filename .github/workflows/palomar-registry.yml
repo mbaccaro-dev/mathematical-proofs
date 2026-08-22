@@ -35,6 +35,7 @@ jobs:
           - MathematicalProofs/CriticalExponentTransforms/Lean
           - MathematicalProofs/MobiusResidualComplexity/Lean
           - MathematicalProofs/SubpowerDyadicEnergy/Lean
+          - MathematicalProofs/HaglundK1ZeroTrajectory/Lean
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
         with:

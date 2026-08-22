@@ -9,7 +9,7 @@ claims.
 
 ## Palomar verification
 
-Each of the six `Lean` projects contains a Palomar v0.4
+Each of the seven `Lean` projects contains a Palomar v0.4
 `formalization.yaml`, a trusted `Challenge.lean`, a separate `Solution.lean`,
 and a `comparator.json` that requires NanoDa. Run
 `bash scripts/verify-palomar.sh <path-to-Lean-project>` on Linux to replay the

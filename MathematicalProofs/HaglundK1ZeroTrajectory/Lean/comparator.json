@@ -1,0 +1,34 @@
+{
+  "challenge_module": "Challenge",
+  "solution_module": "Solution",
+  "theorem_names": [
+    "HaglundK1ZeroTrajectory.firstQuadrantCertificate_zero_simple_descending",
+    "HaglundK1ZeroTrajectory.realPencil_imaginaryAxis_ne_zero",
+    "HaglundK1ZeroTrajectory.branch_uniformly_bounded",
+    "HaglundK1ZeroTrajectory.no_right_upper_emergence_of_scaled_limits",
+    "HaglundK1ZeroTrajectory.exists_local_descending_zero_motion"
+  ],
+  "definition_names": [
+    "IncompleteGammaApproximant.phiTerm",
+    "IncompleteGammaApproximant.Phi",
+    "IncompleteGammaApproximant.H",
+    "HaglundK1ZeroTrajectory.phiOne",
+    "HaglundK1ZeroTrajectory.phiTwo",
+    "HaglundK1ZeroTrajectory.pencil",
+    "HaglundK1ZeroTrajectory.realPencil",
+    "HaglundK1ZeroTrajectory.delta",
+    "HaglundK1ZeroTrajectory.parameterMap",
+    "HaglundK1ZeroTrajectory.phaseHeight",
+    "HaglundK1ZeroTrajectory.zeroVelocity",
+    "HaglundK1ZeroTrajectory.levelNumerator",
+    "HaglundK1ZeroTrajectory.levelExcess",
+    "HaglundK1ZeroTrajectory.rawPhaseSlope",
+    "HaglundK1ZeroTrajectory.AtlasLeafConclusion",
+    "HaglundK1ZeroTrajectory.AtlasCovers",
+    "HaglundK1ZeroTrajectory.openFirstQuadrant",
+    "HaglundK1ZeroTrajectory.FirstQuadrantCertificate",
+    "HaglundK1ZeroTrajectory.InOuterCone"
+  ],
+  "permitted_axioms": ["propext", "Quot.sound", "Classical.choice"],
+  "enable_nanoda": true
+}

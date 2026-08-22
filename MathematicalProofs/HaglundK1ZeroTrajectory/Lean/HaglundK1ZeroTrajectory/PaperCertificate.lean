@@ -1,0 +1,7 @@
+import HaglundK1ZeroTrajectory.AnalyticCertificate
+
+#print axioms HaglundK1ZeroTrajectory.firstQuadrantCertificate_zero_simple_descending
+#print axioms HaglundK1ZeroTrajectory.realPencil_imaginaryAxis_ne_zero
+#print axioms HaglundK1ZeroTrajectory.branch_uniformly_bounded
+#print axioms HaglundK1ZeroTrajectory.no_right_upper_emergence_of_scaled_limits
+#print axioms HaglundK1ZeroTrajectory.exists_local_descending_zero_motion
