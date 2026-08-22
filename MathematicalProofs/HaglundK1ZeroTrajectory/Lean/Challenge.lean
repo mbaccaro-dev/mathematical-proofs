@@ -79,8 +79,9 @@ theorem firstQuadrantCertificate_zero_simple_descending
       (zeroVelocity z t).im < 0 := by
   sorry
 
-theorem realPencil_imaginaryAxis_ne_zero (y : ℝ) {t : ℝ} (ht : 0 ≤ t) :
-    realPencil (Complex.I * (y : ℂ)) t ≠ 0 := by
+theorem realPencil_imaginaryAxis_pos (y : ℝ) {t : ℝ} (ht : 0 ≤ t) :
+    0 < (realPencil (Complex.I * (y : ℂ)) t).re ∧
+      (realPencil (Complex.I * (y : ℂ)) t).im = 0 := by
   sorry
 
 theorem branch_uniformly_bounded
@@ -113,9 +114,45 @@ theorem exists_local_descending_zero_motion
     ∃ z : ℂ → ℂ,
       z (t₀ : ℂ) = z₀ ∧
       (∀ᶠ τ in 𝓝 (t₀ : ℂ), pencil (z τ) τ = 0) ∧
+      AnalyticAt ℂ z (t₀ : ℂ) ∧
       HasStrictDerivAt z (zeroVelocity z₀ t₀) (t₀ : ℂ) ∧
+      (∀ᶠ τ in 𝓝 (t₀ : ℂ), ∀ᶠ w in 𝓝 z₀,
+        pencil w τ = 0 → w = z τ) ∧
       (∀ᶠ w in 𝓝 z₀, z (parameterMap w) = w) ∧
       (zeroVelocity z₀ t₀).im < 0 := by
+  sorry
+
+def CertifiedForwardBranch (z : ℝ → ℂ) (a b : ℝ) : Prop :=
+  a < b ∧ 0 ≤ a ∧ b ≤ 1 ∧
+    ContinuousOn (fun t => (z t).im) (Icc a b) ∧
+    (∀ t ∈ Ioo a b,
+      0 < (z t).re ∧ 0 < (z t).im ∧
+      realPencil (z t) t = 0 ∧
+      HasDerivAt (fun s => (z s).im) (zeroVelocity (z t) t).im t) ∧
+    (∀ t ∈ Icc a b, InOuterCone (z t))
+
+theorem firstQuadrantCertificate_proves_nonreal_zero_trajectory
+    (hcert : FirstQuadrantCertificate) :
+    (∀ {z₀ : ℂ} {t₀ : ℝ},
+      0 < z₀.re → 0 < z₀.im → 0 ≤ t₀ → t₀ ≤ 1 →
+      realPencil z₀ t₀ = 0 →
+      deriv (fun w => realPencil w t₀) z₀ ≠ 0 ∧
+        ∃ z : ℂ → ℂ,
+          z (t₀ : ℂ) = z₀ ∧
+          (∀ᶠ τ in 𝓝 (t₀ : ℂ), pencil (z τ) τ = 0) ∧
+          AnalyticAt ℂ z (t₀ : ℂ) ∧
+          HasStrictDerivAt z (zeroVelocity z₀ t₀) (t₀ : ℂ) ∧
+          (∀ᶠ τ in 𝓝 (t₀ : ℂ), ∀ᶠ w in 𝓝 z₀,
+            pencil w τ = 0 → w = z τ) ∧
+          (∀ᶠ w in 𝓝 z₀, z (parameterMap w) = w) ∧
+          (zeroVelocity z₀ t₀).im < 0) ∧
+    (∀ (y : ℝ) {t : ℝ}, 0 ≤ t →
+      0 < (realPencil (Complex.I * (y : ℂ)) t).re ∧
+        (realPencil (Complex.I * (y : ℂ)) t).im = 0) ∧
+    (∀ {z : ℝ → ℂ} {a b : ℝ}, CertifiedForwardBranch z a b →
+      StrictAntiOn (fun t => (z t).im) (Icc a b) ∧
+        ∀ t ∈ Icc a b,
+          ‖z t‖ < max 256 (Real.exp (2 * (z a).im / 3))) := by
   sorry
 
 end HaglundK1ZeroTrajectory

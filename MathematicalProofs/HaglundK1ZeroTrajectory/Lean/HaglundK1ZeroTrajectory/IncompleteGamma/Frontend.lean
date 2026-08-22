@@ -513,7 +513,7 @@ theorem sum_scaledUpperIncompleteGamma_critical_pair (N : ℕ) (z : ℂ) :
     _ = 4 * firstIntegral N z := by rw [firstIntegral_eq_sum]
 
 /-- The exact incomplete-gamma-to-cosine identity printed before the
-integration-by-parts refactor. -/
+integration-by-parts derivation. -/
 theorem XiIncompleteGamma_eq_firstIntegral (N : ℕ) (z : ℂ) :
     XiIncompleteGamma N z =
       1 / 2 - 2 * (z ^ 2 + 1 / 4) * firstIntegral N z := by

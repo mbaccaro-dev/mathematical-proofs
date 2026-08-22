@@ -1,6 +1,7 @@
 import HaglundK1ZeroTrajectory.IncompleteGamma.Frontend
 import HaglundK1ZeroTrajectory.IncompleteGamma.Growth
 import HaglundK1ZeroTrajectory.IncompleteGamma.LocalZeroMotion
+import Mathlib.Analysis.Calculus.InverseFunctionTheorem.Analytic
 
 /-!
 # Analytic reduction for the first Haglund pencil
@@ -555,19 +556,29 @@ theorem phiTwo_imaginaryAxis_eq (y : ℝ) :
   rw [phiTwo_eq_single_integral]
   exact singleSummand_imaginaryAxis_eq 1 y
 
-/-- The literal `k = 1` pencil has no zero anywhere on the imaginary axis
-for every nonnegative interpolation parameter, in particular for `[0, 1]`. -/
-theorem realPencil_imaginaryAxis_ne_zero (y : ℝ) {t : ℝ} (ht : 0 ≤ t) :
-    realPencil (Complex.I * (y : ℂ)) t ≠ 0 := by
+/-- On the imaginary axis the literal `k = 1` pencil is real and strictly
+positive for every nonnegative interpolation parameter. -/
+theorem realPencil_imaginaryAxis_pos (y : ℝ) {t : ℝ} (ht : 0 ≤ t) :
+    0 < (realPencil (Complex.I * (y : ℂ)) t).re ∧
+      (realPencil (Complex.I * (y : ℂ)) t).im = 0 := by
   have h0 := singleSummand_imaginaryAxis_pos 0 y
   have h1 := singleSummand_imaginaryAxis_pos 1 y
   rw [realPencil, pencil, phiOne_imaginaryAxis_eq,
     phiTwo_imaginaryAxis_eq]
+  constructor
+  · simp only [Complex.add_re, Complex.mul_re, ofReal_re, ofReal_im,
+      zero_mul, sub_zero]
+    nlinarith [mul_nonneg ht h1.le]
+  · simp
+
+/-- Consequently the literal `k = 1` pencil has no zero anywhere on the
+imaginary axis for a nonnegative interpolation parameter. -/
+theorem realPencil_imaginaryAxis_ne_zero (y : ℝ) {t : ℝ} (ht : 0 ≤ t) :
+    realPencil (Complex.I * (y : ℂ)) t ≠ 0 := by
   intro hzero
-  have hre := congrArg Complex.re hzero
-  simp only [Complex.add_re, Complex.mul_re, ofReal_re, ofReal_im,
-    zero_mul, sub_zero, zero_re] at hre
-  nlinarith [mul_nonneg ht h1.le]
+  have hpos := (realPencil_imaginaryAxis_pos y ht).1
+  rw [hzero] at hpos
+  norm_num at hpos
 
 /-- The exact outer-cone conclusion used by the verified asymptotic module. -/
 def InOuterCone (z : ℂ) : Prop :=
@@ -674,16 +685,20 @@ theorem parameterMap_hasStrictDerivAt_at_zero {z : ℂ} {t : ℝ}
   rw [← hder]
   exact hraw
 
-/-- A simple pencil zero has a locally unique holomorphic continuation with
-the manuscript's exact velocity. -/
+/-- A simple pencil zero has an analytic continuation on a neighborhood, with
+the manuscript's exact velocity and an explicitly quantified local uniqueness
+property. -/
 theorem exists_local_zero_motion {z₀ τ₀ : ℂ}
     (hzero : pencil z₀ τ₀ = 0) (hQ : phiTwo z₀ ≠ 0)
     (hsimple : deriv (fun z => pencil z τ₀) z₀ ≠ 0) :
     ∃ z : ℂ → ℂ,
       z τ₀ = z₀ ∧
       (∀ᶠ τ in 𝓝 τ₀, pencil (z τ) τ = 0) ∧
+      AnalyticAt ℂ z τ₀ ∧
       HasStrictDerivAt z
         (-phiTwo z₀ / deriv (fun w => pencil w τ₀) z₀) τ₀ ∧
+      (∀ᶠ τ in 𝓝 τ₀, ∀ᶠ w in 𝓝 z₀,
+        pencil w τ = 0 → w = z τ) ∧
       (∀ᶠ w in 𝓝 z₀, z (parameterMap w) = w) := by
   have hzeroRealShape :
       phiOne z₀ + τ₀ * phiTwo z₀ = 0 := by
@@ -721,21 +736,51 @@ theorem exists_local_zero_motion {z₀ τ₀ : ℂ}
       (-deriv (fun z => pencil z τ₀) z₀ / phiTwo z₀) z₀
     rw [← hder]
     exact hparamRaw
+  have hparamAnalytic : AnalyticAt ℂ parameterMap z₀ := by
+    change AnalyticAt ℂ (-phiOne / phiTwo) z₀
+    exact (phiOne_differentiable.analyticAt z₀).neg.div
+      (phiTwo_differentiable.analyticAt z₀) hQ
+  have hderParam : deriv parameterMap z₀ =
+      -deriv (fun z => pencil z τ₀) z₀ / phiTwo z₀ :=
+    hparam.hasDerivAt.deriv
   have hpne : -deriv (fun z => pencil z τ₀) z₀ / phiTwo z₀ ≠ 0 :=
     div_ne_zero (neg_ne_zero.mpr hsimple) hQ
-  let z : ℂ → ℂ := hparam.localInverse parameterMap
-    (-deriv (fun z => pencil z τ₀) z₀ / phiTwo z₀) z₀ hpne
-  have hzstrict := hparam.to_localInverse hpne
+  have hpneDeriv : deriv parameterMap z₀ ≠ 0 := by
+    rw [hderParam]
+    exact hpne
+  let hparamCanonical : HasStrictDerivAt parameterMap (deriv parameterMap z₀) z₀ :=
+    hparamAnalytic.hasStrictDerivAt
+  let z : ℂ → ℂ := hparamCanonical.localInverse parameterMap
+    (deriv parameterMap z₀) z₀ hpneDeriv
+  have hzstrict := hparamCanonical.to_localInverse hpneDeriv
   have hzstrict' : HasStrictDerivAt z
       (-phiTwo z₀ / deriv (fun w => pencil w τ₀) z₀) τ₀ := by
     rw [hcenter] at hzstrict
     apply hzstrict.congr_deriv
+    rw [hderParam]
     field_simp
   have hzcenter : z τ₀ = z₀ := by
     rw [← hcenter]
-    exact (hparam.eventually_left_inverse hpne).self_of_nhds
-  refine ⟨z, hzcenter, ?_, hzstrict', ?_⟩
-  · have hright := hparam.eventually_right_inverse hpne
+    exact (hparamCanonical.eventually_left_inverse hpneDeriv).self_of_nhds
+  have hzanalytic : AnalyticAt ℂ z τ₀ := by
+    have h := hparamAnalytic.analyticAt_localInverse hpneDeriv
+    simpa only [z, hparamCanonical, hcenter] using h
+  have hleft := hparamCanonical.eventually_left_inverse hpneDeriv
+  have hQnear : ∀ᶠ w in 𝓝 z₀, phiTwo w ≠ 0 := by
+    exact phiTwo_differentiable.continuous.continuousAt.eventually_ne hQ
+  have hunique : ∀ᶠ τ in 𝓝 τ₀, ∀ᶠ w in 𝓝 z₀,
+      pencil w τ = 0 → w = z τ := by
+    filter_upwards [] with τ
+    filter_upwards [hleft, hQnear] with w hwleft hQw
+    intro hwzero
+    have hparamw : parameterMap w = τ := by
+      apply (div_eq_iff hQw).2
+      change phiOne w + τ * phiTwo w = 0 at hwzero
+      linear_combination -hwzero
+    rw [← hparamw]
+    exact hwleft.symm
+  refine ⟨z, hzcenter, ?_, hzanalytic, hzstrict', hunique, hleft⟩
+  · have hright := hparamCanonical.eventually_right_inverse hpneDeriv
     rw [hcenter] at hright
     have hQevent : ∀ᶠ τ in 𝓝 τ₀, phiTwo (z τ) ≠ 0 := by
       have hcont : ContinuousAt (fun τ => phiTwo (z τ)) τ₀ :=
@@ -748,7 +793,6 @@ theorem exists_local_zero_motion {z₀ τ₀ : ℂ}
       (div_eq_iff hQτ).1 hτ
     change phiOne (z τ) + τ * phiTwo (z τ) = 0
     linear_combination -hm
-  · exact hparam.eventually_left_inverse hpne
 
 /-- Full local certificate bridge for the literal real-parameter pencil.  A
 certified terminal leaf supplies simplicity, the analytic zero branch, its
@@ -762,7 +806,10 @@ theorem exists_local_descending_zero_motion
     ∃ z : ℂ → ℂ,
       z (t₀ : ℂ) = z₀ ∧
       (∀ᶠ τ in 𝓝 (t₀ : ℂ), pencil (z τ) τ = 0) ∧
+      AnalyticAt ℂ z (t₀ : ℂ) ∧
       HasStrictDerivAt z (zeroVelocity z₀ t₀) (t₀ : ℂ) ∧
+      (∀ᶠ τ in 𝓝 (t₀ : ℂ), ∀ᶠ w in 𝓝 z₀,
+        pencil w τ = 0 → w = z τ) ∧
       (∀ᶠ w in 𝓝 z₀, z (parameterMap w) = w) ∧
       (zeroVelocity z₀ t₀).im < 0 := by
   have hcert := atlasLeaf_zero_simple_descending ht0 ht1 hQ hleaf hzero
@@ -770,9 +817,88 @@ theorem exists_local_descending_zero_motion
     simpa only [realPencil] using hzero
   have hsimpleComplex : deriv (fun w => pencil w (t₀ : ℂ)) z₀ ≠ 0 := by
     simpa only [realPencil] using hcert.1
-  obtain ⟨z, hz0, hz, hzderiv, hzinv⟩ :=
+  obtain ⟨z, hz0, hz, hzanalytic, hzderiv, hzunique, hzinv⟩ :=
     exists_local_zero_motion hzeroComplex hQ hsimpleComplex
-  refine ⟨z, hz0, hz, ?_, hzinv, hcert.2⟩
+  refine ⟨z, hz0, hz, hzanalytic, ?_, hzunique, hzinv, hcert.2⟩
   simpa only [zeroVelocity, realPencil] using hzderiv
+
+/-- A forward nonreal zero branch carries the exact analytic hypotheses used
+to turn the pointwise certificate into strict descent and an explicit
+no-escape bound. -/
+def CertifiedForwardBranch (z : ℝ → ℂ) (a b : ℝ) : Prop :=
+  a < b ∧ 0 ≤ a ∧ b ≤ 1 ∧
+    ContinuousOn (fun t => (z t).im) (Icc a b) ∧
+    (∀ t ∈ Ioo a b,
+      0 < (z t).re ∧ 0 < (z t).im ∧
+      realPencil (z t) t = 0 ∧
+      HasDerivAt (fun s => (z s).im) (zeroVelocity (z t) t).im t) ∧
+    (∀ t ∈ Icc a b, InOuterCone (z t))
+
+/-- Every certified forward branch is strictly descending and stays inside
+the explicit disk forced by its initial height and the outer-cone estimate. -/
+theorem certifiedForwardBranch_strictDescent_noEscape
+    (hcert : FirstQuadrantCertificate) {z : ℝ → ℂ} {a b : ℝ}
+    (hbranch : CertifiedForwardBranch z a b) :
+    StrictAntiOn (fun t => (z t).im) (Icc a b) ∧
+      ∀ t ∈ Icc a b,
+        ‖z t‖ < max 256 (Real.exp (2 * (z a).im / 3)) := by
+  rcases hbranch with ⟨hab, ha0, hb1, hcont, hinterior, hcone⟩
+  have hanti : StrictAntiOn (fun t => (z t).im) (Icc a b) := by
+    apply strictAntiOn_of_hasDerivWithinAt_neg (convex_Icc a b) hcont
+    · intro t ht
+      have ht' : t ∈ Ioo a b := by
+        simpa [interior_Icc, hab] using ht
+      exact (hinterior t ht').2.2.2.hasDerivWithinAt
+    · intro t ht
+      have ht' : t ∈ Ioo a b := by
+        simpa [interior_Icc, hab] using ht
+      have hdata := hinterior t ht'
+      exact (firstQuadrantCertificate_zero_simple_descending hcert
+        hdata.1 hdata.2.1 (ha0.trans ht'.1.le) (ht'.2.le.trans hb1)
+        hdata.2.2.1).2
+  refine ⟨hanti, ?_⟩
+  intro t ht
+  have him : (z t).im ≤ (z a).im := by
+    rcases eq_or_lt_of_le ht.1 with rfl | hat
+    · exact le_rfl
+    · exact (hanti (left_mem_Icc.mpr hab.le) ht hat).le
+  exact norm_lt_escapeRadius him (hcone t ht)
+
+/-- Nonreal conclusion of the verified atlas interface. One
+global first-quadrant certificate yields, for every physical zero, simplicity,
+an analytic and locally unique descending branch, strict positivity on the
+imaginary axis, and strict descent with an explicit no-escape radius for every
+forward branch satisfying the paper's outer-cone certificate. -/
+theorem firstQuadrantCertificate_proves_nonreal_zero_trajectory
+    (hcert : FirstQuadrantCertificate) :
+    (∀ {z₀ : ℂ} {t₀ : ℝ},
+      0 < z₀.re → 0 < z₀.im → 0 ≤ t₀ → t₀ ≤ 1 →
+      realPencil z₀ t₀ = 0 →
+      deriv (fun w => realPencil w t₀) z₀ ≠ 0 ∧
+        ∃ z : ℂ → ℂ,
+          z (t₀ : ℂ) = z₀ ∧
+          (∀ᶠ τ in 𝓝 (t₀ : ℂ), pencil (z τ) τ = 0) ∧
+          AnalyticAt ℂ z (t₀ : ℂ) ∧
+          HasStrictDerivAt z (zeroVelocity z₀ t₀) (t₀ : ℂ) ∧
+          (∀ᶠ τ in 𝓝 (t₀ : ℂ), ∀ᶠ w in 𝓝 z₀,
+            pencil w τ = 0 → w = z τ) ∧
+          (∀ᶠ w in 𝓝 z₀, z (parameterMap w) = w) ∧
+          (zeroVelocity z₀ t₀).im < 0) ∧
+    (∀ (y : ℝ) {t : ℝ}, 0 ≤ t →
+      0 < (realPencil (Complex.I * (y : ℂ)) t).re ∧
+        (realPencil (Complex.I * (y : ℂ)) t).im = 0) ∧
+    (∀ {z : ℝ → ℂ} {a b : ℝ}, CertifiedForwardBranch z a b →
+      StrictAntiOn (fun t => (z t).im) (Icc a b) ∧
+        ∀ t ∈ Icc a b,
+          ‖z t‖ < max 256 (Real.exp (2 * (z a).im / 3))) := by
+  refine ⟨?_, realPencil_imaginaryAxis_pos, ?_⟩
+  · intro z₀ t₀ hzre hzim ht0 ht1 hzero
+    have hsimple := firstQuadrantCertificate_zero_simple_descending hcert
+      hzre hzim ht0 ht1 hzero
+    refine ⟨hsimple.1, ?_⟩
+    exact exists_local_descending_zero_motion ht0 ht1
+      (hcert z₀ ⟨hzre, hzim⟩).1 (hcert z₀ ⟨hzre, hzim⟩).2 hzero
+  · intro z a b hbranch
+    exact certifiedForwardBranch_strictDescent_noEscape hcert hbranch
 
 end HaglundK1ZeroTrajectory

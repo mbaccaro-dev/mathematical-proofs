@@ -2,11 +2,7 @@
   "challenge_module": "Challenge",
   "solution_module": "Solution",
   "theorem_names": [
-    "HaglundK1ZeroTrajectory.firstQuadrantCertificate_zero_simple_descending",
-    "HaglundK1ZeroTrajectory.realPencil_imaginaryAxis_ne_zero",
-    "HaglundK1ZeroTrajectory.branch_uniformly_bounded",
-    "HaglundK1ZeroTrajectory.no_right_upper_emergence_of_scaled_limits",
-    "HaglundK1ZeroTrajectory.exists_local_descending_zero_motion"
+    "HaglundK1ZeroTrajectory.firstQuadrantCertificate_proves_nonreal_zero_trajectory"
   ],
   "definition_names": [
     "IncompleteGammaApproximant.phiTerm",
@@ -27,7 +23,8 @@
     "HaglundK1ZeroTrajectory.AtlasCovers",
     "HaglundK1ZeroTrajectory.openFirstQuadrant",
     "HaglundK1ZeroTrajectory.FirstQuadrantCertificate",
-    "HaglundK1ZeroTrajectory.InOuterCone"
+    "HaglundK1ZeroTrajectory.InOuterCone",
+    "HaglundK1ZeroTrajectory.CertifiedForwardBranch"
   ],
   "permitted_axioms": ["propext", "Quot.sound", "Classical.choice"],
   "enable_nanoda": true

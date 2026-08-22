@@ -23,13 +23,14 @@ the Riemann hypothesis is claimed.
 
 ## Verification
 
-The selected Lean statements cover the literal incomplete-gamma pencil and
-five load-bearing analytic interfaces: certificate-to-simplicity and descent,
-imaginary-axis exclusion, forward boundedness, the collision-direction
-contradiction, and the local analytic zero branch with its exact velocity.
-The numerical atlas and the full Weierstrass--Puiseux multiset construction
-remain verified outside Lean as described in the paper. GitHub Actions replays
-the pinned Comparator, Lean kernel, and NanoDa checks for the formalized scope.
+The selected Lean theorem covers the literal incomplete-gamma pencil and the
+nonreal analytic consequence of the paper's first-quadrant certificate. It
+proves every certified zero simple and gives it a locally unique analytic descending branch,
+proves real strict positivity on the imaginary axis, and gives strict descent
+with an explicit no-escape radius for certified forward branches. The interval
+atlas and the full Weierstrass--Puiseux multiset construction remain verified
+outside Lean as described in the paper. GitHub Actions replays the pinned
+Comparator, Lean kernel, and NanoDa checks for the formalized scope.
 
 ## Cite the paper
 
