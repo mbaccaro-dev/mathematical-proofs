@@ -2,13 +2,14 @@
 version: "v0.4"
 
 project:
-  name: "Cumulative dyadic energy for Möbius-logarithm prefixes"
+  name: "Eventual dyadic defect and Möbius-logarithm energy"
   description: >-
-    A Lean 4 proof of the exact conservation law connecting the paper's
-    dyadic defect, block variation, and positive cumulative prefix energy.
-    Under the stated universal two-endpoint condition, the formalization
-    derives an explicit cubic logarithmic bound for that cumulative energy at
-    every endpoint.
+    A Lean 4 proof of the global power-of-two balance connecting dyadic
+    defect, block variation, and positive Möbius-logarithm prefix energy.
+    Eventual nonnegativity on exactly those dyadic blocks gives an explicit
+    all-endpoint cubic energy bound. With the stated weighted-squarefree
+    remainder estimate, the formalization also recovers the sharp 6/pi^2
+    leading coefficient and retains the complete finite-prefix correction.
   authors:
     - "Mayk Loide Baccaro"
   license: "Apache-2.0"
@@ -30,7 +31,7 @@ sources:
     type: "paper"
     location: "https://doi.org/10.5281/zenodo.22038521"
     relationship: "formalizes"
-    note: "The formalization proves the paper's central discrete cumulative-energy consequence."
+    note: "The formalization proves the paper's central discrete dyadic-energy consequences."
     license: "unknown"
     author_endorsement: "participated"
 
@@ -39,26 +40,32 @@ related_formalizations: []
 status:
   scope: >-
     The selected statements use the paper's exact Möbius-logarithm weights,
-    strict predecessor convention, half-open dyadic blocks, and both right
-    endpoints. They prove the exact conservation law between dyadic defect,
-    block variation, and completed cumulative energy. Assuming the universal
-    two-endpoint nonnegativity condition, they derive an explicit cubic
-    logarithmic bound for the positive cumulative energy at every integer
-    endpoint. The condition itself is not proved. The analytic equivalence
-    with the Riemann hypothesis, Mellin and Fourier analysis, reciprocal-zeta
-    continuation, zero simplicity, and reciprocal-residue budget remain
-    manuscript-level mathematics.
+    strict predecessor convention, and half-open power-of-two blocks. They
+    telescope the local identities into the exact global energy balance,
+    including its initial boundary term. Eventual defect nonnegativity only
+    on those blocks gives an explicit cubic logarithmic bound for positive
+    cumulative energy at every integer endpoint, with all earlier scales kept
+    in a finite constant. An explicit weighted-squarefree remainder premise
+    yields the sharp 6/pi^2 leading coefficient at powers of two. Neither the
+    sign condition nor the remainder estimate is proved here. Mellin analysis,
+    reciprocal-zeta continuation, RH equivalence, zero simplicity, and the
+    residue budget remain manuscript-level mathematics.
   sorry_count: 0
   sorry_in_definitions: 0
   axioms: ["propext", "Quot.sound", "Classical.choice"]
   main_results:
-    - declaration: "RiemannHypothesisProofFactory.SubpowerDyadicEnergy.dyadic_energy_conservation"
-      file: "RiemannHypothesisProofFactory/SubpowerDyadicEnergy/DyadicBalance.lean"
+    - declaration: "RiemannHypothesisProofFactory.SubpowerDyadicEnergy.dyadic_global_energy_balance"
+      file: "RiemannHypothesisProofFactory/SubpowerDyadicEnergy/EventualDyadicBalance.lean"
       sorry_count: 0
       axioms: ["propext", "Quot.sound", "Classical.choice"]
       comparator_config: "comparator.json"
-    - declaration: "RiemannHypothesisProofFactory.SubpowerDyadicEnergy.paperP1_implies_cumulative_energy_cubic_bound"
-      file: "RiemannHypothesisProofFactory/SubpowerDyadicEnergy/DyadicBalance.lean"
+    - declaration: "RiemannHypothesisProofFactory.SubpowerDyadicEnergy.eventualDyadicDefectFrom_implies_sharp_power_energy_bound"
+      file: "RiemannHypothesisProofFactory/SubpowerDyadicEnergy/EventualDyadicBalance.lean"
+      sorry_count: 0
+      axioms: ["propext", "Quot.sound", "Classical.choice"]
+      comparator_config: "comparator.json"
+    - declaration: "RiemannHypothesisProofFactory.SubpowerDyadicEnergy.eventualDyadicDefectFrom_implies_cumulative_energy_cubic_bound"
+      file: "RiemannHypothesisProofFactory/SubpowerDyadicEnergy/EventualDyadicBalance.lean"
       sorry_count: 0
       axioms: ["propext", "Quot.sound", "Classical.choice"]
       comparator_config: "comparator.json"
@@ -88,9 +95,11 @@ automation:
 
 fidelity:
   divergences: >-
-    The discrete cumulative-energy theorem is formalized directly. The
-    Mellin-Plancherel and reciprocal-zeta arguments that connect subpower
-    energy to the Riemann hypothesis remain manuscript-level mathematics.
+    The discrete power-of-two balance and its energy consequences are
+    formalized directly. The weighted-squarefree remainder is an explicit
+    premise of the sharp-coefficient theorem. Mellin-Plancherel and
+    reciprocal-zeta arguments connecting subpower energy to the Riemann
+    hypothesis remain manuscript-level mathematics.
 
 review:
   status: "agent-reviewed"
@@ -101,15 +110,20 @@ review:
 alignment:
   namespace: "RiemannHypothesisProofFactory.SubpowerDyadicEnergy"
   statements:
-    - source: "Exact dyadic defect-variation-cumulative-energy conservation law"
-      lean: "RiemannHypothesisProofFactory.SubpowerDyadicEnergy.dyadic_energy_conservation"
-      module: "RiemannHypothesisProofFactory.SubpowerDyadicEnergy.DyadicBalance"
+    - source: "Global power-of-two defect-variation-energy balance"
+      lean: "RiemannHypothesisProofFactory.SubpowerDyadicEnergy.dyadic_global_energy_balance"
+      module: "RiemannHypothesisProofFactory.SubpowerDyadicEnergy.EventualDyadicBalance"
       status: "proved"
-      note: "The identity includes both right endpoints and the exact boundary completion term."
-    - source: "Cubic cumulative-energy bound under the universal two-endpoint condition"
-      lean: "RiemannHypothesisProofFactory.SubpowerDyadicEnergy.paperP1_implies_cumulative_energy_cubic_bound"
-      module: "RiemannHypothesisProofFactory.SubpowerDyadicEnergy.DyadicBalance"
+      note: "Adjacent half-open blocks telescope exactly, with the initial completed boundary term retained."
+    - source: "Sharp leading energy bound from eventual dyadic sign"
+      lean: "RiemannHypothesisProofFactory.SubpowerDyadicEnergy.eventualDyadicDefectFrom_implies_sharp_power_energy_bound"
+      module: "RiemannHypothesisProofFactory.SubpowerDyadicEnergy.EventualDyadicBalance"
       status: "proved"
-      note: "The universal condition is an explicit hypothesis; the conclusion controls the paper's positive cumulative energy at every endpoint."
+      note: "The 6/pi^2 leading coefficient follows from the explicitly stated weighted-squarefree remainder premise; the finite possibly negative defect prefix is retained."
+    - source: "All-endpoint cubic cumulative-energy bound from eventual dyadic sign"
+      lean: "RiemannHypothesisProofFactory.SubpowerDyadicEnergy.eventualDyadicDefectFrom_implies_cumulative_energy_cubic_bound"
+      module: "RiemannHypothesisProofFactory.SubpowerDyadicEnergy.EventualDyadicBalance"
+      status: "proved"
+      note: "Only power-of-two defect signs are assumed; monotonicity lifts the result to every endpoint with a finite explicit base constant."
 
 acknowledgements: "Mathlib, Lean, Comparator, Lean4export, Landrun, and NanoDa."

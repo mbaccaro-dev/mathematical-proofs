@@ -1,19 +1,18 @@
 # Lean certificate
 
-This package proves the finite pair-compression theorem used in
-*Logarithmic Residual-Complexity Barriers for Local Möbius Cancellation*.
-A nonempty zero-sum cell of positive squarefree integers is split by Möbius
-sign and paired in increasing rank. The formal theorem constructs the common
-core as the gcd of the cell and proves that the pairs have opposite signs,
-preserve the residual prime-factor budget after passing to the pairwise gcd,
-remain within the actual cell diameter, and cross each real cutoff exactly as
-many times as the absolute signed mass below it. It also identifies the
-crossing ranks with the pairs whose endpoints straddle the cutoff.
+This package proves the prime-band mechanism used in *Logarithmic
+Residual-Complexity Barriers for Local Möbius Cancellation*.
 
-The package intentionally does not claim a full formalization of the paper.
-In particular, it does not formalize the prime number theorem, the binomial
-family asymptotic, the logarithmic scale conversion, or the global
-sparse-jump counting argument. Those remain manuscript-level proofs.
+The formal results show that a fixed band of primes eventually supplies the
+required squarefree product family with exact binomial size. They then prove
+that a single global matching subject to the stated residual and edge bounds
+must leave the whole family unmatched. Finally, they establish the exact
+logarithmic conversion between product scale and prime-product rank and the
+resulting budget separation.
+
+The final comparison between the binomial population and a general
+`O(X^beta)` unmatched set remains a manuscript proof. It is not included in
+the formal claim.
 
 Build with:
 
@@ -23,5 +22,4 @@ lake env lean RiemannHypothesisProofFactory/MobiusResidualComplexity/PaperCertif
 ```
 
 The project is pinned to Lean 4.33.0 and its matching Mathlib revision. The
-second command prints the axiom dependencies of every public theorem in the
-finite certificate.
+second command prints the axiom dependencies of the four selected results.

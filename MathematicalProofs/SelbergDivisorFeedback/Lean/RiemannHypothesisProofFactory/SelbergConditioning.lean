@@ -2,11 +2,13 @@ import RiemannHypothesisProofFactory.SelbergConditioning.FiniteKernel
 import RiemannHypothesisProofFactory.SelbergConditioning.ConditioningWitness
 import RiemannHypothesisProofFactory.SelbergConditioning.PrimeFactorConstruction
 import RiemannHypothesisProofFactory.SelbergConditioning.SelbergStability
+import RiemannHypothesisProofFactory.SelbergConditioning.InfinitePrimePowerConstruction
+import RiemannHypothesisProofFactory.SelbergConditioning.NearLinearConditioning
 
 /-!
 # Selberg divisor-feedback formal-assurance surface
 
-The imported modules certify both the finite prime-factor construction and the
-finite quantitative Selberg-feedback estimate controlling its logarithmic,
-linear hyperbola, and quadratic hyperbola terms.
+The imported modules certify the explicit infinite prime-power perturbation
+and its sequence-level near-linear Selberg conditioning theorem, together with
+the finite arithmetic lemmas used in the proof.
 -/

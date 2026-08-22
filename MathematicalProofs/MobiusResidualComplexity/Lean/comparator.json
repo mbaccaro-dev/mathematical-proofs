@@ -2,15 +2,22 @@
   "challenge_module": "Challenge",
   "solution_module": "Solution",
   "theorem_names": [
-    "RiemannHypothesisProofFactory.MobiusResidualComplexity.exact_cell_gcd_pair_compression"
+    "RiemannHypothesisProofFactory.MobiusResidualComplexity.eventually_octuplePrimeBand_product_population",
+    "RiemannHypothesisProofFactory.MobiusResidualComplexity.chebyshev_globalMatching_population_barrier",
+    "RiemannHypothesisProofFactory.MobiusResidualComplexity.threshold_logarithmic_scale_conversion",
+    "RiemannHypothesisProofFactory.MobiusResidualComplexity.eventually_threshold_budget_separation"
   ],
   "definition_names": [
     "RiemannHypothesisProofFactory.MobiusResidualComplexity.omega",
-    "RiemannHypothesisProofFactory.MobiusResidualComplexity.rankCrossingIndices",
-    "RiemannHypothesisProofFactory.MobiusResidualComplexity.positiveVertices",
-    "RiemannHypothesisProofFactory.MobiusResidualComplexity.negativeVertices",
-    "RiemannHypothesisProofFactory.MobiusResidualComplexity.cellMass",
-    "RiemannHypothesisProofFactory.MobiusResidualComplexity.cellGCD"
+    "RiemannHypothesisProofFactory.MobiusResidualComplexity.primeBandProducts",
+    "RiemannHypothesisProofFactory.MobiusResidualComplexity.unmatchedSquarefreeThrough",
+    "RiemannHypothesisProofFactory.MobiusResidualComplexity.IsGlobalMatching",
+    "RiemannHypothesisProofFactory.MobiusResidualComplexity.OppositeResidualParity",
+    "RiemannHypothesisProofFactory.MobiusResidualComplexity.ResidualEdgeAdmissible",
+    "RiemannHypothesisProofFactory.MobiusResidualComplexity.widePrimeBand",
+    "RiemannHypothesisProofFactory.MobiusResidualComplexity.thresholdCount",
+    "RiemannHypothesisProofFactory.MobiusResidualComplexity.thresholdCountReal",
+    "RiemannHypothesisProofFactory.MobiusResidualComplexity.thresholdScale"
   ],
   "permitted_axioms": ["propext", "Quot.sound", "Classical.choice"],
   "enable_nanoda": true

@@ -2,13 +2,15 @@
 version: "v0.4"
 
 project:
-  name: "Fixed-budget pair compression for squarefree Möbius cells"
+  name: "Prime-band population and logarithmic residual-complexity barriers"
   description: >-
-    A Lean 4 proof that a finite zero-sum squarefree Möbius cell whose actual
-    gcd leaves a fixed residual budget admits an exact increasing-rank compression
-    into opposite-sign pairs. The theorem preserves the residual budget,
-    controls pair gaps by the cell diameter, and gives the exact crossing
-    count at every real cutoff.
+    A Lean 4 proof of the prime-band mechanism behind a logarithmic barrier
+    for local Möbius cancellation. Chebyshev estimates supply an eventual
+    family of squarefree prime products with exact binomial population. An
+    endpoint-scale gcd obstruction forces that population to remain unmatched
+    under the stated global residual and edge constraints. The explicit
+    product scale also converts the residual budget to its logarithmic
+    threshold with the exact limiting constant.
   authors:
     - "Mayk Loide Baccaro"
   license: "Apache-2.0"
@@ -30,7 +32,7 @@ sources:
     type: "paper"
     location: "https://doi.org/10.5281/zenodo.22006119"
     relationship: "formalizes"
-    note: "The formalization proves the paper's exact finite pair-compression theorem."
+    note: "The selected results formalize the paper's prime-band population, global matching obstruction, and logarithmic scale conversion."
     license: "unknown"
     author_endorsement: "participated"
 
@@ -38,24 +40,37 @@ related_formalizations: []
 
 status:
   scope: >-
-    The selected theorem starts from a nonempty finite set of positive
-    squarefree integers whose Möbius values sum to zero. If division by the
-    gcd of the cell leaves at most the fixed number of residual prime factors,
-    increasing-rank pairing gives opposite signs,
-    preserves both residual budgets after passage to the pairwise gcd, keeps
-    every gap within the actual cell diameter, and leaves exactly the absolute
-    signed prefix mass many pairs crossing every real cutoff, with membership
-    in the crossing set equivalent to exactly one paired endpoint lying below
-    the cutoff. The theorem is
-    finite and exact. It does not prove the paper's asymptotic logarithmic
-    lower bound, prime-number-theorem input, binomial estimates, scale
-    conversion, or global sparse-jump argument.
+    The selected results prove four connected parts of the obstruction. For
+    every exponent strictly between zero and one, the fixed band from y to 8y
+    eventually contains enough primes to form the rank floor(y^delta)
+    squarefree products, with exact binomial cardinality and an explicit
+    factorial lower bound. At finite scale, any single reciprocal matching
+    satisfying the stated endpoint-scale residual, parity, and gap conditions
+    leaves at least that whole binomial population unmatched. Along the
+    explicit product scale, rank is asymptotic to delta times log X divided by
+    log log X, and any budget below a normalized constant r is eventually less
+    than q times the rank whenever r/delta is less than q.
   sorry_count: 0
   sorry_in_definitions: 0
   axioms: ["propext", "Quot.sound", "Classical.choice"]
   main_results:
-    - declaration: "RiemannHypothesisProofFactory.MobiusResidualComplexity.exact_cell_gcd_pair_compression"
-      file: "RiemannHypothesisProofFactory/MobiusResidualComplexity/PairCompression.lean"
+    - declaration: "RiemannHypothesisProofFactory.MobiusResidualComplexity.eventually_octuplePrimeBand_product_population"
+      file: "RiemannHypothesisProofFactory/MobiusResidualComplexity/PrimeBandAsymptotics.lean"
+      sorry_count: 0
+      axioms: ["propext", "Quot.sound", "Classical.choice"]
+      comparator_config: "comparator.json"
+    - declaration: "RiemannHypothesisProofFactory.MobiusResidualComplexity.chebyshev_globalMatching_population_barrier"
+      file: "RiemannHypothesisProofFactory/MobiusResidualComplexity/ResearchBarrierCertificate.lean"
+      sorry_count: 0
+      axioms: ["propext", "Quot.sound", "Classical.choice"]
+      comparator_config: "comparator.json"
+    - declaration: "RiemannHypothesisProofFactory.MobiusResidualComplexity.threshold_logarithmic_scale_conversion"
+      file: "RiemannHypothesisProofFactory/MobiusResidualComplexity/ThresholdAsymptotics.lean"
+      sorry_count: 0
+      axioms: ["propext", "Quot.sound", "Classical.choice"]
+      comparator_config: "comparator.json"
+    - declaration: "RiemannHypothesisProofFactory.MobiusResidualComplexity.eventually_threshold_budget_separation"
+      file: "RiemannHypothesisProofFactory/MobiusResidualComplexity/ThresholdAsymptotics.lean"
       sorry_count: 0
       axioms: ["propext", "Quot.sound", "Classical.choice"]
       comparator_config: "comparator.json"
@@ -65,7 +80,7 @@ automation:
     - method: "agent"
       models: ["OpenAI GPT-5 (Codex)"]
       framework: "Codex"
-      tool_setup: "Human-directed AI-assisted Lean development using Mathlib tactics, statement comparison, Comparator, the Lean kernel, and NanoDa."
+      tool_setup: "Human-directed AI-assisted mathematical development using Mathlib tactics, statement comparison, Comparator, the Lean kernel, and NanoDa."
       cost:
         wall_time: "not tracked"
         spend_usd: "subscription-based"
@@ -85,23 +100,40 @@ automation:
 
 fidelity:
   divergences: >-
-    The finite pair-compression theorem is formalized directly. The
-    asymptotic number-theoretic estimates and the global residual-complexity
-    obstruction remain manuscript-level mathematics.
+    The prime-band supply, exact product population, finite global matching
+    obstruction, logarithmic scale limit, and residual-budget separation are
+    formalized. The final sparse-binomial comparison with an arbitrary
+    O(X^beta) unmatched set and the resulting full limsup contradiction remain
+    manuscript-level mathematics.
 
 review:
   status: "agent-reviewed"
   reviewers:
     - "OpenAI GPT-5 (Codex)"
-  notes: "Independent checks covered squarefreeness, sign balance, rank order, gcd residual budgets, diameter control, cutoff crossings, axioms, and source correspondence. No human peer review is claimed."
+  notes: "Independent checks covered prime supply, squarefreeness, exact cardinality, matching ownership, residual and gap bounds, asymptotic scale conversion, quantifiers, and axiom reports. No human peer review is claimed."
 
 alignment:
   namespace: "RiemannHypothesisProofFactory.MobiusResidualComplexity"
   statements:
-    - source: "Exact fixed-budget pair compression of a squarefree zero-sum cell"
-      lean: "RiemannHypothesisProofFactory.MobiusResidualComplexity.exact_cell_gcd_pair_compression"
-      module: "RiemannHypothesisProofFactory.MobiusResidualComplexity.PairCompression"
+    - source: "Eventual fixed-band prime-product population"
+      lean: "RiemannHypothesisProofFactory.MobiusResidualComplexity.eventually_octuplePrimeBand_product_population"
+      module: "RiemannHypothesisProofFactory.MobiusResidualComplexity.PrimeBandAsymptotics"
       status: "proved"
-      note: "The Lean statement constructs the cell gcd, includes the actual cell diameter, and identifies the exact crossing pairs at every real cutoff."
+      note: "The theorem includes the sublinear exponent range, exact binomial cardinality, and factorial lower bound."
+    - source: "Finite global-matching population obstruction"
+      lean: "RiemannHypothesisProofFactory.MobiusResidualComplexity.chebyshev_globalMatching_population_barrier"
+      module: "RiemannHypothesisProofFactory.MobiusResidualComplexity.ResearchBarrierCertificate"
+      status: "proved"
+      note: "The theorem retains one reciprocal partner map, endpoint-scale residual bounds, parity, the edge ceiling, and the unmatched population conclusion."
+    - source: "Logarithmic product-scale conversion"
+      lean: "RiemannHypothesisProofFactory.MobiusResidualComplexity.threshold_logarithmic_scale_conversion"
+      module: "RiemannHypothesisProofFactory.MobiusResidualComplexity.ThresholdAsymptotics"
+      status: "proved"
+      note: "The theorem proves the exact limiting constant 1/delta."
+    - source: "Residual-budget separation along the product scale"
+      lean: "RiemannHypothesisProofFactory.MobiusResidualComplexity.eventually_threshold_budget_separation"
+      module: "RiemannHypothesisProofFactory.MobiusResidualComplexity.ThresholdAsymptotics"
+      status: "proved"
+      note: "The theorem transports a normalized logarithmic budget bound to a strict rank bound."
 
 acknowledgements: "Mathlib, Lean, Comparator, Lean4export, Landrun, and NanoDa."

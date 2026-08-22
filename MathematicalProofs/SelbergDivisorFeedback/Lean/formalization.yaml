@@ -2,19 +2,22 @@
 version: "v0.4"
 
 project:
-  name: "Finite arithmetic core of a Selberg conditioning obstruction"
+  name: "Near-linear conditioning of Selberg divisor feedback"
   description: >-
-    A Lean 4 proof of the finite arithmetic core of a Selberg conditioning
-    obstruction. It constructs an exactly centered nonzero prime-coefficient
-    direction with a global logarithmic divisor-residual bound, derives a
-    nondegenerate two-sign separation and positive Lipschitz lower bound, and
-    controls the complete ordered Selberg perturbation with explicit linear
-    and quadratic constants.
+    A Lean 4 proof of the sequence-level conditioning construction for Selberg
+    divisor feedback. Two explicit perturbations of the von Mangoldt weight
+    stay in the positive prime-power cone, approximate the divisor data to an
+    arbitrary tolerance through twice the observation scale, separate their
+    summatory outputs at a near-linear power scale, and retain one uniform
+    linear Selberg bound.
   authors:
     - "Mayk Loide Baccaro"
   license: "Apache-2.0"
   responsible_maintainers:
     - "Mayk Loide Baccaro"
+
+repository:
+  role: "substantive-development"
 
 classification:
   arxiv: ["math.NT"]
@@ -28,7 +31,7 @@ sources:
     type: "paper"
     location: "https://doi.org/10.5281/zenodo.22005767"
     relationship: "formalizes"
-    note: "The selected result group formalizes the paper's finite prime construction, conditioning calculation, and quantitative Selberg-feedback estimate."
+    note: "The selected theorem formalizes the paper's infinite prime-power conditioning construction and its quantitative Selberg-feedback consequence."
     license: "unknown"
     author_endorsement: "participated"
 
@@ -36,33 +39,22 @@ related_formalizations: []
 
 status:
   scope: >-
-    The selected statements construct a finite centered coefficient family on
-    actual primes, prove its global logarithmic prime-factor residual bound,
-    and exhibit a nonzero residual direction. Given the manuscript's positive
-    scale and signed-sum lower bound, they derive the exact two-sign residual
-    tolerance, a nonzero output separation, and a strictly positive Lipschitz
-    lower bound. They also expand the complete ordered Selberg perturbation
-    into its logarithmic moment and linear and quadratic hyperbola terms, then
-    bound those terms from a nonnegative base prefix estimate and finite
-    harmonic mass. The prime-number asymptotics that supply the signed-sum
-    growth, residual moments, and generalized von Mangoldt hierarchy remain
-    manuscript-level arguments.
+    The selected theorem uses the paper's explicit infinite perturbation,
+    including the distinguished prime-two correction and constant values on
+    every prime-power chain. Its standard analytic inputs state the weighted
+    prime-number asymptotic, the negligible two-chain, coefficient and
+    Chebyshev bounds, the divisor identity, perturbation moment and harmonic
+    bounds, and the classical Selberg estimate. From these inputs Lean derives
+    the two actual von Mangoldt weights, positive-cone membership, divisor
+    residual tolerance at every index through twice the scale, quantitative
+    summatory separation, and a uniform Selberg bound. No output separation or
+    conditioning conclusion is assumed.
   sorry_count: 0
   sorry_in_definitions: 0
   axioms: ["propext", "Quot.sound", "Classical.choice"]
   main_results:
-    - declaration: "RiemannHypothesisProofFactory.SelbergConditioning.finite_prime_factor_conditioning_construction"
-      file: "RiemannHypothesisProofFactory/SelbergConditioning/PrimeFactorConstruction.lean"
-      sorry_count: 0
-      axioms: ["propext", "Quot.sound", "Classical.choice"]
-      comparator_config: "comparator.json"
-    - declaration: "RiemannHypothesisProofFactory.SelbergConditioning.finite_two_sign_conditioning_obstruction"
-      file: "RiemannHypothesisProofFactory/SelbergConditioning/ConditioningWitness.lean"
-      sorry_count: 0
-      axioms: ["propext", "Quot.sound", "Classical.choice"]
-      comparator_config: "comparator.json"
-    - declaration: "RiemannHypothesisProofFactory.SelbergConditioning.finite_selberg_feedback_stability"
-      file: "RiemannHypothesisProofFactory/SelbergConditioning/SelbergStability.lean"
+    - declaration: "RiemannHypothesisProofFactory.SelbergConditioning.near_linear_conditioning_witness"
+      file: "RiemannHypothesisProofFactory/SelbergConditioning/NearLinearConditioning.lean"
       sorry_count: 0
       axioms: ["propext", "Quot.sound", "Classical.choice"]
       comparator_config: "comparator.json"
@@ -92,35 +84,25 @@ automation:
 
 fidelity:
   divergences: >-
-    The selected result group proves the finite prime construction,
-    nondegenerate conditioning calculation, and quantitative feedback estimate
-    with its complete ordered linear and quadratic terms. The signed-sum lower
-    bound is an explicit hypothesis. The analytic asymptotics that produce its
-    near-linear scale remain manuscript-level.
+    The infinite prime-power construction and its conditioning conclusion are
+    formalized. The weighted prime-number limit, negligible two-chain,
+    coefficient, divisor, Chebyshev, moment, harmonic-mass, and classical
+    Selberg estimates are explicit premises. The broader generalized
+    von Mangoldt hierarchy remains manuscript-level.
 
 review:
   status: "agent-reviewed"
   reviewers:
     - "OpenAI GPT-5 (Codex)"
-  notes: "The prime support, exact centering, nonzero direction, positive scale, residual and signed-sum hypotheses, global nonnegativity, prefix and harmonic-mass bounds, constants, and axiom reports were checked. No human peer review is claimed."
+  notes: "The prime-power support, correction term, analytic inputs, positivity, divisor residuals, separation scale, uniform Selberg constant, quantifiers, and axiom reports were checked. No human peer review is claimed."
 
 alignment:
   namespace: "RiemannHypothesisProofFactory.SelbergConditioning"
   statements:
-    - source: "Finite centered prime-coefficient construction"
-      lean: "RiemannHypothesisProofFactory.SelbergConditioning.finite_prime_factor_conditioning_construction"
-      module: "RiemannHypothesisProofFactory.SelbergConditioning.PrimeFactorConstruction"
+    - source: "Near-linear conditioning witness for Selberg divisor feedback"
+      lean: "RiemannHypothesisProofFactory.SelbergConditioning.near_linear_conditioning_witness"
+      module: "RiemannHypothesisProofFactory.SelbergConditioning.NearLinearConditioning"
       status: "proved"
-      note: "The distinguished correction gives exact weighted centering, a global logarithmic residual bound, and an explicit nonzero prime residual."
-    - source: "Finite two-sign conditioning obstruction"
-      lean: "RiemannHypothesisProofFactory.SelbergConditioning.finite_two_sign_conditioning_obstruction"
-      module: "RiemannHypothesisProofFactory.SelbergConditioning.ConditioningWitness"
-      status: "proved"
-      note: "Positive scale and power hypotheses exclude the zero case; the conclusion includes nonzero separation and a strictly positive Lipschitz lower bound."
-    - source: "Finite quantitative stability of ordered Selberg feedback"
-      lean: "RiemannHypothesisProofFactory.SelbergConditioning.finite_selberg_feedback_stability"
-      module: "RiemannHypothesisProofFactory.SelbergConditioning.SelbergStability"
-      status: "proved"
-      note: "The full logarithmic, ordered linear, and ordered quadratic perturbation terms are controlled with the stated explicit constant."
+      note: "The theorem derives the actual positive prime-power weights, pointwise divisor tolerance, summatory separation, and one uniform Selberg bound from the stated analytic inputs."
 
 acknowledgements: "Mathlib, Lean, Comparator, Lean4export, Landrun, and NanoDa."

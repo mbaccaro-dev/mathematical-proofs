@@ -1,7 +1,7 @@
 # Lean verification
 
 This self-contained Lean 4 project proves the paper's central discrete
-cumulative-energy consequence.
+power-of-two energy consequences.
 
 ## Pinned environment
 
@@ -25,15 +25,15 @@ The public statement and proof surfaces are `Challenge.lean` and
 Lean checks:
 
 - the literal Möbius-logarithm weights, prefix sums, and half-open dyadic blocks;
-- the exact conservation law joining dyadic defect, block variation, and
-  completed cumulative energy, including both right endpoints;
-- the logarithmic block estimate and floor-halving recurrence under the
-  universal two-endpoint condition; and
-- the resulting explicit cubic bound for the paper's positive cumulative
-  prefix energy at every endpoint.
+- the exact global power-of-two balance joining dyadic defect, block variation,
+  and completed cumulative energy, including its initial boundary term;
+- the sharp `6 / pi^2` leading energy coefficient under an explicitly stated
+  weighted-squarefree remainder estimate; and
+- the all-endpoint cubic cumulative-energy bound from eventual nonnegativity
+  only on the power-of-two blocks, with earlier scales kept explicitly.
 
 Lean does not check the paper's subpower-energy equivalences, Mellin or Fourier
 analysis, holomorphic continuation of reciprocal zeta, functional-equation
-argument, squarefree asymptotics, local pole-energy analysis, simplicity of
-zeros, reciprocal-residue budget, or any assertion of the universal
-two-endpoint condition. Those remain manuscript-level mathematics.
+argument, the weighted-squarefree remainder premise, local pole-energy
+analysis, simplicity of zeros, reciprocal-residue budget, or any assertion of
+the eventual sign condition. Those remain manuscript-level mathematics.

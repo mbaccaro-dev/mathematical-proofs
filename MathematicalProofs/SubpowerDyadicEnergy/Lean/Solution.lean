@@ -1,1 +1,1 @@
-import RiemannHypothesisProofFactory.SubpowerDyadicEnergy.DyadicBalance
+import RiemannHypothesisProofFactory.SubpowerDyadicEnergy.EventualDyadicBalance

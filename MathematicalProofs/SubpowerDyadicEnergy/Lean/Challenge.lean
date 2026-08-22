@@ -58,20 +58,55 @@ def completedBaseEnergy : ℝ :=
 def cumulativeCubicConstant : ℝ :=
   completedBaseEnergy / Real.log (2 : ℝ) ^ 3 + 3 / Real.log (2 : ℝ)
 
-/-- One half-open dyadic block satisfies the exact defect-variation-energy
-conservation law, uniformly for both right endpoints. -/
-theorem dyadic_energy_conservation (L eps : ℕ) (hL : 2 ≤ L) :
-    2 * paperD L eps +
-        completedCumulativeEnergy (rightEndpoint L eps) =
-      3 * variation L eps + completedCumulativeEnergy L := by
+def eventualDyadicDefectFrom (j0 : ℕ) : Prop :=
+  ∀ j : ℕ, j0 ≤ j → 0 ≤ paperD (2 ^ j) 0
+
+def eventualDyadicBaseEnergy (j0 : ℕ) : ℝ :=
+  ∑ j ∈ Finset.Icc 1 j0, completedCumulativeEnergy (2 ^ j)
+
+def eventualDyadicCubicConstant (j0 : ℕ) : ℝ :=
+  eventualDyadicBaseEnergy j0 / Real.log (2 : ℝ) ^ 3 +
+    3 / Real.log (2 : ℝ)
+
+def dyadicDefectSum (J : ℕ) : ℝ :=
+  ∑ j ∈ Finset.Ico 1 J, paperD (2 ^ j) 0
+
+def dyadicVariationSum (J : ℕ) : ℝ :=
+  ∑ j ∈ Finset.Ico 1 J, variation (2 ^ j) 0
+
+def weightedSquarefreeRemainderBound (C : ℝ) : Prop :=
+  ∀ J : ℕ, 2 ≤ J →
+    |dyadicVariationSum J -
+        (2 / Real.pi ^ 2) * Real.log ((2 ^ J : ℕ) : ℝ) ^ 3| ≤
+      C * Real.log ((2 ^ J : ℕ) : ℝ) ^ 2
+
+/-- The exact local identities telescope over adjacent power-of-two blocks,
+with the initial completed boundary term retained. -/
+theorem dyadic_global_energy_balance (J : ℕ) (hJ : 1 ≤ J) :
+    2 * dyadicDefectSum J + completedCumulativeEnergy (2 ^ J) =
+      3 * dyadicVariationSum J + completedCumulativeEnergy 2 := by
   sorry
 
-/-- The universal two-endpoint condition gives an explicit cubic logarithmic
-bound for the paper's positive cumulative prefix energy at every endpoint. -/
-theorem paperP1_implies_cumulative_energy_cubic_bound
-    (hP1 : paperP1) (N : ℕ) (hN : 2 ≤ N) :
+/-- Eventual dyadic-defect nonnegativity and the explicit weighted-squarefree
+remainder yield the sharp `6 / pi^2` leading energy coefficient. -/
+theorem eventualDyadicDefectFrom_implies_sharp_power_energy_bound
+    (j0 : ℕ) (hj0 : 1 ≤ j0) (hEventual : eventualDyadicDefectFrom j0)
+    (C : ℝ) (hSquarefree : weightedSquarefreeRemainderBound C)
+    (J : ℕ) (hJ2 : 2 ≤ J) (hj0J : j0 ≤ J) :
+    completedCumulativeEnergy (2 ^ J) ≤
+      (6 / Real.pi ^ 2) * Real.log ((2 ^ J : ℕ) : ℝ) ^ 3 +
+        3 * C * Real.log ((2 ^ J : ℕ) : ℝ) ^ 2 +
+        completedCumulativeEnergy 2 - 2 * dyadicDefectSum j0 := by
+  sorry
+
+/-- Eventual sign alone gives an all-endpoint cubic logarithmic bound, with
+all earlier scales retained in one explicit finite constant. -/
+theorem eventualDyadicDefectFrom_implies_cumulative_energy_cubic_bound
+    (j0 : ℕ) (hj0 : 1 ≤ j0) (hEventual : eventualDyadicDefectFrom j0)
+    (N : ℕ) (hN : 2 ≤ N) :
     cumulativeEnergy N ≤
-      cumulativeCubicConstant * Real.log (N : ℝ) ^ 3 := by
+      eventualDyadicCubicConstant j0 *
+        (Real.log (N : ℝ) + Real.log (2 : ℝ)) ^ 3 := by
   sorry
 
 end

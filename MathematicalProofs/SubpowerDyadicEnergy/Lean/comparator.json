@@ -2,8 +2,9 @@
   "challenge_module": "Challenge",
   "solution_module": "Solution",
   "theorem_names": [
-    "RiemannHypothesisProofFactory.SubpowerDyadicEnergy.dyadic_energy_conservation",
-    "RiemannHypothesisProofFactory.SubpowerDyadicEnergy.paperP1_implies_cumulative_energy_cubic_bound"
+    "RiemannHypothesisProofFactory.SubpowerDyadicEnergy.dyadic_global_energy_balance",
+    "RiemannHypothesisProofFactory.SubpowerDyadicEnergy.eventualDyadicDefectFrom_implies_sharp_power_energy_bound",
+    "RiemannHypothesisProofFactory.SubpowerDyadicEnergy.eventualDyadicDefectFrom_implies_cumulative_energy_cubic_bound"
   ],
   "definition_names": [
     "RiemannHypothesisProofFactory.SubpowerDyadicEnergy.moebiusReal",
@@ -18,7 +19,13 @@
     "RiemannHypothesisProofFactory.SubpowerDyadicEnergy.boundaryEnergy",
     "RiemannHypothesisProofFactory.SubpowerDyadicEnergy.completedCumulativeEnergy",
     "RiemannHypothesisProofFactory.SubpowerDyadicEnergy.completedBaseEnergy",
-    "RiemannHypothesisProofFactory.SubpowerDyadicEnergy.cumulativeCubicConstant"
+    "RiemannHypothesisProofFactory.SubpowerDyadicEnergy.cumulativeCubicConstant",
+    "RiemannHypothesisProofFactory.SubpowerDyadicEnergy.eventualDyadicDefectFrom",
+    "RiemannHypothesisProofFactory.SubpowerDyadicEnergy.eventualDyadicBaseEnergy",
+    "RiemannHypothesisProofFactory.SubpowerDyadicEnergy.eventualDyadicCubicConstant",
+    "RiemannHypothesisProofFactory.SubpowerDyadicEnergy.dyadicDefectSum",
+    "RiemannHypothesisProofFactory.SubpowerDyadicEnergy.dyadicVariationSum",
+    "RiemannHypothesisProofFactory.SubpowerDyadicEnergy.weightedSquarefreeRemainderBound"
   ],
   "permitted_axioms": ["propext", "Quot.sound", "Classical.choice"],
   "enable_nanoda": true

@@ -2,17 +2,30 @@
   "challenge_module": "Challenge",
   "solution_module": "Solution",
   "theorem_names": [
-    "RiemannHypothesisProofFactory.SelbergConditioning.finite_prime_factor_conditioning_construction",
-    "RiemannHypothesisProofFactory.SelbergConditioning.finite_two_sign_conditioning_obstruction",
-    "RiemannHypothesisProofFactory.SelbergConditioning.finite_selberg_feedback_stability"
+    "RiemannHypothesisProofFactory.SelbergConditioning.near_linear_conditioning_witness"
   ],
   "definition_names": [
     "RiemannHypothesisProofFactory.SelbergConditioning.primeFactorResidual",
-    "RiemannHypothesisProofFactory.SelbergConditioning.centeredPrimeCoefficient",
     "RiemannHypothesisProofFactory.SelbergConditioning.orderedHyperbolaSum",
     "RiemannHypothesisProofFactory.SelbergConditioning.logarithmicMoment",
     "RiemannHypothesisProofFactory.SelbergConditioning.harmonicMass",
-    "RiemannHypothesisProofFactory.SelbergConditioning.selbergPerturbation"
+    "RiemannHypothesisProofFactory.SelbergConditioning.oddPrimeCoefficient",
+    "RiemannHypothesisProofFactory.SelbergConditioning.oddCorrectionTerm",
+    "RiemannHypothesisProofFactory.SelbergConditioning.twoCoefficient",
+    "RiemannHypothesisProofFactory.SelbergConditioning.infinitePrimeCoefficient",
+    "RiemannHypothesisProofFactory.SelbergConditioning.infinitePrimePowerPerturbation",
+    "RiemannHypothesisProofFactory.SelbergConditioning.oddPrimePowerPart",
+    "RiemannHypothesisProofFactory.SelbergConditioning.twoPrimePowerIndicator",
+    "RiemannHypothesisProofFactory.SelbergConditioning.arithmeticPrefix",
+    "RiemannHypothesisProofFactory.SelbergConditioning.plusMangoldtWeight",
+    "RiemannHypothesisProofFactory.SelbergConditioning.minusMangoldtWeight",
+    "RiemannHypothesisProofFactory.SelbergConditioning.InPrimePowerCone",
+    "RiemannHypothesisProofFactory.SelbergConditioning.selbergStatistic",
+    "RiemannHypothesisProofFactory.SelbergConditioning.divisorFeedbackResidual",
+    "RiemannHypothesisProofFactory.SelbergConditioning.summatoryError",
+    "RiemannHypothesisProofFactory.SelbergConditioning.conditioningScale",
+    "RiemannHypothesisProofFactory.SelbergConditioning.conditioningScaleCap",
+    "RiemannHypothesisProofFactory.SelbergConditioning.conditioningSelbergConstant"
   ],
   "permitted_axioms": ["propext", "Quot.sound", "Classical.choice"],
   "enable_nanoda": true

@@ -1,18 +1,16 @@
-import RiemannHypothesisProofFactory.MobiusResidualComplexity.PairCompression
+import RiemannHypothesisProofFactory.MobiusResidualComplexity.ResearchBarrierCertificate
+import RiemannHypothesisProofFactory.MobiusResidualComplexity.PrimeBandAsymptotics
+import RiemannHypothesisProofFactory.MobiusResidualComplexity.ThresholdAsymptotics
 
 /-!
-# Möbius residual-complexity paper certificate
+# Möbius residual-complexity certificate
 
-The imported modules check the exact fixed-budget compression of a finite
-zero-sum squarefree cell into increasing-rank opposite-sign pairs. The formal
-result includes the pairwise-gcd residual budgets, the cell-diameter bound, and
-the exact crossing count at every real cutoff. The asymptotic lower bound and
-the global sparse-jump argument remain manuscript-level proofs.
+The selected results prove the eventual fixed-band product population, the
+finite global-matching obstruction, the exact logarithmic scale conversion,
+and residual-budget separation along that scale.
 -/
 
-#print axioms RiemannHypothesisProofFactory.MobiusResidualComplexity.squarefree_cell_mass_eq_card_sub_card
-#print axioms RiemannHypothesisProofFactory.MobiusResidualComplexity.zero_mass_squarefree_cell_balanced
-#print axioms RiemannHypothesisProofFactory.MobiusResidualComplexity.common_core_residual_budget
-#print axioms RiemannHypothesisProofFactory.MobiusResidualComplexity.exact_rank_pair_crossing_balance
-#print axioms RiemannHypothesisProofFactory.MobiusResidualComplexity.exact_fixed_budget_pair_compression
-#print axioms RiemannHypothesisProofFactory.MobiusResidualComplexity.exact_cell_gcd_pair_compression
+#print axioms RiemannHypothesisProofFactory.MobiusResidualComplexity.eventually_octuplePrimeBand_product_population
+#print axioms RiemannHypothesisProofFactory.MobiusResidualComplexity.chebyshev_globalMatching_population_barrier
+#print axioms RiemannHypothesisProofFactory.MobiusResidualComplexity.threshold_logarithmic_scale_conversion
+#print axioms RiemannHypothesisProofFactory.MobiusResidualComplexity.eventually_threshold_budget_separation
