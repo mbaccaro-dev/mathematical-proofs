@@ -30,11 +30,14 @@ proof or disproof of the Riemann hypothesis.
 The GitHub release metadata records DOI
 [10.5281/zenodo.22006119](https://doi.org/10.5281/zenodo.22006119). The
 manuscript intentionally omits repository-deposit metadata. The Lean project
-proves the exact finite fixed-budget pair-compression theorem using the gcd of
-the cell, including sign pairing, pairwise-gcd budget preservation,
-cell-diameter control, and the exact cutoff-crossing pairs. The analytic number theory, asymptotic counting, and
-global sparse-jump argument remain manuscript-level proof obligations. GitHub
-Actions repeats the pinned Lean build and public-certificate check.
+proves the prime-band obstruction at finite and all large scales. It
+establishes the fixed-band prime supply, exact product population, individual
+unmatched conclusion, residual-or-unmatched dichotomy, logarithmic scale
+conversion, and residual-budget separation. It also proves the finite
+fixed-budget pair-compression theorem using the gcd of the cell. The final
+sparse-binomial comparison yielding the printed limsup theorem and the global
+sparse-jump argument remain manuscript-level proofs. GitHub Actions repeats
+the pinned Lean build and public-certificate check.
 
 ## Cite the paper
 

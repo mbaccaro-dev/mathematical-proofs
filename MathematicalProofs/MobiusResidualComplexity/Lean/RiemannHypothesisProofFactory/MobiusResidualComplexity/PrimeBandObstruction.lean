@@ -205,6 +205,31 @@ theorem primeBandProducts_forced_unmatched
   · exact hedge
   · simpa [hPcard] using hceiling
 
+/-- A partner map satisfying the stated edge conditions is undefined on every
+member of the obstructed prime-band family. -/
+theorem primeBandProducts_mate_eq_none
+    (mate : ℕ → Option ℕ)
+    (Q : Finset ℕ) (k y budget edgeCeiling : ℕ)
+    (hprime : ∀ p ∈ Q, Nat.Prime p)
+    (hband : ∀ p ∈ Q, y ≤ p)
+    (hy : 0 < y)
+    (hceiling : edgeCeiling < y ^ (k - budget))
+    (hmatched : ∀ a ∈ primeBandProducts Q k, ∀ b,
+      mate a = some b →
+      0 < b ∧ a ≠ b ∧
+      omega (a / Nat.gcd a b) ≤ budget ∧
+      Nat.dist a b ≤ edgeCeiling) :
+    ∀ a ∈ primeBandProducts Q k, mate a = none := by
+  intro a ha
+  cases hmate : mate a with
+  | none => rfl
+  | some b =>
+      exfalso
+      apply primeBandProducts_forced_unmatched Q k y budget edgeCeiling hprime
+        hband hy hceiling a ha
+      exact ⟨b, (hmatched a ha b hmate).1, (hmatched a ha b hmate).2.1,
+        (hmatched a ha b hmate).2.2.1, (hmatched a ha b hmate).2.2.2⟩
+
 /-- Exact population form of the prime-band obstruction.  The family has
 binomial size, occupies a controlled multiplicative scale, has one Möbius
 sign, and every member is forced to remain unmatched under a residual budget
@@ -267,15 +292,9 @@ theorem primeBand_unmatched_lower_bound
     rw [← hprod]
     exact squarefree_primeBand_product P (fun p hp ↦ hprime p (hPsub hp))
   have haPos : 0 < a := Nat.pos_of_ne_zero hsquarefree.ne_zero
-  have hnone : mate a = none := by
-    cases hmate : mate a with
-    | none => rfl
-    | some b =>
-        exfalso
-        apply primeBandProducts_forced_unmatched Q k y budget edgeCeiling hprime
-          (fun p hp ↦ (hband p hp).1) hy hceiling a ha
-        exact ⟨b, (hmatched a ha b hmate).1, (hmatched a ha b hmate).2.1,
-          (hmatched a ha b hmate).2.2.1, (hmatched a ha b hmate).2.2.2⟩
+  have hnone : mate a = none :=
+    primeBandProducts_mate_eq_none mate Q k y budget edgeCeiling hprime
+      (fun p hp ↦ (hband p hp).1) hy hceiling hmatched a ha
   simp only [unmatchedSquarefreeThrough, Finset.mem_filter, Finset.mem_Icc]
   exact ⟨⟨haPos, hscale.2⟩, hsquarefree, hnone⟩
 

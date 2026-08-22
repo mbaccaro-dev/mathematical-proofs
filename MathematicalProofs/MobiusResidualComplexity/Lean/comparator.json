@@ -2,8 +2,8 @@
   "challenge_module": "Challenge",
   "solution_module": "Solution",
   "theorem_names": [
-    "RiemannHypothesisProofFactory.MobiusResidualComplexity.eventually_octuplePrimeBand_product_population",
-    "RiemannHypothesisProofFactory.MobiusResidualComplexity.chebyshev_globalMatching_population_barrier",
+    "RiemannHypothesisProofFactory.MobiusResidualComplexity.chebyshev_globalMatching_residual_budget_barrier",
+    "RiemannHypothesisProofFactory.MobiusResidualComplexity.eventually_octuple_globalMatching_residual_or_unmatched_barrier",
     "RiemannHypothesisProofFactory.MobiusResidualComplexity.threshold_logarithmic_scale_conversion",
     "RiemannHypothesisProofFactory.MobiusResidualComplexity.eventually_threshold_budget_separation"
   ],

@@ -24,6 +24,37 @@ def ResidualEdgeAdmissible
     OppositeResidualParity a b ∧
     Nat.dist a b ≤ edgeBound T
 
+/-- Under endpoint-scale residual and edge bounds, every member of the
+prime-band family is individually unmatched. -/
+theorem globalMatching_primeBand_forced_unmatched
+    (mate : ℕ → Option ℕ) (R edgeBound : ℕ → ℕ)
+    (Q : Finset ℕ) (k y scale budget edgeCeiling : ℕ)
+    (_hglobal : IsGlobalMatching mate)
+    (hprime : ∀ p ∈ Q, Nat.Prime p)
+    (hband : ∀ p ∈ Q, y ≤ p)
+    (hy : 0 < y)
+    (hbudget : R scale ≤ budget)
+    (hedgeCeiling : edgeBound scale ≤ edgeCeiling)
+    (hRmono : Monotone R)
+    (hEmono : Monotone edgeBound)
+    (hscale : ∀ a ∈ primeBandProducts Q k, ∀ b,
+      mate a = some b → max a b ≤ scale)
+    (hadmissible : ∀ a ∈ primeBandProducts Q k, ∀ b,
+      mate a = some b → ResidualEdgeAdmissible R edgeBound a b)
+    (hceiling : edgeCeiling < y ^ (k - budget)) :
+    ∀ a ∈ primeBandProducts Q k, mate a = none := by
+  apply primeBandProducts_mate_eq_none mate Q k y budget edgeCeiling hprime
+    hband hy hceiling
+  intro a ha b hab
+  have hadm := hadmissible a ha b hab
+  have hT := hscale a ha b hab
+  have hRT : R (max a b) ≤ budget :=
+    (hRmono hT).trans hbudget
+  have hET : edgeBound (max a b) ≤ edgeCeiling :=
+    (hEmono hT).trans hedgeCeiling
+  exact ⟨hadm.2.1, hadm.2.2.1, hadm.2.2.2.2.2.1.trans hRT,
+    hadm.2.2.2.2.2.2.2.2.trans hET⟩
+
 /-- A global matching whose endpoint-scale residual and edge bounds are
 controlled on a prime-band family leaves at least the entire binomial family
 unmatched.  This connector retains both residual bounds, parity, endpoint

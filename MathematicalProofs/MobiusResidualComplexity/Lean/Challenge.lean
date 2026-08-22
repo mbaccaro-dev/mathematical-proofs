@@ -47,26 +47,9 @@ noncomputable def thresholdCountReal (delta x : ℝ) : ℝ :=
 noncomputable def thresholdScale (delta x : ℝ) : ℝ :=
   2 * (8 * x) ^ thresholdCount delta x
 
-/-- For every sublinear exponent, the fixed band `(y, 8y]` eventually
-contains enough primes to form the full family of squarefree products of
-rank `floor(y^delta)`, with exact binomial cardinality and an explicit
-factorial lower bound. -/
-theorem eventually_octuplePrimeBand_product_population
-    {delta : ℝ} (hdelta0 : 0 < delta) (hdelta1 : delta < 1) :
-    ∀ᶠ y : ℕ in atTop,
-      let k := ⌊(y : ℝ) ^ delta⌋₊
-      k ≤ (widePrimeBand 8 y).card ∧
-        (primeBandProducts (widePrimeBand 8 y) k).card =
-          Nat.choose (widePrimeBand 8 y).card k ∧
-        ((((widePrimeBand 8 y).card + 1 - k : ℕ) : ℝ) ^ k /
-            (k.factorial : ℝ)) ≤
-          (primeBandProducts (widePrimeBand 8 y) k).card := by
-  sorry
-
-/-- Chebyshev prime supply, unique factorization, and the endpoint-scale gcd
-obstruction force an explicit binomial population to remain unmatched by any
-single global matching satisfying the stated residual and edge bounds. -/
-theorem chebyshev_globalMatching_population_barrier
+/-- If the unmatched population is smaller than the prime-product family,
+the retained-prime scale cannot exceed the allowed edge length. -/
+theorem chebyshev_globalMatching_residual_budget_barrier
     (mate : ℕ → Option ℕ) (R edgeBound : ℕ → ℕ)
     (A y k scale budget edgeCeiling : ℕ)
     (hglobal : IsGlobalMatching mate)
@@ -83,13 +66,44 @@ theorem chebyshev_globalMatching_population_barrier
       mate a = some b → max a b ≤ scale)
     (hadmissible : ∀ a ∈ primeBandProducts (widePrimeBand A y) k, ∀ b,
       mate a = some b → ResidualEdgeAdmissible R edgeBound a b)
-    (hseparation : edgeCeiling < y ^ (k - budget)) :
-    k ≤ (widePrimeBand A y).card ∧
-      Nat.choose (widePrimeBand A y).card k ≤
-        (unmatchedSquarefreeThrough mate ((A * y) ^ k)).card ∧
-      ((((widePrimeBand A y).card + 1 - k : ℕ) : ℝ) ^ k /
-          (k.factorial : ℝ)) ≤
-        (unmatchedSquarefreeThrough mate ((A * y) ^ k)).card := by
+    (hfew : (unmatchedSquarefreeThrough mate ((A * y) ^ k)).card <
+      Nat.choose (widePrimeBand A y).card k) :
+    y ^ (k - budget) ≤ edgeCeiling := by
+  sorry
+
+/-- At every sufficiently large fixed-band scale, either the permitted edge
+length reaches the retained-prime product or every prime-band product is
+individually unmatched, with explicit binomial and factorial lower bounds. -/
+theorem eventually_octuple_globalMatching_residual_or_unmatched_barrier
+    (mate : ℕ → Option ℕ) (R edgeBound budget edgeCeiling : ℕ → ℕ)
+    {delta : ℝ} (hdelta0 : 0 < delta) (hdelta1 : delta < 1)
+    (hglobal : IsGlobalMatching mate)
+    (hRmono : Monotone R)
+    (hEmono : Monotone edgeBound)
+    (hbudget : ∀ᶠ y : ℕ in atTop,
+      let k := ⌊(y : ℝ) ^ delta⌋₊
+      R (2 * (8 * y) ^ k) ≤ budget y)
+    (hedgeCeiling : ∀ᶠ y : ℕ in atTop,
+      let k := ⌊(y : ℝ) ^ delta⌋₊
+      edgeBound (2 * (8 * y) ^ k) ≤ edgeCeiling y)
+    (hscale : ∀ᶠ y : ℕ in atTop,
+      let k := ⌊(y : ℝ) ^ delta⌋₊
+      ∀ a ∈ primeBandProducts (widePrimeBand 8 y) k, ∀ b,
+        mate a = some b → max a b ≤ 2 * (8 * y) ^ k)
+    (hadmissible : ∀ᶠ y : ℕ in atTop,
+      let k := ⌊(y : ℝ) ^ delta⌋₊
+      ∀ a ∈ primeBandProducts (widePrimeBand 8 y) k, ∀ b,
+        mate a = some b → ResidualEdgeAdmissible R edgeBound a b) :
+    ∀ᶠ y : ℕ in atTop,
+      let k := ⌊(y : ℝ) ^ delta⌋₊
+      y ^ (k - budget y) ≤ edgeCeiling y ∨
+        ((∀ a ∈ primeBandProducts (widePrimeBand 8 y) k, mate a = none) ∧
+          k ≤ (widePrimeBand 8 y).card ∧
+          Nat.choose (widePrimeBand 8 y).card k ≤
+            (unmatchedSquarefreeThrough mate ((8 * y) ^ k)).card ∧
+          ((((widePrimeBand 8 y).card + 1 - k : ℕ) : ℝ) ^ k /
+              (k.factorial : ℝ)) ≤
+            (unmatchedSquarefreeThrough mate ((8 * y) ^ k)).card) := by
   sorry
 
 /-- The prime-product scale converts rank into the manuscript's logarithmic

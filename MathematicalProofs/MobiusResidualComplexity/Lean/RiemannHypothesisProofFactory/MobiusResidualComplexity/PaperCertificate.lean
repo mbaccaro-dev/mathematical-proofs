@@ -5,12 +5,12 @@ import RiemannHypothesisProofFactory.MobiusResidualComplexity.ThresholdAsymptoti
 /-!
 # Möbius residual-complexity certificate
 
-The selected results prove the eventual fixed-band product population, the
-finite global-matching obstruction, the exact logarithmic scale conversion,
-and residual-budget separation along that scale.
+The selected results prove the finite residual-budget barrier, its all-scale
+residual-or-unmatched form, the exact logarithmic scale conversion, and
+residual-budget separation along that scale.
 -/
 
-#print axioms RiemannHypothesisProofFactory.MobiusResidualComplexity.eventually_octuplePrimeBand_product_population
-#print axioms RiemannHypothesisProofFactory.MobiusResidualComplexity.chebyshev_globalMatching_population_barrier
+#print axioms RiemannHypothesisProofFactory.MobiusResidualComplexity.chebyshev_globalMatching_residual_budget_barrier
+#print axioms RiemannHypothesisProofFactory.MobiusResidualComplexity.eventually_octuple_globalMatching_residual_or_unmatched_barrier
 #print axioms RiemannHypothesisProofFactory.MobiusResidualComplexity.threshold_logarithmic_scale_conversion
 #print axioms RiemannHypothesisProofFactory.MobiusResidualComplexity.eventually_threshold_budget_separation

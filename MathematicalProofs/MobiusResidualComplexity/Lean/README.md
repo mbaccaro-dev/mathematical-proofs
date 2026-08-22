@@ -3,16 +3,17 @@
 This package proves the prime-band mechanism used in *Logarithmic
 Residual-Complexity Barriers for Local Möbius Cancellation*.
 
-The formal results show that a fixed band of primes eventually supplies the
-required squarefree product family with exact binomial size. They then prove
-that a single global matching subject to the stated residual and edge bounds
-must leave the whole family unmatched. Finally, they establish the exact
-logarithmic conversion between product scale and prime-product rank and the
+The formal results prove an exact residual-or-unmatched dichotomy for a fixed
+prime band. At each large scale, either the allowed edge length reaches the
+retained-prime product or every member of the prime-product family is
+individually unmatched. Chebyshev estimates and unique factorization give the
+explicit binomial and factorial population bounds. The development also proves
+the exact logarithmic conversion between product scale and rank and the
 resulting budget separation.
 
-The final comparison between the binomial population and a general
-`O(X^beta)` unmatched set remains a manuscript proof. It is not included in
-the formal claim.
+The final sparse-binomial comparison with a general `O(X^beta)` unmatched set,
+and therefore the paper's full limsup conclusion, remain manuscript proofs.
+They are not included in the formal claim.
 
 Build with:
 

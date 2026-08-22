@@ -2,15 +2,15 @@
 version: "v0.4"
 
 project:
-  name: "Prime-band population and logarithmic residual-complexity barriers"
+  name: "Prime-band residual-or-unmatched barriers"
   description: >-
-    A Lean 4 proof of the prime-band mechanism behind a logarithmic barrier
-    for local Möbius cancellation. Chebyshev estimates supply an eventual
-    family of squarefree prime products with exact binomial population. An
-    endpoint-scale gcd obstruction forces that population to remain unmatched
-    under the stated global residual and edge constraints. The explicit
-    product scale also converts the residual budget to its logarithmic
-    threshold with the exact limiting constant.
+    A Lean 4 proof of a residual-or-unmatched barrier for local Möbius
+    cancellation. At every sufficiently large fixed-band scale, either the
+    permitted edge length reaches the retained-prime product or every member
+    of an explicit squarefree prime-product family is unmatched. Chebyshev
+    estimates give the exact binomial and factorial population bounds. The
+    product scale also converts residual rank to its logarithmic threshold
+    with the exact limiting constant.
   authors:
     - "Mayk Loide Baccaro"
   license: "Apache-2.0"
@@ -32,7 +32,7 @@ sources:
     type: "paper"
     location: "https://doi.org/10.5281/zenodo.22006119"
     relationship: "formalizes"
-    note: "The selected results formalize the paper's prime-band population, global matching obstruction, and logarithmic scale conversion."
+    note: "The selected results formalize the paper's pointwise prime-band obstruction, finite and all-scale residual-or-unmatched barriers, and logarithmic scale conversion."
     license: "unknown"
     author_endorsement: "participated"
 
@@ -40,26 +40,25 @@ related_formalizations: []
 
 status:
   scope: >-
-    The selected results prove four connected parts of the obstruction. For
-    every exponent strictly between zero and one, the fixed band from y to 8y
-    eventually contains enough primes to form the rank floor(y^delta)
-    squarefree products, with exact binomial cardinality and an explicit
-    factorial lower bound. At finite scale, any single reciprocal matching
-    satisfying the stated endpoint-scale residual, parity, and gap conditions
-    leaves at least that whole binomial population unmatched. Along the
-    explicit product scale, rank is asymptotic to delta times log X divided by
-    log log X, and any budget below a normalized constant r is eventually less
-    than q times the rank whenever r/delta is less than q.
+    The selected results prove the obstruction as an exact dichotomy. If a
+    global matching has fewer unmatched vertices than the prime-product
+    family, its permitted edge length must reach the retained-prime product.
+    At every sufficiently large fixed-band scale, either that edge alternative
+    holds or every prime-band product is individually unmatched, with explicit
+    binomial and factorial lower bounds. Along the product scale, rank is
+    asymptotic to delta times log X divided by log log X, and a normalized
+    residual budget below r is eventually below q times the rank whenever
+    r/delta is less than q.
   sorry_count: 0
   sorry_in_definitions: 0
   axioms: ["propext", "Quot.sound", "Classical.choice"]
   main_results:
-    - declaration: "RiemannHypothesisProofFactory.MobiusResidualComplexity.eventually_octuplePrimeBand_product_population"
-      file: "RiemannHypothesisProofFactory/MobiusResidualComplexity/PrimeBandAsymptotics.lean"
+    - declaration: "RiemannHypothesisProofFactory.MobiusResidualComplexity.chebyshev_globalMatching_residual_budget_barrier"
+      file: "RiemannHypothesisProofFactory/MobiusResidualComplexity/ResearchBarrierCertificate.lean"
       sorry_count: 0
       axioms: ["propext", "Quot.sound", "Classical.choice"]
       comparator_config: "comparator.json"
-    - declaration: "RiemannHypothesisProofFactory.MobiusResidualComplexity.chebyshev_globalMatching_population_barrier"
+    - declaration: "RiemannHypothesisProofFactory.MobiusResidualComplexity.eventually_octuple_globalMatching_residual_or_unmatched_barrier"
       file: "RiemannHypothesisProofFactory/MobiusResidualComplexity/ResearchBarrierCertificate.lean"
       sorry_count: 0
       axioms: ["propext", "Quot.sound", "Classical.choice"]
@@ -100,11 +99,12 @@ automation:
 
 fidelity:
   divergences: >-
-    The prime-band supply, exact product population, finite global matching
-    obstruction, logarithmic scale limit, and residual-budget separation are
-    formalized. The final sparse-binomial comparison with an arbitrary
-    O(X^beta) unmatched set and the resulting full limsup contradiction remain
-    manuscript-level mathematics.
+    The prime-band supply, exact product population, pointwise global-matching
+    obstruction, finite and all-scale residual-or-unmatched barriers,
+    logarithmic scale limit, and residual-budget separation are formalized.
+    The final sparse-binomial comparison with an arbitrary O(X^beta) unmatched
+    set and the resulting full limsup contradiction remain manuscript-level
+    mathematics.
 
 review:
   status: "agent-reviewed"
@@ -115,16 +115,16 @@ review:
 alignment:
   namespace: "RiemannHypothesisProofFactory.MobiusResidualComplexity"
   statements:
-    - source: "Eventual fixed-band prime-product population"
-      lean: "RiemannHypothesisProofFactory.MobiusResidualComplexity.eventually_octuplePrimeBand_product_population"
-      module: "RiemannHypothesisProofFactory.MobiusResidualComplexity.PrimeBandAsymptotics"
-      status: "proved"
-      note: "The theorem includes the sublinear exponent range, exact binomial cardinality, and factorial lower bound."
-    - source: "Finite global-matching population obstruction"
-      lean: "RiemannHypothesisProofFactory.MobiusResidualComplexity.chebyshev_globalMatching_population_barrier"
+    - source: "Finite residual-budget barrier"
+      lean: "RiemannHypothesisProofFactory.MobiusResidualComplexity.chebyshev_globalMatching_residual_budget_barrier"
       module: "RiemannHypothesisProofFactory.MobiusResidualComplexity.ResearchBarrierCertificate"
       status: "proved"
-      note: "The theorem retains one reciprocal partner map, endpoint-scale residual bounds, parity, the edge ceiling, and the unmatched population conclusion."
+      note: "If the unmatched population is smaller than the explicit prime-product family, the retained-prime scale cannot exceed the allowed edge length."
+    - source: "All-scale residual-or-unmatched barrier"
+      lean: "RiemannHypothesisProofFactory.MobiusResidualComplexity.eventually_octuple_globalMatching_residual_or_unmatched_barrier"
+      module: "RiemannHypothesisProofFactory.MobiusResidualComplexity.ResearchBarrierCertificate"
+      status: "proved"
+      note: "For all sufficiently large fixed-band scales, the theorem gives the edge alternative or proves that every prime-band product is unmatched with explicit population bounds."
     - source: "Logarithmic product-scale conversion"
       lean: "RiemannHypothesisProofFactory.MobiusResidualComplexity.threshold_logarithmic_scale_conversion"
       module: "RiemannHypothesisProofFactory.MobiusResidualComplexity.ThresholdAsymptotics"
